@@ -1,10 +1,15 @@
-import ReactDOM from 'react-dom';
-import React from 'react';
-import AppRouter from './AppRouter';
+import ReactDOM from "react-dom"
+import React from "react"
+import App from "./App"
+import { Provider } from "react-redux"
+import { store } from "./redux/store"
 
-
-const App = () => {
-    return <AppRouter/>;
+const RenderApp = () => {
+    return (
+        <Provider store={store}>
+            <App />
+        </Provider>
+    )
 }
 
-ReactDOM.render(<App/>,  document.getElementById('root'));
+ReactDOM.render(<RenderApp />, document.getElementById("root"))
