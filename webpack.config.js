@@ -24,16 +24,15 @@ module.exports = {
                 use: ["style-loader", "css-loader"]
             },
             {
-                test: /\.scss$/,
+                test: /\.(png|jp?g|svg)$/,
                 use: [
                     {
-                        loader: "style-loader"
-                    },
-                    {
-                        loader: "css-loader"
-                    },
-                    {
-                        loader: "sass-loader"
+                        loader: "file-loader",
+                        options: {
+                            name: "[name].[ext]",
+                            outputPath: "images/",
+                            publicPath: "images/"
+                        }
                     }
                 ]
             }
