@@ -1,12 +1,13 @@
-import React from "react"
-import "./index.scss"
+import React from "react";
+import "./index.scss";
+import AppRouter from "./router/AppRouter";
 
-const AppRouter = () => {
+const App = () => {
     return (
         <div className="root-container">
             <AppRouter />
         </div>
-    )
-}
+    );
+};
 
-export default AppRouter
+export default App;

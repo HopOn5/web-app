@@ -1,7 +1,9 @@
-import React from "react"
+import React from "react";
 
 const UploadVerification = () => {
-    return <></>
-}
+    const getClassname = (classname) =>
+        `upload-verification${classname ? `__${classname}` : ""}`;
+    return <div className={getClassname()}>Verification</div>;
+};
 
-export default UploadVerification
+export default UploadVerification;

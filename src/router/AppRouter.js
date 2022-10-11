@@ -1,18 +1,16 @@
-import { BrowserRouter } from "react-router-dom"
-import { BrowserRouter, Route, Switch } from "react-router-dom"
-import Onboarding from "../pages/onBoarding"
-import { onboardingUrl } from "../pageUrls"
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Onboarding from "../pages/onBoarding";
+import { onboardingUrl } from "../pageUrls";
 
 const AppRouter = (props) => {
     return (
         <BrowserRouter>
-            <Switch>
-                <Route path={onboardingUrl}>
-                    <Onboarding />
-                </Route>
-            </Switch>
+            <Routes>
+                <Route path={"/onboarding"} element={<Onboarding />}></Route>
+            </Routes>
         </BrowserRouter>
-    )
-}
+    );
+};
 
-export default AppRouter
+export default AppRouter;
