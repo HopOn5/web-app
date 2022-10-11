@@ -1,9 +1,9 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     personalInfo: {},
     verificationData: {},
     address: {}
-}
+};
 const onBoardingSlice = createSlice({
     // A name, used in action types
     name: "onboarding",
@@ -11,7 +11,7 @@ const onBoardingSlice = createSlice({
     reducers: {
         updatePersonalInfo(state) {}
     }
-})
+});
 
-export const { updatePersonalInfo } = onBoardingSlice.reducer
-export default onBoardingSlice.reducer
+export const { updatePersonalInfo } = onBoardingSlice.actions;
+export default onBoardingSlice.reducer;

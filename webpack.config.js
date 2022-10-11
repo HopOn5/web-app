@@ -20,24 +20,32 @@ module.exports = {
                 }
             },
             {
-                test: /\.(css|scss)$/,
-                include: path.resolve("src"),
+                test: /\.css$/i,
+                use: ["style-loader", "css-loader"]
+            },
+            {
+                test: /\.scss$/,
                 use: [
                     {
                         loader: "style-loader"
                     },
                     {
-                        loader: "css-loader",
-                        options: {
-                            importLoaders: 1,
-                            // This enables local scoped CSS based in CSS Modules spec
-                            modules: true
-                        }
+                        loader: "css-loader"
                     },
                     {
-                        loader: "sass-loader",
+                        loader: "sass-loader"
+                    }
+                ]
+            },
+            {
+                test: /\.(png|jp?g|svg)$/,
+                use: [
+                    {
+                        loader: "file-loader",
                         options: {
-                            sourceMap: true
+                            name: "[name].[ext]",
+                            outputPath: "images/",
+                            publicPath: "images/"
                         }
                     }
                 ]
