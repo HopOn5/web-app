@@ -1,5 +1,5 @@
 {
-  "name": "medcare_web-app",
+  "name": "hop_on-webapp",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mahiMathewsCov/medCare_web-app.git"
+    "url": "git+https://github.com/HopOn5/web-app.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mahiMathewsCov/medCare_web-app/issues"
+    "url": "https://github.com/HopOn5/web-app.git/issues"
   },
-  "homepage": "https://github.com/mahiMathewsCov/medCare_web-app#readme",
+  "homepage": "https://github.com/HopOn5/web-app.git#readme",
   "devDependencies": {
     "@babel/core": "^7.19.3",
     "@babel/plugin-proposal-class-properties": "^7.18.6",
