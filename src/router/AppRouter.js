@@ -1,15 +1,35 @@
-import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
+import PageLayout from "../components/PageLayout";
 import Onboarding from "../pages/onBoarding";
-import { onboardingUrl } from "../pageUrls";
+import { URLData } from "../pageUrls";
+import { useDispatch, useSelector } from "react-redux";
+import { updateLayoutData } from "../appReducer";
+import getLayoutData from "../helpers/getLayoutData";
+// import PrivateRoute from "./PrivateRoute";
 
-const AppRouter = (props) => {
+const AppRouter = ({ children, ...props }) => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const dispatch = useDispatch();
+    const layoutData = useSelector((states) => states.app.layout);
+
+    useEffect(() => {
+        dispatch(updateLayoutData(getLayoutData(location.pathname) ?? {}));
+    }, [location]);
+
+    const handleLayoutClose = () => {
+        navigate(layoutData?.exitTo ?? location?.state?.from ?? "/");
+    };
     return (
-        <BrowserRouter>
+        <PageLayout onClose={handleLayoutClose}>
             <Routes>
-                <Route path={onboardingUrl} element={<Onboarding />}></Route>
+                <Route
+                    path={URLData.onboarding.url}
+                    element={<Onboarding />}
+                ></Route>
             </Routes>
-        </BrowserRouter>
+        </PageLayout>
     );
 };
 

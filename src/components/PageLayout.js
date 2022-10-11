@@ -1,9 +1,15 @@
 import React from "react";
-import "../styles/components/_appheader.scss";
+import "../styles/components/_pageLayout.scss";
 import Icon from "./Icon";
+import Text from "./Text";
+import close from "../icons/close.svg";
+import { useSelector } from "react-redux";
 
-const PageLayout = ({ isLogo, leftComp, rightComp, isClose, children }) => {
-    console.log(children, "CHIL");
+const PageLayout = ({ isLogo, children, ...props }) => {
+    const { leftComp, rightComp, onClose } = props;
+    const layoutData = useSelector((states) => states?.app?.layout);
+    const { isClose, title } = layoutData;
+
     const getClassname = (classname) =>
         `page-layout${classname ? `__${classname}` : ""}`;
 
@@ -21,9 +27,16 @@ const PageLayout = ({ isLogo, leftComp, rightComp, isClose, children }) => {
                             {leftComp}
                         </div>
                     )}
+                    {title && <Text type="primaryMed bold">{title}</Text>}
                 </div>
                 <div className={getClassname("header-right")}>
-                    {isClose && <Icon className={getClassname("right-icon")} />}
+                    {isClose && (
+                        <Icon
+                            className={getClassname("right-icon")}
+                            icon={close}
+                            onClick={onClose}
+                        />
+                    )}
                     {rightComp && (
                         <div className={getClassname("right-comp")}>
                             {rightComp}
