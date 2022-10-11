@@ -1,11 +1,14 @@
 import React from "react";
-import "./index.scss";
+import "./styles/index.scss";
 import AppRouter from "./router/AppRouter";
+import PageLayout from "./components/PageLayout";
 
 const App = () => {
     return (
         <div className="root-container">
-            <AppRouter />
+            <PageLayout>
+                <AppRouter />
+            </PageLayout>
         </div>
     );
 };
