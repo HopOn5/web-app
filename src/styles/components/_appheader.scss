@@ -1,0 +1,8 @@
+@import "../variables.scss";
+
+.page-layout {
+    &__header {
+        background-color: $tertiary;
+        min-height: 105px;
+    }
+}

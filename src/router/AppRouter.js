@@ -7,7 +7,7 @@ const AppRouter = (props) => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path={"/onboarding"} element={<Onboarding />}></Route>
+                <Route path={onboardingUrl} element={<Onboarding />}></Route>
             </Routes>
         </BrowserRouter>
     );
