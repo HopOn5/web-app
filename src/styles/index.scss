@@ -10,10 +10,31 @@
 }
 
 .primaryMed {
+    font-size: 16px;
+    color: $text;
+}
+.primaryLarge {
     font-size: 22px;
-    color: $primary;
+    color: $text;
 }
 
+.button {
+    cursor: pointer;
+}
+.btn-primary {
+    border-radius: 5px;
+    background-color: $primary;
+    color: white;
+    font-size: 16px;
+    font-weight: 800;
+    padding: 10px 8px;
+    display: flex;
+    justify-content: center;
+}
+
+.white {
+    color: white;
+}
 .fW4 {
     font-weight: 400;
 }

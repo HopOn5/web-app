@@ -5,8 +5,11 @@ const Button = ({ className, ...props }) => {
         return `btn-${type}`;
     };
     return (
-        <div className={`${className} ${getBtnType(props?.type)}button`}>
-            {props?.value}
+        <div
+            className={`${className ?? ""} ${getBtnType(props?.type)} button`}
+            onClick={props?.onClick}
+        >
+            {props?.children}
         </div>
     );
 };

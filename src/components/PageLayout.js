@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/components/_pageLayout.scss";
 import Icon from "./Icon";
 import Text from "./Text";
-import close from "../icons/close.svg";
+import close from "../icons/close-white.svg";
 import { useSelector } from "react-redux";
 
 const PageLayout = ({ isLogo, children, ...props }) => {
@@ -27,7 +27,9 @@ const PageLayout = ({ isLogo, children, ...props }) => {
                             {leftComp}
                         </div>
                     )}
-                    {title && <Text type="primaryMed bold">{title}</Text>}
+                    {title && (
+                        <Text type="primaryLarge white fW8">{title}</Text>
+                    )}
                 </div>
                 <div className={getClassname("header-right")}>
                     {isClose && (

@@ -5,4 +5,31 @@
     &__icon {
         width: 90px;
     }
+    &__content {
+        &-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 26px;
+        }
+        &-list {
+            padding-top: 19px;
+        }
+    }
+    &__list-item {
+        padding-bottom: 15px;
+        .icon {
+            margin-right: 5px;
+        }
+    }
+    &__footer {
+        .btn-primary {
+            max-width: 150px;
+            margin: 0 auto;
+            .icon {
+                margin-right: 5px;
+                width: 15px;
+            }
+        }
+    }
 }
