@@ -2,7 +2,10 @@ export const URLData = {
     onboarding: {
         url: "/onboarding",
         isLogo: true,
-        layout: { isClose: true, title: "Upload Verification" }
+        layout: {
+            isClose: true,
+            title: ""
+        }
     },
     registration: {
         url: "/registration",

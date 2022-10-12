@@ -52,6 +52,7 @@ const UploadVerification = () => {
                 </div>
             </div>
             <div className={getClassname("footer")}>
+                {/* Upload button */}
                 <Button
                     className={getClassname("footer-upload")}
                     type="primary"
