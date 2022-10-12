@@ -11,7 +11,8 @@ const AppRouter = ({ children, ...props }) => {
                 path={URLData.onboarding.url}
                 element={<Onboarding />}
             ></Route>
-            <Route path={"/"}></Route>
+            <Route path={URLData.home.url}></Route>
+            <Route path={URLData.registration.url}></Route>
         </Routes>
     );
 };

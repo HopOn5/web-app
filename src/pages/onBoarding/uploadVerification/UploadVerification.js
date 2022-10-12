@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./_uploadVerification.scss";
 import Card from "../../../components/Card";
 import Text from "../../../components/Text";
@@ -12,6 +12,8 @@ const UploadVerification = () => {
     const getClassname = (classname) =>
         `upload-verification${classname ? `__${classname}` : ""}`;
 
+    const [uploadedFile, setUploadedFile] = useState(null);
+    const [filename, setFileName] = useState("");
     const CONTENT_HEADER = "Upload your student term letter";
 
     const listItems = [
@@ -30,6 +32,12 @@ const UploadVerification = () => {
             </Text>
         ));
     };
+
+    const handleFileUpload = (e) => {
+        setUploadedFile(e.target.files[0]);
+        setFileName(e.target.files[0].name);
+    };
+
     return (
         <Card className={getClassname()} style={styles.card}>
             <div className={getClassname("icon-container")}>
@@ -44,10 +52,21 @@ const UploadVerification = () => {
                 </div>
             </div>
             <div className={getClassname("footer")}>
-                <Button type="primary">
+                <Button
+                    className={getClassname("footer-upload")}
+                    type="primary"
+                    compType="file"
+                    id="verify-upload"
+                    acceptTypes="application/pdf"
+                    maxSize="10Mb"
+                    onFileUpload={handleFileUpload}
+                >
                     <Icon icon={uploadIcon} />
                     <Text type="white">Upload</Text>
                 </Button>
+                {filename && (
+                    <Text type="primarySmall fW8">{filename} is uploaded!</Text>
+                )}
             </div>
         </Card>
     );
