@@ -8,12 +8,18 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { useFormik } from "formik";
 
-import { initialValues } from "./formValidation";
+import { initialValues, validateSchema } from "./formValidation";
 
 export const PersonalDetails = () => {
   const [value, setValue] = useState(null);
+
+  // Formik Implementation
   const formik = useFormik({
     initialValues: initialValues,
+    validate: validateSchema,
+    onSubmit: (values) => {
+      console.log("values", values);
+    },
   });
 
   return (
@@ -26,42 +32,53 @@ export const PersonalDetails = () => {
           <Typography sx={{ pb: 2 }}>Personal Info</Typography>
           <Grid container spacing={2} sx={{ pb: 2 }}>
             <Grid item xs={6} md={6} sm={12}>
-              <InputField
+              <TextField
                 label="First Name"
                 name="firstName"
                 value={formik.values.firstName}
+                onChange={formik.handleChange}
+                sx={styles.inputField}
               />
             </Grid>
             <Grid item xs={6} md={6} sm={12}>
-              <InputField
+              <TextField
                 label="Last Name"
                 name="lastName"
                 value={formik.values.lastName}
+                onChange={formik.handleChange}
+                sx={styles.inputField}
+                variant="outlined"
               />
             </Grid>
           </Grid>
           <Grid container spacing={2} sx={{ pb: 2 }}>
             <Grid item xs={6} md={6} sm={12}>
-              <InputField
+              <TextField
                 label="Email"
                 name="email"
                 value={formik.values.email}
+                onChange={formik.handleChange}
+                sx={styles.inputField}
               />
             </Grid>
             <Grid item xs={6} md={6} sm={12}>
-              <InputField
+              <TextField
                 label="Phone Number"
                 name="phoneNumber"
                 value={formik.values.phoneNumber}
+                onChange={formik.handleChange}
+                sx={styles.inputField}
               />
             </Grid>
           </Grid>
           <Grid container spacing={2} sx={{ pb: 2 }}>
             <Grid item xs={6} md={6} sm={12}>
-              <InputField
+              <TextField
                 label="Gender"
                 name="gender"
                 value={formik.values.gender}
+                onChange={formik.handleChange}
+                sx={styles.inputField}
               />
             </Grid>
             <Grid item xs={6} md={6} sm={12}>
@@ -91,4 +108,7 @@ const styles = {
   cardItem: { mx: 40, my: 10, padding: 5 },
   accountIconButton: { color: "#457a76" },
   accountIcon: { height: 100, width: 100 },
+  inputField: {
+    width: "100%",
+  },
 };
