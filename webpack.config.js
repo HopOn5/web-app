@@ -36,6 +36,19 @@ module.exports = {
                         loader: "sass-loader"
                     }
                 ]
+            },
+            {
+                test: /\.(png|jp?g|svg)$/,
+                use: [
+                    {
+                        loader: "file-loader",
+                        options: {
+                            name: "[name].[ext]",
+                            outputPath: "images/",
+                            publicPath: "images/"
+                        }
+                    }
+                ]
             }
         ]
     },

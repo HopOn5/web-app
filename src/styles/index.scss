@@ -1,4 +1,61 @@
+@import "./variables.scss";
+
 .root-container {
     height: 100%;
     width: 100%;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+// Text common styles
+.primarySmall {
+    font-size: 12px;
+    color: $text;
+}
+.primaryMed {
+    font-size: 16px;
+    color: $text;
+}
+.primaryLarge {
+    font-size: 22px;
+    color: $text;
+}
+.fW4 {
+    font-weight: 400;
+}
+.fW8 {
+    font-weight: 800;
+}
+.fW7 {
+    font-weight: 700;
+}
+
+//Button common styles
+.button {
+    cursor: pointer;
+}
+.btn-primary {
+    border-radius: 5px;
+    background-color: $primary;
+    color: white;
+    font-size: 16px;
+    font-weight: 800;
+    padding: 10px 8px;
+    display: flex;
+    justify-content: center;
+}
+.btn-tWhite {
+    background-color: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 800;
+    padding: 10px 8px;
+    display: flex;
+    justify-content: center;
+}
+
+.white {
+    color: white;
 }

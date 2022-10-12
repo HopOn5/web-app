@@ -1,15 +1,19 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Onboarding from "../pages/onBoarding";
-import { onboardingUrl } from "../pageUrls";
+import { URLData } from "../pageUrls";
+// import PrivateRoute from "./PrivateRoute";
 
-const AppRouter = (props) => {
+const AppRouter = ({ children, ...props }) => {
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route path={onboardingUrl} element={<Onboarding />}></Route>
-            </Routes>
-        </BrowserRouter>
+        <Routes>
+            <Route
+                path={URLData.onboarding.url}
+                element={<Onboarding />}
+            ></Route>
+            <Route path={URLData.home.url}></Route>
+            <Route path={URLData.registration.url}></Route>
+        </Routes>
     );
 };
 
