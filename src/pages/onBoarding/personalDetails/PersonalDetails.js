@@ -105,7 +105,7 @@ export const PersonalDetails = () => {
 };
 
 const styles = {
-  cardItem: { mx: 40, my: 10, padding: 5 },
+  cardItem: { my: 10, padding: 5 },
   accountIconButton: { color: "#457a76" },
   accountIcon: { height: 100, width: 100 },
   inputField: {
