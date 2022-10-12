@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateLayoutData } from "./appReducer";
 import getLayoutData from "./helpers/getLayoutData";
 import LayoutHeaderComponent from "./components/layout/LayoutHeaderComponent";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 const App = () => {
     const navigate = useNavigate();
@@ -40,12 +41,26 @@ const App = () => {
         navigate(layoutData?.exitTo ?? location?.state?.from ?? "/");
     };
 
+    const theme = createTheme({
+        palette: {
+            primary: {
+                main: "#165954"
+            },
+            secondary: {
+                main: "#F9AC66",
+                dark: "#ED6B5B"
+            }
+        }
+    });
+
     return (
-        <div className="root-container">
-            <PageLayout onClose={handleLayoutClose} {...layoutProps}>
-                <AppRouter />
-            </PageLayout>
-        </div>
+        <ThemeProvider theme={theme}>
+            <div className="root-container">
+                <PageLayout onClose={handleLayoutClose} {...layoutProps}>
+                    <AppRouter />
+                </PageLayout>
+            </div>
+        </ThemeProvider>
     );
 };
 
