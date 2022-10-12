@@ -1,7 +1,6 @@
 import React from "react";
 
 const Icon = ({ icon, onClick, className }) => {
-    console.log(onClick ? "true" : "sdaj", onClick);
     return (
         <img
             src={icon}
