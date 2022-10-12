@@ -1,7 +1,9 @@
 import React from "react";
 import { Button as MaterialButton } from "@mui/material";
+import Loader from "./Loader";
+import "../styles/components/_button.scss";
 
-const Button = ({ className, ...props }) => {
+const Button = ({ className, isLoading, ...props }) => {
     const getBtnType = (type) => {
         return `btn-${type}`;
     };
@@ -25,6 +27,13 @@ const Button = ({ className, ...props }) => {
             </MaterialButton>
         );
     }
+    if (isLoading)
+        return (
+            <div className="btn-loader">
+                {" "}
+                <Loader />
+            </div>
+        );
     return (
         <div
             className={`${className ?? ""} ${getBtnType(props?.type)} button`}
