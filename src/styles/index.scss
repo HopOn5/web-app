@@ -46,6 +46,7 @@
     display: flex;
     justify-content: center;
 }
+
 .btn-tWhite {
     background-color: none;
     color: white;
@@ -58,4 +59,7 @@
 
 .white {
     color: white;
+}
+.blue {
+    color: $link;
 }
