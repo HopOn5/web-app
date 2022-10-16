@@ -9,8 +9,23 @@ import leftarr from "../../icons/green_leftArrow.svg";
 import rightarr from "../../icons/green_rightArrow.svg";
 import "./_onboarding.scss";
 import UploadAddress from "./uploadAddress/UploadAddress";
+import { useFormik } from "formik";
+import {
+  initialValues,
+  validateSchema,
+} from "./personalDetails/formValidation";
 
 const Onboarding = ({}) => {
+  //formik initialisation for personal Details component
+  const formik = useFormik({
+    initialValues,
+    validationSchema: validateSchema,
+    onSubmit: (values) => {
+      console.log("values from onboarding", values);
+      handleNext();
+    },
+  });
+
   const dispatch = useDispatch();
   const layout = useSelector((states) => states.app.layout);
 
@@ -23,8 +38,10 @@ const Onboarding = ({}) => {
       );
   }, [activeStep, layout]);
 
+  const handleSubmitForm = ({ values, handleCallback }) => {};
+
   const stepData = {
-    0: { body: <PersonalDetails />, title: "Personal Details" },
+    0: { body: <PersonalDetails formik={formik} />, title: "Personal Details" },
     1: { body: <UploadVerification />, title: "Upload Verification" },
     2: {
       body: <UploadAddress handleSubmit={handleSubmitForm} />,
@@ -50,25 +67,18 @@ const Onboarding = ({}) => {
     }
   };
 
+  const handleSubmitClick = () => {
+    if (activeStep === 0) {
+      formik?.handleSubmit && formik?.handleSubmit();
+    } else handleNext();
+  };
+
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
   const getSteps = () => {
     return ["Personal Details", "Document Upload", "Address Details"];
-  };
-
-  const getStepContent = (step) => {
-    switch (step) {
-      case 0:
-        return <PersonalDetails />;
-      case 1:
-        return <UploadVerification />;
-      case 2:
-        return;
-      default:
-        return;
-    }
   };
 
   const steps = getSteps();
@@ -133,7 +143,9 @@ const Onboarding = ({}) => {
             <Icon
               icon={rightarr}
               className="onBoarding__stepper-icon"
-              onClick={handleNext}
+              onClick={() => {
+                handleSubmitClick();
+              }}
             />
           </Box>
         ) : (
