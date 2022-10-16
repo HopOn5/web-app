@@ -1,12 +1,20 @@
 import React, { useState } from "react";
 import Card from "@mui/material/Card";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { Button, Grid, TextField, Typography } from "@mui/material";
+import {
+  Button,
+  FormControl,
+  Grid,
+  InputLabel,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { InputField } from "../../../components/InputField";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { gender } from "../utils";
+import { SelectField } from "../../../components/SelectField";
 
 export const PersonalDetails = (props) => {
   const { formik } = props;
@@ -20,6 +28,14 @@ export const PersonalDetails = (props) => {
       <Card sx={styles.cardItem}>
         <Button sx={styles.accountIconButton}>
           <AccountCircleIcon fontSize="large" sx={styles.accountIcon} />
+          {/* <input
+            accept="image/*"
+            //className={classes.input}
+            id="contained-button-file"
+            //multiple
+            type="file"
+            //onChange={this.handleUploadClick}
+          /> */}
         </Button>
         <Grid sx={{ px: 2, py: 1 }}>
           <Typography sx={{ pb: 2 }}>Personal Info</Typography>
@@ -106,12 +122,31 @@ export const PersonalDetails = (props) => {
           </Grid>
           <Grid container spacing={2} sx={{ pb: 2 }}>
             <Grid item xs={12} md={6} sm={12} lg={6}>
-              <TextField
+              {/* <TextField
                 label="Gender"
                 name="gender"
                 value={formik?.values?.gender}
                 onChange={formik?.handleChange}
                 sx={styles.inputField}
+                helperText={
+                  formik?.errors?.gender && formik?.touched?.gender
+                    ? formik?.errors?.gender
+                    : null
+                }
+                error={
+                  formik?.errors?.gender && formik?.touched?.gender
+                    ? formik?.errors?.gender
+                    : null
+                }
+              /> */}
+              <SelectField
+                label="Gender"
+                name="gender"
+                options={gender}
+                value={formik?.values?.gender}
+                onChange={(e) =>
+                  formik.setFieldValue("gender", e?.target?.value)
+                }
                 helperText={
                   formik?.errors?.gender && formik?.touched?.gender
                     ? formik?.errors?.gender
@@ -130,6 +165,7 @@ export const PersonalDetails = (props) => {
                   onChange={(value) =>
                     formik?.setFieldValue("dob", value, true)
                   }
+                  label="Date of Birth"
                   value={formik?.values?.dob}
                   renderInput={(params) => (
                     <TextField
