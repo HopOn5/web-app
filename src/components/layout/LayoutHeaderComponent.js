@@ -9,11 +9,11 @@ const LayoutHeaderComponent = ({ isRight, layoutData }) => {
 
     const renderComponent = () => {
         if (isRight && layoutData?.type) {
-            return rightContent.find((comp) => comp.type === layoutData.type)
-                .component;
+            return rightContent.find((comp) => comp?.type === layoutData?.type)
+                ?.component;
         } else if (layoutData?.type)
             return leftContent.find((comp) => comp.type === layoutData.type)
-                .component;
+                ?.component;
         return null;
     };
     return renderComponent();

@@ -8,6 +8,7 @@ import UploadVerification from "./uploadVerification/UploadVerification";
 import leftarr from "../../icons/green_leftArrow.svg";
 import rightarr from "../../icons/green_rightArrow.svg";
 import "./_onboarding.scss";
+import UploadAddress from "./uploadAddress/UploadAddress";
 
 const Onboarding = ({}) => {
   const dispatch = useDispatch();
@@ -25,7 +26,10 @@ const Onboarding = ({}) => {
   const stepData = {
     0: { body: <PersonalDetails />, title: "Personal Details" },
     1: { body: <UploadVerification />, title: "Upload Verification" },
-    2: { body: <></>, title: "Address Details" },
+    2: {
+      body: <UploadAddress handleSubmit={handleSubmitForm} />,
+      title: "Address Details",
+    },
   };
 
   const getStepData = (step) => stepData[step].body;

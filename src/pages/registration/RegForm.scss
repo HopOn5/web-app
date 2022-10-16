@@ -1,0 +1,27 @@
+.heading {
+    text-align: center;
+    color: #165954;
+    font-size: 3vw;
+    padding-top: 40px;
+}
+
+.textfield {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: 40px auto 50px;
+    > div {
+        margin: 20px;
+    }
+}
+
+.alignthings {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.registerbutton {
+    margin-top: 30px;
+    width: 100px;
+}
