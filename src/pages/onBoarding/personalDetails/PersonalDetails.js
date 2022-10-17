@@ -9,7 +9,6 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { InputField } from "../../../components/InputField";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -28,18 +27,18 @@ export const PersonalDetails = (props) => {
       <Card sx={styles.cardItem}>
         <Button sx={styles.accountIconButton}>
           <AccountCircleIcon fontSize="large" sx={styles.accountIcon} />
-          {/* <input
+          <input
             accept="image/*"
             //className={classes.input}
             id="contained-button-file"
             //multiple
             type="file"
             //onChange={this.handleUploadClick}
-          /> */}
+          />
         </Button>
         <Grid sx={{ px: 2, py: 1 }}>
-          <Typography sx={{ pb: 2 }}>Personal Info</Typography>
-          <Grid container spacing={2} sx={{ pb: 2 }}>
+          <Typography sx={styles.textPadding}>Personal Info</Typography>
+          <Grid container spacing={2} sx={styles.textPadding}>
             <Grid item xs={12} md={6} sm={12} lg={6}>
               <TextField
                 label="First Name"
@@ -80,7 +79,7 @@ export const PersonalDetails = (props) => {
               />
             </Grid>
           </Grid>
-          <Grid container spacing={2} sx={{ pb: 2 }}>
+          <Grid container spacing={2} sx={styles.textPadding}>
             <Grid item xs={12} md={6} sm={12}>
               <TextField
                 label="Email"
@@ -120,7 +119,7 @@ export const PersonalDetails = (props) => {
               />
             </Grid>
           </Grid>
-          <Grid container spacing={2} sx={{ pb: 2 }}>
+          <Grid container spacing={2} sx={styles.textPadding}>
             <Grid item xs={12} md={6} sm={12} lg={6}>
               {/* <TextField
                 label="Gender"
@@ -169,13 +168,13 @@ export const PersonalDetails = (props) => {
                   value={formik?.values?.dob}
                   renderInput={(params) => (
                     <TextField
+                      label="Date of Birth"
+                      name="dob"
+                      fullWidth
                       error={Boolean(
                         formik?.touched?.dob && formik?.errors?.dob
                       )}
                       helperText={formik?.touched?.dob && formik?.errors?.dob}
-                      label="Date of Birth"
-                      name="dob"
-                      fullWidth
                       {...params}
                     />
                   )}
@@ -196,4 +195,5 @@ const styles = {
   inputField: {
     width: "100%",
   },
+  textPadding: { pb: 2 },
 };
