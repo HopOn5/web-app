@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     personalInfo: {},
-    verificationData: {},
+    verificationData: null,
     address: {}
 };
 const onBoardingSlice = createSlice({
@@ -9,9 +9,12 @@ const onBoardingSlice = createSlice({
     name: "onboarding",
     initialState,
     reducers: {
-        updatePersonalInfo(state) {}
+        updatePersonalInfo(state) {},
+        updateTermFile(state, action) {
+            state.verificationData = action.payload;
+        }
     }
 });
 
-export const { updatePersonalInfo } = onBoardingSlice.actions;
+export const { updatePersonalInfo, updateTermFile } = onBoardingSlice.actions;
 export default onBoardingSlice.reducer;
