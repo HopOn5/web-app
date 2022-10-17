@@ -1,6 +1,16 @@
+import { Avatar } from "@mui/material";
 import React from "react";
 
-const Icon = ({ icon, onClick, className }) => {
+const Icon = ({ icon, onClick, className, styles, type = "" }) => {
+    if (type === "AVATAR")
+        return (
+            <Avatar
+                src={icon}
+                className={className}
+                sx={styles}
+                onClick={onClick}
+            />
+        );
     return (
         <img
             src={icon}

@@ -6,11 +6,11 @@ import Button from "../Button";
 const LoginButton = () => {
     const navigate = useNavigate();
     const handleLoginRedirect = () => {
-        navigate(URLData?.login?.url);
+        navigate(URLData?.signin?.url);
     };
     return (
         <Button type="tWhite" onClick={handleLoginRedirect}>
-            Login
+            Sign in
         </Button>
     );
 };
