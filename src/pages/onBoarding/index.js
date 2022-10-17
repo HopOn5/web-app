@@ -14,6 +14,7 @@ import {
   initialValues,
   validateSchema,
 } from "./personalDetails/formValidation";
+import uploadToStorage from "../../services/uploadToStorage";
 
 const Onboarding = ({}) => {
   //formik initialisation for personal Details component
@@ -27,9 +28,12 @@ const Onboarding = ({}) => {
   });
 
   const dispatch = useDispatch();
-  const layout = useSelector((states) => states.app.layout);
+  const [layout, verificationFile] = useSelector((states) => [
+    states.app.layout,
+    states?.onboarding?.verificationData ?? null,
+  ]);
 
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState(1);
 
   useEffect(() => {
     if (!layout?.title)
@@ -38,10 +42,15 @@ const Onboarding = ({}) => {
       );
   }, [activeStep, layout]);
 
-  const handleSubmitForm = ({ values, handleCallback }) => {};
+  const handleSubmitForm = async ({ values, handleCallback }) => {
+    let downloadURL = await uploadToStorage(verificationFile, "verification");
+  };
 
   const stepData = {
-    0: { body: <PersonalDetails formik={formik} />, title: "Personal Details" },
+    0: {
+      body: <PersonalDetails formik={formik} />,
+      title: "Personal Details",
+    },
     1: { body: <UploadVerification />, title: "Upload Verification" },
     2: {
       body: <UploadAddress handleSubmit={handleSubmitForm} />,
