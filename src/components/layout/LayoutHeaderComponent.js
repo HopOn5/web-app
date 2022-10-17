@@ -2,9 +2,7 @@ import React from "react";
 import * as HeaderComp from "./headerComponents";
 
 const LayoutHeaderComponent = ({ isRight, layoutData }) => {
-    const rightContent = [
-        { type: "login", component: <HeaderComp.LoginButton /> }
-    ];
+    const rightContent = [];
     const leftContent = [];
 
     const renderComponent = () => {

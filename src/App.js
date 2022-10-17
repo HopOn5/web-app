@@ -19,6 +19,7 @@ const App = () => {
 
     const getLayoutProps = (layoutInfo) => {
         return {
+            ...layoutInfo,
             rightComp: (
                 <LayoutHeaderComponent
                     isRight
@@ -33,7 +34,7 @@ const App = () => {
 
     useEffect(() => {
         const layout = getLayoutData(location.pathname);
-        dispatch(updateLayoutData(getLayoutData(location.pathname) ?? {}));
+        dispatch(updateLayoutData(layout ?? {}));
         setLayoutProps(getLayoutProps(layout ?? {}));
     }, [location]);
 

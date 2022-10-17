@@ -1,20 +1,19 @@
 export const URLData = {
     onboarding: {
         url: "/onboarding",
-        isLogo: true,
         layout: {
+            isLogo: true,
             isClose: true,
             title: ""
         }
     },
     registration: {
         url: "/registration",
-        isLogo: true,
-        layout: { right: { type: "login" } }
+        layout: { isLogo: true, right: { type: "signin" }, title: "Register" }
     },
-    home: { url: "/", isLogo: true, layout: { right: { type: "user" } } },
-    login: {
-        url: "/login",
-        isLogo: true
+    home: { url: "/", layout: { isLogo: true, right: { type: "user" } } },
+    signin: {
+        url: "/signin",
+        layout: { isLogo: true, right: {}, title: "Sign in" }
     }
 };
