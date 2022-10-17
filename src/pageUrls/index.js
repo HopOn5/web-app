@@ -17,9 +17,9 @@ export const URLData = {
         url: "/login",
         isLogo: true
     },
-    signin:{
-        url:"/signin",
-        isLogo:true,
-        layout: { right: { type: "login" } }
-    },
+    signin: {
+        url: "/signin",
+        isLogo: true,
+        layout: { right: {} }
+    }
 };
