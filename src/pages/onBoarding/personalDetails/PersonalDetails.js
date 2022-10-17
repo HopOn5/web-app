@@ -81,8 +81,8 @@ export const PersonalDetails = (props) => {
         </Dialog>
 
         <Grid sx={{ px: 2, py: 1 }}>
-          <Typography sx={{ pb: 2 }}>Personal Info</Typography>
-          <Grid container spacing={2} sx={{ pb: 2 }}>
+          <Typography sx={styles.textPadding}>Personal Info</Typography>
+          <Grid container spacing={2} sx={styles.textPadding}>
             <Grid item xs={12} md={6} sm={12} lg={6}>
               <TextField
                 label="First Name"
@@ -123,7 +123,7 @@ export const PersonalDetails = (props) => {
               />
             </Grid>
           </Grid>
-          <Grid container spacing={2} sx={{ pb: 2 }}>
+          <Grid container spacing={2} sx={styles.textPadding}>
             <Grid item xs={12} md={6} sm={12}>
               <TextField
                 label="Email"
@@ -163,7 +163,7 @@ export const PersonalDetails = (props) => {
               />
             </Grid>
           </Grid>
-          <Grid container spacing={2} sx={{ pb: 2 }}>
+          <Grid container spacing={2} sx={styles.textPadding}>
             <Grid item xs={12} md={6} sm={12} lg={6}>
               <SelectField
                 label="Gender"
@@ -222,4 +222,5 @@ const styles = {
   inputField: {
     width: "100%",
   },
+  textPadding: { pb: 2 },
 };
