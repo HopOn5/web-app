@@ -84,44 +84,18 @@ const Onboarding = ({}) => {
   const steps = getSteps();
 
   return (
-    <Box sx={{ width: "80%", margin: "auto", my: 5 }}>
+    <Box sx={styles.stepperStyle}>
       <Stepper nonLinear activeStep={activeStep}>
         {steps.map((label, index) => (
-          <Step
-            key={label}
-            sx={{
-              "& .MuiStepLabel-root .Mui-active": {
-                color: "#457a76", // circle color (ACTIVE)
-              },
-              "& .MuiStepLabel-label.Mui-active.MuiStepLabel-alternativeLabel":
-                {
-                  color: "common.white", // Just text label (ACTIVE)
-                },
-              "& .MuiStepLabel-root .Mui-active .MuiStepIcon-text": {
-                fill: "white", // circle's number (ACTIVE)
-              },
-            }}
-          >
+          <Step key={label} sx={styles.stepNumberStyle}>
             <StepLabel color="#457a76">{label}</StepLabel>
           </Step>
         ))}
       </Stepper>
 
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
+      <Box sx={styles.alignItemCenter}>
         {activeStep !== 0 ? (
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
+          <Box sx={styles.alignItemCenter}>
             <Icon
               icon={leftarr}
               className="onBoarding__stepper-icon"
@@ -133,13 +107,7 @@ const Onboarding = ({}) => {
         )}
         <Box> {getStepData(activeStep)}</Box>
         {activeStep !== 2 ? (
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
+          <Box sx={styles.alignItemCenter}>
             <Icon
               icon={rightarr}
               className="onBoarding__stepper-icon"
@@ -157,3 +125,23 @@ const Onboarding = ({}) => {
 };
 
 export default Onboarding;
+
+const styles = {
+  stepperStyle: { width: "80%", margin: "auto", my: 5 },
+  stepNumberStyle: {
+    "& .MuiStepLabel-root .Mui-active": {
+      color: "#457a76", // circle color (ACTIVE)
+    },
+    "& .MuiStepLabel-label.Mui-active.MuiStepLabel-alternativeLabel": {
+      color: "common.white", // Just text label (ACTIVE)
+    },
+    "& .MuiStepLabel-root .Mui-active .MuiStepIcon-text": {
+      fill: "white", // circle's number (ACTIVE)
+    },
+  },
+  alignItemCenter: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+};
