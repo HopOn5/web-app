@@ -7,12 +7,14 @@ import uploadIcon from "../../../icons/upload.svg";
 import letterIcon from "../../../icons/student_letter.svg";
 import tick from "../../../icons/tick.svg";
 import Button from "../../../components/Button";
+import { updateTermFile } from "../redux/reducer";
+import { useDispatch } from "react-redux";
 
 const UploadVerification = () => {
     const getClassname = (classname) =>
         `upload-verification${classname ? `__${classname}` : ""}`;
 
-    const [uploadedFile, setUploadedFile] = useState(null);
+    const dispatch = useDispatch();
     const [filename, setFileName] = useState("");
     const CONTENT_HEADER = "Upload your student term letter";
 
@@ -34,8 +36,8 @@ const UploadVerification = () => {
     };
 
     const handleFileUpload = (e) => {
-        setUploadedFile(e.target.files[0]);
         setFileName(e.target.files[0].name);
+        dispatch(updateTermFile(e.target.files[0]));
     };
 
     return (
@@ -66,7 +68,12 @@ const UploadVerification = () => {
                     <Text type="white">Upload</Text>
                 </Button>
                 {filename && (
-                    <Text type="primarySmall fW8">{filename} is uploaded!</Text>
+                    <Text
+                        type="primarySmall fW8"
+                        className={getClassname("btn-subtxt")}
+                    >
+                        {filename} is uploaded!
+                    </Text>
                 )}
             </div>
         </Card>

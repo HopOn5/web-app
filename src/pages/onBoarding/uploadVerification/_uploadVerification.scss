@@ -13,6 +13,8 @@
             padding-top: 26px;
         }
         &-list {
+            display: flex;
+            flex-direction: column;
             padding-top: 19px;
         }
     }
@@ -35,5 +37,9 @@
             text-align: center;
             padding-top: 12px;
         }
+    }
+    &__btn-subtxt {
+        display: flex;
+        justify-content: center;
     }
 }
