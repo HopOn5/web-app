@@ -4,6 +4,7 @@ import Icon from "../Icon";
 import Text from "../Text";
 import close from "../../icons/close-white.svg";
 import { useSelector } from "react-redux";
+import logo from "../../icons/logo.jpg";
 
 const PageLayout = ({ isLogo, children, ...props }) => {
     const { leftComp, rightComp, onClose } = props;
@@ -15,13 +16,20 @@ const PageLayout = ({ isLogo, children, ...props }) => {
 
     const titleType = "primaryLarge white fW8";
 
+    console.log(isLogo);
+
     return (
         <div className={getClassname()}>
             <div className={getClassname("header")}>
                 <div className={getClassname("header-left")}>
                     {isLogo && (
                         <div className={getClassname("logo-container")}>
-                            <Icon className={getClassname("logo")} />
+                            <Icon
+                                type="AVATAR"
+                                className={getClassname("logo")}
+                                icon={logo}
+                                styles={styles.logo}
+                            />
                         </div>
                     )}
                     {leftComp && (
@@ -60,5 +68,7 @@ const PageLayout = ({ isLogo, children, ...props }) => {
         </div>
     );
 };
+
+const styles = { logo: { width: "60px", height: "60px" } };
 
 export default PageLayout;
