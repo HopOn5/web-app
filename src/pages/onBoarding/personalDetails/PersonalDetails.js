@@ -3,40 +3,83 @@ import Card from "@mui/material/Card";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import {
   Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
   FormControl,
   Grid,
   InputLabel,
   TextField,
   Typography,
 } from "@mui/material";
-import { InputField } from "../../../components/InputField";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { gender } from "../utils";
 import { SelectField } from "../../../components/SelectField";
+import Avatar from "react-avatar-edit";
+import user from "../../../icons/user-profile.svg";
+import "./_personalDetails.scss";
 
 export const PersonalDetails = (props) => {
   const { formik } = props;
 
-  const [value, setValue] = useState(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [imageCrop, setImageCrop] = useState(false);
+  const [storeImage, setStoreImage] = useState([]);
 
-  console.log("errors", formik?.errors);
+  const onCrop = (view) => {
+    setImageCrop(view);
+  };
+
+  const onClose = () => {};
+
+  const handleModalClose = () => setDialogOpen(false);
+
+  const saveImage = () => {
+    setStoreImage(imageCrop);
+    setDialogOpen(false);
+  };
+
+  const profileImage = storeImage;
 
   return (
     <div>
       <Card sx={styles.cardItem}>
-        <Button sx={styles.accountIconButton}>
-          <AccountCircleIcon fontSize="large" sx={styles.accountIcon} />
-          {/* <input
-            accept="image/*"
-            //className={classes.input}
-            id="contained-button-file"
-            //multiple
-            type="file"
-            //onChange={this.handleUploadClick}
-          /> */}
-        </Button>
+        <img
+          className="personal-details__img"
+          src={profileImage?.length ? profileImage : user}
+          onClick={() => setDialogOpen(true)}
+        />
+
+        <Dialog
+          open={dialogOpen}
+          onClose={handleModalClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">
+            {"Upload your profile picture"}
+          </DialogTitle>
+          <DialogContent>
+            <Avatar
+              width={390}
+              height={295}
+              onCrop={onCrop}
+              onClose={onClose}
+            />
+          </DialogContent>
+          <DialogActions sx={{ margin: "auto" }}>
+            <Button variant="contained" onClick={saveImage}>
+              Upload
+            </Button>
+            <Button variant="outlined" onClick={handleModalClose}>
+              Cancel
+            </Button>
+          </DialogActions>
+        </Dialog>
+
         <Grid sx={{ px: 2, py: 1 }}>
           <Typography sx={{ pb: 2 }}>Personal Info</Typography>
           <Grid container spacing={2} sx={{ pb: 2 }}>
@@ -122,23 +165,6 @@ export const PersonalDetails = (props) => {
           </Grid>
           <Grid container spacing={2} sx={{ pb: 2 }}>
             <Grid item xs={12} md={6} sm={12} lg={6}>
-              {/* <TextField
-                label="Gender"
-                name="gender"
-                value={formik?.values?.gender}
-                onChange={formik?.handleChange}
-                sx={styles.inputField}
-                helperText={
-                  formik?.errors?.gender && formik?.touched?.gender
-                    ? formik?.errors?.gender
-                    : null
-                }
-                error={
-                  formik?.errors?.gender && formik?.touched?.gender
-                    ? formik?.errors?.gender
-                    : null
-                }
-              /> */}
               <SelectField
                 label="Gender"
                 name="gender"
@@ -169,6 +195,7 @@ export const PersonalDetails = (props) => {
                   value={formik?.values?.dob}
                   renderInput={(params) => (
                     <TextField
+                      {...params}
                       error={Boolean(
                         formik?.touched?.dob && formik?.errors?.dob
                       )}
@@ -176,7 +203,6 @@ export const PersonalDetails = (props) => {
                       label="Date of Birth"
                       name="dob"
                       fullWidth
-                      {...params}
                     />
                   )}
                 />
