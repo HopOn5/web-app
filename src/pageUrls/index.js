@@ -20,6 +20,6 @@ export const URLData = {
     signin: {
         url: "/signin",
         isLogo: true,
-        layout: { right: {} }
+        layout: { right: {}, title: "Sign in" }
     }
 };

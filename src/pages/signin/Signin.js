@@ -1,7 +1,7 @@
 import React from "react";
 import "./Signin.scss";
 import SigninSection from "./SigninSection";
-import banner from "./banner.jpg";
+import banner from "../../icons/banner.jpg";
 
 const Signin = () => {
     return (
