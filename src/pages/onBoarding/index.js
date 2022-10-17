@@ -33,7 +33,7 @@ const Onboarding = ({}) => {
     states?.onboarding?.verificationData ?? null,
   ]);
 
-  const [activeStep, setActiveStep] = useState(1);
+  const [activeStep, setActiveStep] = useState(0);
 
   useEffect(() => {
     if (!layout?.title)
