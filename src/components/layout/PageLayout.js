@@ -16,8 +16,6 @@ const PageLayout = ({ isLogo, children, ...props }) => {
 
     const titleType = "primaryLarge white fW8";
 
-    console.log(isLogo);
-
     return (
         <div className={getClassname()}>
             <div className={getClassname("header")}>

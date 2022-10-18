@@ -1,0 +1,22 @@
+.all-features {
+    display: flex;
+    &__notifications {
+    }
+    &__chats {
+    }
+    &__user {
+    }
+    &__list-item {
+        margin-left: 15px !important;
+    }
+    .icon {
+        max-width: 35px;
+    }
+}
+.banner-icon {
+    display: flex;
+    // position: relative;
+    &__badge {
+        // position: absolute;
+    }
+}

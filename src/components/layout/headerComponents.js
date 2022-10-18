@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { URLData } from "../../pageUrls";
+import Text from "../Text";
 import Button from "../Button";
+import Icon from "../Icon";
+import "../../styles/components/_layoutComponents.scss";
+import bellIcon from "../../icons/bell.svg";
+import msgIcon from "../../icons/chat-icon.svg";
+import userIcon from "../../icons/user.svg";
+import { FormControl, Menu, MenuItem } from "@mui/material";
+import ClickAwayListener from "@mui/material/ClickAwayListener";
 
 const LoginButton = () => {
     const navigate = useNavigate();
@@ -15,4 +23,122 @@ const LoginButton = () => {
     );
 };
 
-export { LoginButton };
+const AllFeatures = () => {
+    const navigate = useNavigate();
+    const handleClick = (e, type) => {
+        if (type === "chats") {
+            navigate(URLData?.messages?.url);
+        }
+    };
+    const handleSelect = (type) => {
+        switch (type) {
+            case "profile": {
+                navigate(URLData?.profile?.url);
+                break;
+            }
+            case "chats": {
+                navigate(URLData?.messages?.url);
+                break;
+            }
+            case "notifications": {
+                navigate(URLData?.notifications.url);
+                break;
+            }
+            case "logout": {
+                break;
+            }
+            default:
+                break;
+        }
+    };
+    const allFeatures = [
+        <BannerIconBadge
+            className="all-features__notifications all-features__list-item"
+            type="notification"
+            count={1}
+            onClick={handleClick}
+        />,
+        <BannerIconBadge
+            className="all-features__chats all-features__list-item"
+            type="chats"
+            count={3}
+            onClick={handleClick}
+        />,
+        <UserDrop
+            handleSelect={handleSelect}
+            className="all-features__user all-features__list-item"
+        />
+    ];
+    return <div className="all-features">{allFeatures}</div>;
+};
+
+const BannerIconBadge = ({ type, count = 0, onClick, className = "" }) => {
+    const icons = { notification: bellIcon, chats: msgIcon };
+    return (
+        <div className={`${className} banner-icon`}>
+            <Icon
+                icon={icons[type]}
+                onClick={(e) => onClick(e, type)}
+                className="banner-icon__bell"
+            />
+            {count && (
+                <Text type="white" className="banner-icon__badge">
+                    {count}
+                </Text>
+            )}
+        </div>
+    );
+};
+
+const UserDrop = ({ handleSelect, className }) => {
+    const [showMenu, setShowMenu] = useState(false);
+    const [anchorEl, setAnchorRel] = useState(null);
+
+    const menuList = [
+        { type: "profile", label: "View profile" },
+        { type: "logout", label: "Logout" }
+    ];
+    const renderMenu = () =>
+        menuList.map((item, index) => (
+            <MenuItem
+                key={`${index}-key`}
+                onClick={(e) => handleSelect(item?.type)}
+            >
+                {item?.label}
+            </MenuItem>
+        ));
+
+    const handleClick = (e) => {
+        setAnchorRel(e.currentTarget);
+        setShowMenu((prevState) => !prevState);
+    };
+
+    const handleClose = () => setShowMenu(false);
+    return (
+        <ClickAwayListener onClickAway={handleClose}>
+            <FormControl
+                variant="standard"
+                className={`${className} user-drop`}
+            >
+                <Icon
+                    icon={userIcon}
+                    className="user-drop__icon"
+                    onClick={handleClick}
+                />
+                <Menu
+                    onClose={handleClose}
+                    variant="menu"
+                    open={showMenu}
+                    anchorEl={anchorEl}
+                    autoFocus={false}
+                    anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+                    transformOrigin={{ vertical: "top", horizontal: "center" }}
+                >
+                    {renderMenu()}
+                </Menu>
+            </FormControl>
+        </ClickAwayListener>
+    );
+};
+
+export { LoginButton, AllFeatures };
