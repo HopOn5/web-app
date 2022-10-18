@@ -2,6 +2,7 @@ import React from "react";
 import "./Registration.scss";
 import RegForm from "./RegForm";
 import cycle from "../../icons/cycle.jpg";
+import cycle from "../../icons/cycle_reg.svg";
 
 const Registration = () => {
     return (

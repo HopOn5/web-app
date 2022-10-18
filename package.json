@@ -39,12 +39,16 @@
         "@emotion/styled": "^11.10.4",
         "@mui/icons-material": "^5.10.9",
         "@mui/material": "^5.10.9",
+        "@mui/x-date-pickers": "^5.0.4",
         "@reduxjs/toolkit": "^1.8.6",
+        "date-fns": "^2.29.3",
+        "dayjs": "^1.11.5",
         "env-cmd": "^10.1.0",
         "file-loader": "^6.2.0",
         "firebase": "^9.12.1",
         "formik": "^2.2.9",
         "react": "^18.2.0",
+        "react-avatar-edit": "^1.2.0",
         "react-dom": "^18.2.0",
         "react-redux": "^8.0.4",
         "react-router-dom": "^6.4.2",
@@ -52,9 +56,6 @@
         "redux-logger": "^3.0.6",
         "sass-loader": "^13.0.2",
         "url-loader": "^4.1.1",
-        "@mui/x-date-pickers": "^5.0.4",
-        "date-fns": "^2.29.3",
-        "dayjs": "^1.11.5",
         "yup": "^0.32.11"
     }
 }

@@ -1,6 +1,7 @@
 @import "../variables.scss";
 
 .page-layout {
+    min-height: 100vh;
     &__header {
         padding: 10px 20px;
         background-color: $tertiary;
@@ -8,5 +9,15 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        &-left {
+            display: flex;
+            align-items: center;
+        }
+    }
+    &__logo {
+        margin-right: 15px;
+    }
+    &__body {
+        min-height: 100vh;
     }
 }

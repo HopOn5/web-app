@@ -23,6 +23,19 @@ const App = () => {
         <LayoutHeaderComponent isRight layoutData={layoutInfo?.right ?? {}} />
       ),
       leftComp: <LayoutHeaderComponent layoutData={layoutInfo?.left ?? {}} />,
+    const getLayoutProps = (layoutInfo) => {
+        return {
+            ...layoutInfo,
+            rightComp: (
+                <LayoutHeaderComponent
+                    isRight
+                    layoutData={layoutInfo?.right ?? {}}
+                />
+            ),
+            leftComp: (
+                <LayoutHeaderComponent layoutData={layoutInfo?.left ?? {}} />
+            )
+        };
     };
   };
 
@@ -31,6 +44,11 @@ const App = () => {
     dispatch(updateLayoutData(getLayoutData(location.pathname) ?? {}));
     setLayoutProps(getLayoutProps(layout ?? {}));
   }, [location]);
+    useEffect(() => {
+        const layout = getLayoutData(location.pathname);
+        dispatch(updateLayoutData(layout ?? {}));
+        setLayoutProps(getLayoutProps(layout ?? {}));
+    }, [location]);
 
   const handleLayoutClose = () => {
     navigate(layoutData?.exitTo ?? location?.state?.from ?? "/");
