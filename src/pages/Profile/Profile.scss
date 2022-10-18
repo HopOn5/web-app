@@ -1,0 +1,16 @@
+.profile__card {
+    margin: auto;
+    width: fit-content;
+}
+.profile {
+    display: flex;
+    align-items: center;
+    &__child:first-child {
+        display: flex;
+        justify-content: flex-start;
+        flex: 1;
+    }
+    &__child:last-child {
+        flex: 1;
+    }
+}

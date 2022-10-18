@@ -15,5 +15,19 @@ export const URLData = {
     signin: {
         url: "/signin",
         layout: { isLogo: true, right: {}, title: "Sign in" }
+    },
+    profile: {
+        url: "/profile",
+        layout: {
+            isLogo: true,
+            title: "Profile"
+        }
+    },
+    profileEdit: {
+        url: "/profile-edit",
+        layout: {
+            isLogo: true,
+            title: "Profile-edit"
+        }
     }
 };

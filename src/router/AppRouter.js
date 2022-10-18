@@ -1,6 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Onboarding from "../pages/onBoarding";
+import Profile from "../pages/Profile/Profile";
 import Registration from "../pages/registration/Registration";
 import { URLData } from "../pageUrls";
 // import PrivateRoute from "./PrivateRoute";
@@ -17,6 +18,7 @@ const AppRouter = ({ children, ...props }) => {
                 path={URLData.registration.url}
                 element={<Registration />}
             ></Route>
+            <Route path={URLData.profile.url} element={<Profile />}></Route>
         </Routes>
     );
 };
