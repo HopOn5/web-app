@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
-    layout: {}
+    layout: {},
+    userInfo: {}
 };
 const appSlice = createSlice({
     name: "app",

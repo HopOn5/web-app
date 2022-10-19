@@ -24,8 +24,6 @@ const PageLayout = ({ isLogo, children, ...props }) => {
         navigate("/profile-edit");
     };
 
-    console.log(isLogo);
-
     return (
         <div className={getClassname()}>
             <div className={getClassname("header")}>

@@ -1,0 +1,21 @@
+.request-form {
+    &__form {
+        &-one,
+        &-two {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+        }
+        &-submit {
+            max-width: 200px;
+            margin: 20px auto 0;
+        }
+    }
+    &__input-field {
+        width: 100%;
+        margin: 5px 10px;
+        input {
+            background-color: white !important;
+        }
+    }
+}

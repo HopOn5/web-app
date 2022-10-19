@@ -1,0 +1,30 @@
+.all-features {
+    display: flex;
+    &__list-item {
+        margin-left: 15px !important;
+    }
+    .banner-icon {
+        &:first-child {
+            .icon {
+                max-width: 26px;
+            }
+        }
+        &:nth-child(2) {
+            .icon {
+                max-width: 35px;
+            }
+        }
+    }
+    .user-drop {
+        .icon {
+            max-width: 26px;
+        }
+    }
+}
+.banner-icon {
+    display: flex;
+    // position: relative;
+    &__badge {
+        // position: absolute;
+    }
+}

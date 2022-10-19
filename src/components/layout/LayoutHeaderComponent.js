@@ -2,9 +2,13 @@ import React from "react";
 import * as HeaderComp from "./headerComponents";
 
 const LayoutHeaderComponent = ({ isRight, layoutData }) => {
-    const rightContent = [];
+    const rightContent = [
+        {
+            type: "all_feature",
+            component: <HeaderComp.AllFeatures />
+        }
+    ];
     const leftContent = [];
-
     const renderComponent = () => {
         if (isRight && layoutData?.type) {
             return rightContent.find((comp) => comp?.type === layoutData?.type)
