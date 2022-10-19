@@ -13,7 +13,7 @@ const TemplateCard = (props) => {
 };
 
 const styles = {
-    card: { margin: 5, padding: 5 }
+    card: { margin: "15px", padding: 5 }
 };
 
 export default TemplateCard;

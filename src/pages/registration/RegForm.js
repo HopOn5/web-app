@@ -63,8 +63,8 @@ const RegForm = () => {
 
     return (
         <div>
-            <h2 className="heading">Let's get started...</h2>
-            <div className="textfield">
+            <h2 className="reg-form__heading">Let's get started...</h2>
+            <div className="reg-form__textfield">
                 <TextField
                     id="outlined-basic"
                     label="Email"
@@ -141,7 +141,7 @@ const RegForm = () => {
                             }
                         />
                     </FormGroup>
-                    <div className="registerbutton">
+                    <div className="reg-form__registerbutton">
                         <Button type="primary" onClick={register}>
                             Register
                         </Button>

@@ -26,5 +26,19 @@ export const URLData = {
     notifications: {
         url: "/notifications",
         layout: { isLogo: true, title: "Notifications" }
+    },
+    profile: {
+        url: "/profile",
+        layout: {
+            isLogo: true,
+            title: "Profile"
+        }
+    },
+    profileEdit: {
+        url: "/profile-edit",
+        layout: {
+            isLogo: true,
+            title: "Profile-edit"
+        }
     }
 };
