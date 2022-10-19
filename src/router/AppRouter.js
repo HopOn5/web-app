@@ -1,6 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Onboarding from "../pages/onBoarding";
+import Profile from "../pages/Profile/Profile";
 import Registration from "../pages/registration/Registration";
 import Signin from "../pages/signin/Signin";
 import { URLData } from "../pageUrls";
@@ -13,6 +14,7 @@ const AppRouter = ({ children, ...props }) => {
       <Route path={URLData.home.url}></Route>
       <Route path={URLData.registration.url} element={<Registration />}></Route>
       <Route path={URLData.signin.url} element={<Signin />}></Route>
+      <Route path={URLData.profile.url} element={<Profile />}></Route>
     </Routes>
   );
 };
