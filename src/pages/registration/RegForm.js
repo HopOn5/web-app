@@ -9,6 +9,8 @@ import Text from "../../components/Text";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase-config";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 const style = {
@@ -30,9 +32,34 @@ const RegForm = () => {
         setOpen(true);
     };
     const handleClose = () => setOpen(false);
-    const handleRegister = () => {
-        console.log("You clicked register");
+
+    const [regEmail, setregEmail] = useState("");
+    const [regPassword, setregPassword] = useState("");
+    const [regcreatePassword, setregcreatePassword] = useState("");
+
+    const [user, setUser] = useState({});
+
+    // onAuthStateChanged(auth, (currentUser) => {
+    //     console.log("on auth change", currentUser, auth);
+    //     setUser(currentUser);
+    // });
+    const register = async () => {
+        try {
+            const user = await createUserWithEmailAndPassword(
+                auth,
+                regEmail,
+                regPassword,
+                regcreatePassword
+            );
+            console.log(user);
+        } catch (error) {
+            console.log(error.message);
+        }
     };
+
+    // const handleRegister = async () => {
+    //   console.log("You clicked register");
+    // };
 
     return (
         <div>
@@ -42,16 +69,25 @@ const RegForm = () => {
                     id="outlined-basic"
                     label="Email"
                     variant="outlined"
+                    onChange={(event) => {
+                        setregEmail(event.target.value);
+                    }}
                 />
                 <TextField
                     id="outlined-basic"
                     label="Create password"
                     variant="outlined"
+                    onChange={(event) => {
+                        setregcreatePassword(event.target.value);
+                    }}
                 />
                 <TextField
                     id="outlined-basic"
                     label="Confirm password"
                     variant="outlined"
+                    onChange={(event) => {
+                        setregPassword(event.target.value);
+                    }}
                 />
                 <div className="alignthings">
                     <FormGroup>
@@ -105,9 +141,8 @@ const RegForm = () => {
                             }
                         />
                     </FormGroup>
-
                     <div className="reg-form__registerbutton">
-                        <Button type="primary" onClick={handleRegister}>
+                        <Button type="primary" onClick={register}>
                             Register
                         </Button>
                     </div>
