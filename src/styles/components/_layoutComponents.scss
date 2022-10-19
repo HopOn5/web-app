@@ -1,16 +1,24 @@
 .all-features {
     display: flex;
-    &__notifications {
-    }
-    &__chats {
-    }
-    &__user {
-    }
     &__list-item {
         margin-left: 15px !important;
     }
-    .icon {
-        max-width: 35px;
+    .banner-icon {
+        &:first-child {
+            .icon {
+                max-width: 26px;
+            }
+        }
+        &:nth-child(2) {
+            .icon {
+                max-width: 35px;
+            }
+        }
+    }
+    .user-drop {
+        .icon {
+            max-width: 26px;
+        }
     }
 }
 .banner-icon {

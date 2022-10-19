@@ -57,16 +57,19 @@ const AllFeatures = () => {
             type="notification"
             count={1}
             onClick={handleClick}
+            key="banner-notification"
         />,
         <BannerIconBadge
             className="all-features__chats all-features__list-item"
             type="chats"
             count={3}
             onClick={handleClick}
+            key="banner-chats"
         />,
         <UserDrop
             handleSelect={handleSelect}
             className="all-features__user all-features__list-item"
+            key="banner-user"
         />
     ];
     return <div className="all-features">{allFeatures}</div>;
