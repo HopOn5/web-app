@@ -15,7 +15,7 @@ import {
     updateProfile
 } from "firebase/auth";
 import { setDoc, doc, serverTimestamp } from "firebase/firestore";
-import { db } from "../../firebase-config";
+import { db } from "../../firebase/config";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -69,6 +69,7 @@ const RegForm = () => {
                 createpassword,
                 password
             );
+            toast.success("Register successfully");
             const user = userCredential.user;
             updateProfile(auth.currentUser, {
                 displayName: email
