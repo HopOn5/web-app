@@ -3,3 +3,4 @@ node_modules
 .prettierrc.json
 .env.local
 .env
+package-lock.json

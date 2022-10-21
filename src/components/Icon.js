@@ -14,7 +14,7 @@ const Icon = ({ icon, onClick, className, styles, type = "" }) => {
     return (
         <img
             src={icon}
-            className={`${className ?? "icon"}${onClick ? " pointer" : ""}`}
+            className={`${className} icon ${onClick ? " pointer" : ""}`}
             onClick={onClick ?? (() => {})}
         />
     );

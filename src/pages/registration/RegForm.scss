@@ -1,11 +1,11 @@
-.heading {
+.reg-form__heading {
     text-align: center;
     color: #165954;
     font-size: 3vw;
     padding-top: 40px;
 }
 
-.textfield {
+.reg-form__textfield {
     display: flex;
     flex-direction: column;
     max-width: 400px;
@@ -21,7 +21,7 @@
     align-items: center;
 }
 
-.registerbutton {
+.reg-form__registerbutton {
     margin-top: 30px;
     width: 100px;
 }

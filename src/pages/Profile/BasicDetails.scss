@@ -1,0 +1,20 @@
+.basic-details__card {
+    width: 100%;
+}
+.basic-details__heading {
+    color: #165954;
+}
+
+.basic-details {
+    display: flex;
+    &__items {
+        flex: 1;
+        &_child {
+            padding: 20px;
+            color: #bebcbc;
+        }
+        &_child_ans {
+            padding: 20px;
+        }
+    }
+}
