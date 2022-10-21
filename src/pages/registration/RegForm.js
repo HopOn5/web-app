@@ -11,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/config";
+import TermsConditions from "./TermsConditions";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 const style = {
@@ -129,7 +130,7 @@ const RegForm = () => {
                                                 variant="h6"
                                                 component="h2"
                                             >
-                                                Website Terms and Conditions
+                                                {TermsConditions.heading}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-title"
@@ -137,31 +138,19 @@ const RegForm = () => {
                                                 component="h2"
                                                 sx={{ fontSize: 18, mt: 2 }}
                                             >
-                                                Introduction
+                                                {TermsConditions.subHeading1}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
                                                 sx={{ mt: 2, fontSize: 15 }}
                                             >
-                                                These terms of use govern your
-                                                use of our website; by using our
-                                                website, you agree to these
-                                                terms of use in full. If you
-                                                disagree with these terms of use
-                                                or any part of these terms of
-                                                use, you must not use our
-                                                website.
+                                                {TermsConditions.para11}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
                                                 sx={{ mt: 1, fontSize: 15 }}
                                             >
-                                                You must be at least 18 years of
-                                                age to use our website. By using
-                                                our website and by agreeing to
-                                                these terms of use, you warrant
-                                                and represent that you are at
-                                                least 18 years of age.
+                                                {TermsConditions.para12}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-title"
@@ -169,76 +158,55 @@ const RegForm = () => {
                                                 component="h2"
                                                 sx={{ fontSize: 18, mt: 2 }}
                                             >
-                                                License to use website
+                                                {TermsConditions.subHeading2}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
                                                 sx={{ mt: 2, fontSize: 15 }}
                                             >
-                                                Unless otherwise stated, we own
-                                                the intellectual property rights
-                                                in the website and material on
-                                                the website. Subject to the
-                                                licence below, all these
-                                                intellectual property rights are
-                                                reserved.
+                                                {TermsConditions.para21}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
                                                 sx={{ mt: 1, fontSize: 15 }}
                                             >
-                                                You may view, download for
-                                                caching purposes only, and print
-                                                pages from the website for your
-                                                own personal use, subject to the
-                                                restrictions set out below and
-                                                elsewhere in these terms of use.
+                                                {TermsConditions.para22}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
                                                 sx={{ mt: 1, fontSize: 15 }}
                                             >
-                                                You must not:
+                                                {TermsConditions.filler1}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
                                                 sx={{ mt: 1, fontSize: 15 }}
                                             >
-                                                • republish material from this
-                                                website (including republication
-                                                on another website);
+                                                • {TermsConditions.point1}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
                                                 sx={{ mt: 1, fontSize: 15 }}
                                             >
-                                                • sell, rent or sub-license
-                                                material from the website;
+                                                • {TermsConditions.point2}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
                                                 sx={{ mt: 1, fontSize: 15 }}
                                             >
-                                                • reproduce, duplicate, copy or
-                                                otherwise exploit material on
-                                                our website for a commercial
-                                                purpose;
+                                                • {TermsConditions.point3}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
                                                 sx={{ mt: 1, fontSize: 15 }}
                                             >
-                                                • edit or otherwise modify any
-                                                material on the website; or
+                                                • {TermsConditions.point4}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
                                                 sx={{ mt: 1, fontSize: 15 }}
                                             >
-                                                • redistribute material from
-                                                this website [except for content
-                                                specifically and expressly made
-                                                available for redistribution]
+                                                • {TermsConditions.point5}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-title"
@@ -246,67 +214,37 @@ const RegForm = () => {
                                                 component="h2"
                                                 sx={{ fontSize: 18, mt: 2 }}
                                             >
-                                                Acceptable use
+                                                {TermsConditions.subHeading3}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
                                                 sx={{ mt: 2, fontSize: 15 }}
                                             >
-                                                You must not use our website in
-                                                any way that causes, or may
-                                                cause, damage to the website or
-                                                impairment of the availability
-                                                or accessibility of the website;
-                                                or in any way which is unlawful,
-                                                illegal, fraudulent or harmful,
-                                                or in connection with any
-                                                unlawful, illegal, fraudulent or
-                                                harmful purpose or activity.
+                                                {TermsConditions.para31}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
                                                 sx={{ mt: 1, fontSize: 15 }}
                                             >
-                                                You must not use our website to
-                                                copy, store, host, transmit,
-                                                send, use, publish or distribute
-                                                any material which consists of
-                                                (or is linked to) any spyware,
-                                                computer virus, Trojan horse,
-                                                worm, keystroke logger, rootkit
-                                                or other malicious computer
-                                                software.
+                                                {TermsConditions.para32}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
                                                 sx={{ mt: 1, fontSize: 15 }}
                                             >
-                                                You must not conduct any
-                                                systematic or automated data
-                                                collection activities
-                                                (including, without limitation,
-                                                scraping, data mining, data
-                                                extraction and data harvesting)
-                                                on or in relation to our website
-                                                without our express written
-                                                consent.
+                                                {TermsConditions.para33}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
                                                 sx={{ mt: 1, fontSize: 15 }}
                                             >
-                                                You must not use our website to
-                                                transmit or send unsolicited
-                                                commercial communications.
+                                                {TermsConditions.para34}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
                                                 sx={{ mt: 1, fontSize: 15 }}
                                             >
-                                                You must not use our website for
-                                                any purposes related to
-                                                marketing without our express
-                                                written consent.
+                                                {TermsConditions.para35}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-title"
@@ -314,58 +252,37 @@ const RegForm = () => {
                                                 component="h2"
                                                 sx={{ fontSize: 18, mt: 2 }}
                                             >
-                                                Restricted access
+                                                {TermsConditions.subHeading4}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
                                                 sx={{ mt: 2, fontSize: 15 }}
                                             >
-                                                Access to certain areas of our
-                                                website is restricted. We
-                                                reserve the right to restrict
-                                                access to other areas of our
-                                                website, or indeed our whole
-                                                website, at our discretion.
+                                                {TermsConditions.para41}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
                                                 sx={{ mt: 1, fontSize: 15 }}
                                             >
-                                                If we provide you with or you
-                                                generate a user ID and password
-                                                to enable you to access
-                                                restricted areas of our website
-                                                or other content or services,
-                                                you must ensure that the
-                                                password is kept confidential.
+                                                {TermsConditions.para42}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
                                                 sx={{ mt: 1, fontSize: 15 }}
                                             >
-                                                You must notify us in writing
-                                                immediately if you become aware
-                                                of any unauthorised use of your
-                                                account or password.
+                                                {TermsConditions.para43}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
                                                 sx={{ mt: 1, fontSize: 15 }}
                                             >
-                                                You are responsible for any
-                                                activity on our website arising
-                                                out of any failure to keep your
-                                                password confidential and may be
-                                                held liable for any losses
-                                                arising out of such a failure.
+                                                {TermsConditions.para44}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
                                                 sx={{ mt: 1, fontSize: 15 }}
                                             >
-                                                You must not use any other
-                                                person's user ID and password to
-                                                access our website.
+                                                {TermsConditions.para45}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-title"
@@ -373,89 +290,37 @@ const RegForm = () => {
                                                 component="h2"
                                                 sx={{ fontSize: 18, mt: 2 }}
                                             >
-                                                User consent
+                                                {TermsConditions.subHeading5}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
                                                 sx={{ mt: 2, fontSize: 15 }}
                                             >
-                                                In these terms of use, "your
-                                                content" means material
-                                                (including, without limitation,
-                                                text, images, audio material,
-                                                video material and audio-visual
-                                                material) that you submit to our
-                                                website, for whatever purpose.
+                                                {TermsConditions.para51}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
                                                 sx={{ mt: 1, fontSize: 15 }}
                                             >
-                                                You grant to us a worldwide,
-                                                irrevocable, non-exclusive,
-                                                royalty-free licence to use,
-                                                reproduce, adapt, publish,
-                                                translate and distribute your
-                                                content in any existing or
-                                                future media. You also grant to
-                                                us the right to sub-license
-                                                these rights and the right to
-                                                bring an action for infringement
-                                                of these rights.
+                                                {TermsConditions.para52}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
                                                 sx={{ mt: 1, fontSize: 15 }}
                                             >
-                                                You warrant and represent that
-                                                your content will comply with
-                                                these terms of use.
+                                                {TermsConditions.para53}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
                                                 sx={{ mt: 1, fontSize: 15 }}
                                             >
-                                                Your content must not be illegal
-                                                or unlawful, must not infringe
-                                                any third party's legal rights
-                                                and must not be capable of
-                                                giving rise to legal action
-                                                whether against you or us or a
-                                                third party (in each case under
-                                                any applicable law).
+                                                {TermsConditions.para54}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
                                                 sx={{ mt: 1, fontSize: 15 }}
                                             >
-                                                You must not submit any content
-                                                to the website that is or has
-                                                ever been the subject of any
-                                                threatened or actual legal
-                                                proceedings or other similar
-                                                complaint.
-                                            </Typography>
-                                            <Typography
-                                                id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
-                                            >
-                                                We reserve the right to edit or
-                                                remove any material submitted to
-                                                our website, or stored on our
-                                                servers, or hosted or published
-                                                upon our website.
-                                            </Typography>
-                                            <Typography
-                                                id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
-                                            >
-                                                Notwithstanding our rights under
-                                                these terms of use in relation
-                                                to your content, we do not
-                                                undertake to monitor the
-                                                submission of such content to,
-                                                or the publication of such
-                                                content on, our website.
+                                                {TermsConditions.para55}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-title"
@@ -463,36 +328,19 @@ const RegForm = () => {
                                                 component="h2"
                                                 sx={{ fontSize: 18, mt: 2 }}
                                             >
-                                                Limited warranties
+                                                {TermsConditions.subHeading6}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
                                                 sx={{ mt: 2, fontSize: 15 }}
                                             >
-                                                We do not warrant the
-                                                completeness or accuracy of the
-                                                information published on this
-                                                website; nor do we commit to
-                                                ensuring that the website
-                                                remains available or that the
-                                                material on the website is kept
-                                                up to date.
+                                                {TermsConditions.para61}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
                                                 sx={{ mt: 1, fontSize: 15 }}
                                             >
-                                                To the maximum extent permitted
-                                                by applicable law, we exclude
-                                                all representations, warranties
-                                                and conditions relating to this
-                                                website and the use of this
-                                                website (including, without
-                                                limitation, any warranties
-                                                implied by law in respect of
-                                                satisfactory quality, fitness
-                                                for purpose and/or the use of
-                                                reasonable care and skill).
+                                                {TermsConditions.para62}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-title"
@@ -504,28 +352,13 @@ const RegForm = () => {
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
-                                                sx={{ mt: 2, fontSize: 15 }}
-                                            >
-                                                The full name of our company is
-                                                TagAlong.
-                                            </Typography>
-                                            <Typography
-                                                id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
-                                            >
-                                                Our registered address is
-                                                http://www.tagalong.co.uk
-                                            </Typography>
-                                            <Typography
-                                                id="modal-modal-description"
                                                 sx={{
-                                                    mt: 1,
+                                                    mt: 2,
                                                     mb: 5,
                                                     fontSize: 15
                                                 }}
                                             >
-                                                You can contact us by email to
-                                                abc@xyz.com
+                                                {TermsConditions.para63}
                                             </Typography>
                                         </Box>
                                     </Modal>
