@@ -45,5 +45,12 @@ export const URLData = {
             isLogo: true,
             title: "Profile-edit"
         }
+    },
+    routeRequest: {
+        url: "/route-request",
+        layout: {
+            isLogo: true,
+            title: "Route requests"
+        }
     }
 };

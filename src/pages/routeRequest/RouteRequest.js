@@ -2,7 +2,7 @@ import React from "react";
 import TextField from "@mui/material/TextField";
 import { SelectField } from "../../components/SelectField";
 import Button from "../../components/Button";
-import { inputList, initialValues, dropData, basicSchema } from "./formHelper";
+import { initialValues, basicSchema } from "./formHelper";
 import { useFormik } from "formik";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";

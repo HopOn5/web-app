@@ -60,6 +60,7 @@ const RegForm = () => {
     const navigate = useNavigate();
 
     const onChange = (e) => {
+        console.log(e.target.id, "target", e.target.value);
         setFormData((prevState) => ({
             ...prevState,
             [e.target.id]: e.target.value
@@ -73,8 +74,7 @@ const RegForm = () => {
             const userCredential = await createUserWithEmailAndPassword(
                 auth,
                 email,
-                createpassword,
-                password
+                createpassword
             );
             toast.success("Register successfully");
             const user = userCredential.user;
