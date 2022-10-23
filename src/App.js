@@ -8,6 +8,8 @@ import { updateLayoutData } from "./appReducer";
 import getLayoutData from "./helpers/getLayoutData";
 import LayoutHeaderComponent from "./components/layout/LayoutHeaderComponent";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
     const navigate = useNavigate();
@@ -59,6 +61,7 @@ const App = () => {
             <div className="root-container">
                 <PageLayout onClose={handleLayoutClose} {...layoutProps}>
                     <AppRouter />
+                    <ToastContainer/>
                 </PageLayout>
             </div>
         </ThemeProvider>
