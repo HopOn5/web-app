@@ -48,12 +48,14 @@ const RegForm = () => {
     const [showPassword, setShowPassword] = useState(false);
 
     const [formData, setFormData] = useState({
+        firstname: "",
+        lastname: "",
         email: "",
         createpassword: "",
         password: ""
     });
 
-    const { email, createpassword, password } = formData;
+    const { firstname, lastname, email, createpassword, password } = formData;
 
     const navigate = useNavigate();
 
@@ -94,6 +96,22 @@ const RegForm = () => {
         <div>
             <h2 className="reg-form__heading">Let's get started...</h2>
             <div className="reg-form__textfield">
+                <TextField
+                    type={firstname}
+                    value={firstname}
+                    id="firstname"
+                    label="First Name"
+                    variant="outlined"
+                    onChange={onChange}
+                />
+                <TextField
+                    type={lastname}
+                    value={lastname}
+                    id="lastname"
+                    label="Last Name"
+                    variant="outlined"
+                    onChange={onChange}
+                />
                 <TextField
                     type={email}
                     value={email}
