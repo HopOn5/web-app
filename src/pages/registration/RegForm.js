@@ -48,14 +48,12 @@ const RegForm = () => {
     const [showPassword, setShowPassword] = useState(false);
 
     const [formData, setFormData] = useState({
-        firstname: "",
-        lastname: "",
         email: "",
         createpassword: "",
         password: ""
     });
 
-    const { firstname, lastname, email, createpassword, password } = formData;
+    const { email, createpassword, password } = formData;
 
     const navigate = useNavigate();
 
