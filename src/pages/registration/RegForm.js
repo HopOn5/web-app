@@ -19,6 +19,9 @@ import { db } from "../../firebase/config";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import TermsConditions from "./TermsConditions";
+// import { ErrorMessage, Formik } from "formik";
+import { useFormik } from "formik";
+import { schema, initialValues } from "./registervalidation";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 const style = {
@@ -86,9 +89,17 @@ const RegForm = () => {
             await setDoc(doc(db, "users", user.uid), formDataCopy);
             navigate("/");
         } catch (error) {
-            toast.error("something went wrong with registration");
+            toast.error("Credential not valid");
         }
     };
+
+    const formik = useFormik({
+        initialValues,
+        onSubmit: register,
+        validationSchema: schema
+    });
+
+    const { errors, touched } = formik;
 
     return (
         <div>
@@ -96,27 +107,45 @@ const RegForm = () => {
             <div className="reg-form__textfield">
                 <TextField
                     type={email}
-                    value={email}
+                    value={formik.values.email}
                     id="email"
                     label="Email"
                     variant="outlined"
-                    onChange={onChange}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={
+                        errors.email && touched.email ? (
+                            <div className="error">{errors.email}</div>
+                        ) : null
+                    }
                 />
                 <TextField
                     type={showPassword ? "text" : "password"}
-                    value={createpassword}
+                    value={formik.values.createpassword}
                     id="createpassword"
                     label="Create password"
                     variant="outlined"
-                    onChange={onChange}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={
+                        errors.createpassword && touched.createpassword ? (
+                            <div className="error">{errors.createpassword}</div>
+                        ) : null
+                    }
                 />
                 <TextField
                     type={showPassword ? "text" : "password"}
-                    value={password}
+                    value={formik.values.password}
                     id="password"
                     label="Confirm password"
                     variant="outlined"
-                    onChange={onChange}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={
+                        errors.password && touched.password ? (
+                            <div className="error">{errors.password}</div>
+                        ) : null
+                    }
                 />
                 <div className="alignthings">
                     <FormGroup>
@@ -160,19 +189,28 @@ const RegForm = () => {
                                                 id="modal-modal-title"
                                                 variant="h6"
                                                 component="h2"
-                                                sx={{ fontSize: 18, mt: 2 }}
+                                                sx={{
+                                                    fontSize: 18,
+                                                    mt: 2
+                                                }}
                                             >
                                                 {TermsConditions.subHeading1}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
-                                                sx={{ mt: 2, fontSize: 15 }}
+                                                sx={{
+                                                    mt: 2,
+                                                    fontSize: 15
+                                                }}
                                             >
                                                 {TermsConditions.para11}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
+                                                sx={{
+                                                    mt: 1,
+                                                    fontSize: 15
+                                                }}
                                             >
                                                 {TermsConditions.para12}
                                             </Typography>
@@ -180,55 +218,82 @@ const RegForm = () => {
                                                 id="modal-modal-title"
                                                 variant="h6"
                                                 component="h2"
-                                                sx={{ fontSize: 18, mt: 2 }}
+                                                sx={{
+                                                    fontSize: 18,
+                                                    mt: 2
+                                                }}
                                             >
                                                 {TermsConditions.subHeading2}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
-                                                sx={{ mt: 2, fontSize: 15 }}
+                                                sx={{
+                                                    mt: 2,
+                                                    fontSize: 15
+                                                }}
                                             >
                                                 {TermsConditions.para21}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
+                                                sx={{
+                                                    mt: 1,
+                                                    fontSize: 15
+                                                }}
                                             >
                                                 {TermsConditions.para22}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
+                                                sx={{
+                                                    mt: 1,
+                                                    fontSize: 15
+                                                }}
                                             >
                                                 {TermsConditions.filler1}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
+                                                sx={{
+                                                    mt: 1,
+                                                    fontSize: 15
+                                                }}
                                             >
                                                 • {TermsConditions.point1}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
+                                                sx={{
+                                                    mt: 1,
+                                                    fontSize: 15
+                                                }}
                                             >
                                                 • {TermsConditions.point2}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
+                                                sx={{
+                                                    mt: 1,
+                                                    fontSize: 15
+                                                }}
                                             >
                                                 • {TermsConditions.point3}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
+                                                sx={{
+                                                    mt: 1,
+                                                    fontSize: 15
+                                                }}
                                             >
                                                 • {TermsConditions.point4}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
+                                                sx={{
+                                                    mt: 1,
+                                                    fontSize: 15
+                                                }}
                                             >
                                                 • {TermsConditions.point5}
                                             </Typography>
@@ -236,37 +301,55 @@ const RegForm = () => {
                                                 id="modal-modal-title"
                                                 variant="h6"
                                                 component="h2"
-                                                sx={{ fontSize: 18, mt: 2 }}
+                                                sx={{
+                                                    fontSize: 18,
+                                                    mt: 2
+                                                }}
                                             >
                                                 {TermsConditions.subHeading3}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
-                                                sx={{ mt: 2, fontSize: 15 }}
+                                                sx={{
+                                                    mt: 2,
+                                                    fontSize: 15
+                                                }}
                                             >
                                                 {TermsConditions.para31}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
+                                                sx={{
+                                                    mt: 1,
+                                                    fontSize: 15
+                                                }}
                                             >
                                                 {TermsConditions.para32}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
+                                                sx={{
+                                                    mt: 1,
+                                                    fontSize: 15
+                                                }}
                                             >
                                                 {TermsConditions.para33}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
+                                                sx={{
+                                                    mt: 1,
+                                                    fontSize: 15
+                                                }}
                                             >
                                                 {TermsConditions.para34}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
+                                                sx={{
+                                                    mt: 1,
+                                                    fontSize: 15
+                                                }}
                                             >
                                                 {TermsConditions.para35}
                                             </Typography>
@@ -274,37 +357,55 @@ const RegForm = () => {
                                                 id="modal-modal-title"
                                                 variant="h6"
                                                 component="h2"
-                                                sx={{ fontSize: 18, mt: 2 }}
+                                                sx={{
+                                                    fontSize: 18,
+                                                    mt: 2
+                                                }}
                                             >
                                                 {TermsConditions.subHeading4}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
-                                                sx={{ mt: 2, fontSize: 15 }}
+                                                sx={{
+                                                    mt: 2,
+                                                    fontSize: 15
+                                                }}
                                             >
                                                 {TermsConditions.para41}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
+                                                sx={{
+                                                    mt: 1,
+                                                    fontSize: 15
+                                                }}
                                             >
                                                 {TermsConditions.para42}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
+                                                sx={{
+                                                    mt: 1,
+                                                    fontSize: 15
+                                                }}
                                             >
                                                 {TermsConditions.para43}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
+                                                sx={{
+                                                    mt: 1,
+                                                    fontSize: 15
+                                                }}
                                             >
                                                 {TermsConditions.para44}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
+                                                sx={{
+                                                    mt: 1,
+                                                    fontSize: 15
+                                                }}
                                             >
                                                 {TermsConditions.para45}
                                             </Typography>
@@ -312,37 +413,55 @@ const RegForm = () => {
                                                 id="modal-modal-title"
                                                 variant="h6"
                                                 component="h2"
-                                                sx={{ fontSize: 18, mt: 2 }}
+                                                sx={{
+                                                    fontSize: 18,
+                                                    mt: 2
+                                                }}
                                             >
                                                 {TermsConditions.subHeading5}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
-                                                sx={{ mt: 2, fontSize: 15 }}
+                                                sx={{
+                                                    mt: 2,
+                                                    fontSize: 15
+                                                }}
                                             >
                                                 {TermsConditions.para51}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
+                                                sx={{
+                                                    mt: 1,
+                                                    fontSize: 15
+                                                }}
                                             >
                                                 {TermsConditions.para52}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
+                                                sx={{
+                                                    mt: 1,
+                                                    fontSize: 15
+                                                }}
                                             >
                                                 {TermsConditions.para53}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
+                                                sx={{
+                                                    mt: 1,
+                                                    fontSize: 15
+                                                }}
                                             >
                                                 {TermsConditions.para54}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
+                                                sx={{
+                                                    mt: 1,
+                                                    fontSize: 15
+                                                }}
                                             >
                                                 {TermsConditions.para55}
                                             </Typography>
@@ -350,19 +469,28 @@ const RegForm = () => {
                                                 id="modal-modal-title"
                                                 variant="h6"
                                                 component="h2"
-                                                sx={{ fontSize: 18, mt: 2 }}
+                                                sx={{
+                                                    fontSize: 18,
+                                                    mt: 2
+                                                }}
                                             >
                                                 {TermsConditions.subHeading6}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
-                                                sx={{ mt: 2, fontSize: 15 }}
+                                                sx={{
+                                                    mt: 2,
+                                                    fontSize: 15
+                                                }}
                                             >
                                                 {TermsConditions.para61}
                                             </Typography>
                                             <Typography
                                                 id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
+                                                sx={{
+                                                    mt: 1,
+                                                    fontSize: 15
+                                                }}
                                             >
                                                 {TermsConditions.para62}
                                             </Typography>
@@ -370,7 +498,10 @@ const RegForm = () => {
                                                 id="modal-modal-title"
                                                 variant="h6"
                                                 component="h2"
-                                                sx={{ fontSize: 18, mt: 2 }}
+                                                sx={{
+                                                    fontSize: 18,
+                                                    mt: 2
+                                                }}
                                             >
                                                 Our details
                                             </Typography>
@@ -391,7 +522,7 @@ const RegForm = () => {
                         />
                     </FormGroup>
                     <div className="reg-form__registerbutton">
-                        <Button type="primary" onClick={register}>
+                        <Button type="primary" onClick={formik.handleSubmit}>
                             Register
                         </Button>
                     </div>
