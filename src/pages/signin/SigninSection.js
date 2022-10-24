@@ -6,6 +6,13 @@ import "./SigninSection.scss";
 import { toast, Toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { ErrorMessage, Formik } from "formik";
+import * as Yup from "yup";
+
+const Schema = Yup.object().shape({
+    email: Yup.string().required("Email is required").email("Email is invalid"),
+    password: Yup.string().required("Password is required")
+});
 
 const SigninSection = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -46,45 +53,81 @@ const SigninSection = () => {
     };
 
     return (
-        <div>
-            <h2 className="title">Welcome to Tag-Along</h2>
-            <div className="textinput">
-                <TextField
-                    type="email"
-                    id="email"
-                    label="Email"
-                    variant="outlined"
-                    value={email}
-                    onChange={onChange}
-                    endAdor
-                />
-                <TextField
-                    type={showPassword ? "text" : "password"}
-                    id="password"
-                    value={password}
-                    label="password"
-                    variant="outlined"
-                    onChange={onChange}
-                />
-
-                <div className="alignitems">
-                    <div className="loginbutton">
-                        <Button type="primary" onClick={signin}>
-                            Login
-                        </Button>
+        <Formik
+            initialValues={{
+                email: "",
+                password: "",
+                createpassword: ""
+            }}
+            validationSchema={Schema}
+            onSubmit={signin}
+        >
+            {({
+                values,
+                errors,
+                touched,
+                handleChange,
+                handleBlur,
+                handleSubmit
+            }) => {
+                return (
+                    <div>
+                        <h2 className="title">Welcome to Tag-Along</h2>
+                        <div className="textinput">
+                            <TextField
+                                type="email"
+                                id="email"
+                                label="Email"
+                                variant="outlined"
+                                value={values.email}
+                                onChange={handleChange}
+                                // endAdor
+                                onBlur={handleBlur}
+                            />
+                            <ErrorMessage name="email">
+                                {(error) => (
+                                    <div className="error">{error}</div>
+                                )}
+                            </ErrorMessage>{" "}
+                            <TextField
+                                type={showPassword ? "text" : "password"}
+                                id="password"
+                                value={values.password}
+                                label="password"
+                                variant="outlined"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                            />
+                            {errors.password && touched.password ? (
+                                <div className="error">{errors.password}</div>
+                            ) : null}
+                            <div className="alignitems">
+                                <div className="loginbutton">
+                                    <Button type="primary" onClick={handleSubmit}>
+                                        Login
+                                    </Button>
+                                </div>
+                                <Link
+                                    to="/resetpassword"
+                                    type="primarymed blue"
+                                >
+                                    Forgot Password
+                                </Link>
+                                <div className="text">
+                                    <Text>Don't have an account?</Text>
+                                    <Link
+                                        to="/registration"
+                                        type="primarymed blue"
+                                    >
+                                        Register →
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <Link to="/resetpassword" type="primarymed blue">
-                        Forgot Password
-                    </Link>
-                    <div className="text">
-                        <Text>Don't have an account?</Text>
-                        <Link to="/registration" type="primarymed blue">
-                            Register →
-                        </Link>
-                    </div>
-                </div>
-            </div>
-        </div>
+                );
+            }}
+        </Formik>
     );
 };
 
