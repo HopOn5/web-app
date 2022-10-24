@@ -5,78 +5,58 @@ import Button from "../../components/Button";
 import "./ResetPassword.scss";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import { toast } from "react-toastify";
-import { ErrorMessage, Formik } from "formik";
-import * as Yup from "yup";
-
-// const Schema = Yup.object().shape({
-//     email: Yup.string().required("Email is required").email("Email is invalid")
-// });
+import { useFormik } from "formik";
+import { schema, initialValues } from "./resetvalidation";
 
 const ResetPassword = () => {
-    const [email, setEmail] = useState("");
 
-    const onChange = (e) => setEmail(e.target.value);
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {  
+    const handleSubmit = async (data1) => {
+        try {
             const auth = getAuth();
-            await sendPasswordResetEmail(auth, email);
+            await sendPasswordResetEmail(auth, data1.email);
             toast.success("Email was sent");
         } catch (error) {
-            
             toast.error("Could not send reset email");
         }
     };
 
+    const formik = useFormik({
+        initialValues,
+        onSubmit: handleSubmit,
+        validationSchema: schema
+    });
+
+    const { errors, touched } = formik;
+
     return (
-        // <Formik
-        //     initialValues={{
-        //         email: "",
-              
-        //     }}
-        //     validationSchema={Schema}
-        //     onSubmit={() => {}}
-        // >
-        //     {({
-        //         values,
-        //         // errors,
-        //         // touched,
-        //         handleChange,
-        //         handleBlur,
-        //         handleSubmit
-        //     }) => {
-                // return (
-                    <div style={styles.card} >
-                        <h5 className="resettitle">Reset Password</h5>
-                        <div className="textinput">
-                            <TextField
-                                type="email"
-                                id="email"
-                                value={email}
-                                label="Email"
-                                variant="outlined"
-                                onChange={onChange}
-                                // onChange={handleChange}
-                                // onBlur={handleBlur}
-                            />
-                            {/* <ErrorMessage name="email">
-                                {(error) => (
-                                    <div className="error">{error}</div>
-                                )}
-                            </ErrorMessage>{" "} */}
-                        </div>
-                        <div className="resetalignitems">
-                            <div className="resetbutton">
-                                <Button type="primary" onClick={handleSubmit}>
-                                    Reset
-                                </Button>
-                            </div>
-                        </div>
-                    </div>
-        //         );
-        //     }}
-        // </Formik>
+        <div style={styles.card}>
+            <h5 className="resettitle">Reset Password</h5>
+            <div className="textinput">
+                <TextField
+                    type={formik.values.email}
+                    id="email"
+                    value={formik.values.email}
+                    label="Email"
+                    variant="outlined"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={errors.email && touched.email}
+                    helperText={
+                        errors.email && touched.email ? (
+                            <span className="error">{errors.email}</span>
+                        ) : null
+                    }
+                />
+            </div>
+            <div className="resetalignitems">
+                <div className="resetbutton">
+                    <Button type="primary" onClick={formik.handleSubmit}>
+                        Reset
+                    </Button>
+                </div>
+            </div>
+        </div>
+
     );
 };
 

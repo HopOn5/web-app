@@ -36,7 +36,7 @@ const RegForm = () => {
     const navigate = useNavigate();
 
     const register = async (data1) => {
-        console.log(e, "E");
+        // console.log(e, "E");
         try {
             const auth = getAuth();
             const userCredential = await createUserWithEmailAndPassword(
@@ -81,7 +81,7 @@ const RegForm = () => {
                     variant="outlined"
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    error={errors.email && touched.emailx}
+                    error={errors.email && touched.email}
                     helperText={
                         errors.email && touched.email ? (
                             <span className="error">{errors.email}</span>
