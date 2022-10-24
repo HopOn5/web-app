@@ -52,5 +52,12 @@ export const URLData = {
             isLogo: true,
             title: "Route requests"
         }
+    },
+    routeRequestList: {
+        url: "/route-request/list",
+        layout: {
+            isLogo: true,
+            title: "Request List"
+        }
     }
 };

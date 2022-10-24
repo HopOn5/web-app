@@ -1,110 +1,88 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import "./_routeRequest.scss";
-import Tab from "@mui/material/Tab";
+import { initialValues, basicSchema } from "./formHelper";
+import { useFormik } from "formik";
+import RequestForm from "./RequestForm";
+import { inputList } from "./utils";
+import walkIcon from "../../icons/walk-tab.svg";
+import cycleIcon from "../../icons/cycle-tab.svg";
+import cabIcon from "../../icons/car-tab.svg";
 import Icon from "../../components/Icon";
-import TabContext from "@mui/lab/TabContext";
-import TabList from "@mui/lab/TabList";
-import TabPanel from "@mui/lab/TabPanel";
-import { useDispatch, useSelector } from "react-redux";
-import TextField from "@mui/material/TextField";
-
-import { StandaloneSearchBox, LoadScript } from "@react-google-maps/api";
+import Text from "../../components/Text";
+import { useCreateRequestsMutation } from "../../services/requestsApi";
+import { URLData } from "../../pageUrls";
+import { useNavigate } from "react-router-dom";
 
 const RouteRequests = () => {
     const getClassname = (subclass) =>
-        `home-page${subclass ? `__${subclass}` : ""}`;
-    const dispatch = useDispatch();
-    const userInfo = useSelector((states) => states?.app?.userInfo);
-    const [activeTab, setActiveTab] = useState("walk");
+        `route-request${subclass ? `__${subclass}` : ""}`;
 
-    const requestList = [];
-
-    const tabs = [
-        // {
-        //     label: "Walk",
-        //     value: "walk",
-        //     icon: walkIcon,
-        //     content: <RequestForm type="walk" />
-        // },
-        // {
-        //     label: "Cycle",
-        //     value: "cycle",
-        //     icon: cycleIcon,
-        //     content: <RequestForm type="cycle" />
-        // },
-        // {
-        //     label: "Cab share",
-        //     value: "cab",
-        //     icon: cabIcon,
-        //     content: <RequestForm type="cab" />
-        // }
-    ];
-
-    const renderTabComp = () =>
-        tabs.map((item, index) => (
-            <Tab
-                label={
-                    <Icon
-                        icon={item?.icon}
-                        className={`${getClassname("tab-icon")}`}
-                    />
-                }
-                value={item?.value}
-                key={`${index}-tab `}
-            />
-        ));
-
-    const renderActiveTab = (tabId) => {
-        return tabs.find((item) => item.value === tabId)?.content;
+    const navigate = useNavigate();
+    const [createRequest, { isError, isLoading, isSuccess }] =
+        useCreateRequestsMutation();
+    const handleSubmit = async (e) => {
+        await createRequest(e);
     };
 
-    const handleTabChange = (e, value) => setActiveTab(value);
+    const FORM_HEADER = "Route Request Form";
+    const MAIN_ERR = "Request failed. Please try again after sometime.";
 
-    const inputRef = useRef();
+    const formik = useFormik({
+        initialValues,
+        onSubmit: handleSubmit,
+        validationSchema: basicSchema
+    });
 
-    const handlePlaceChanged = () => {
-        const [place] = inputRef.current.getPlaces();
-        if (place) {
-            // console.log(place.formatted_address);
-            // console.log(place.geometry.location.lat());
-            // console.log(place.geometry.location.lng());
+    useEffect(() => {
+        if (isSuccess) {
+            navigate(URLData.routeRequestList.url);
+        }
+    }, [isSuccess]);
+
+    const customCheckbox = {
+        type: "custom_check",
+        props: {
+            checkList: [
+                {
+                    label: "Walk",
+                    id: "walk",
+                    content: <Icon icon={walkIcon} className="walk-icon" />
+                },
+                {
+                    label: "Cycle",
+                    id: "cycle",
+                    content: <Icon icon={cycleIcon} className="cycle-icon" />
+                },
+                {
+                    label: "Cab share",
+                    id: "cab",
+                    content: <Icon icon={cabIcon} />
+                }
+            ],
+            compType: "box",
+            defaultSelection: formik.values.routeType,
+            onSelect: (e, id) => {
+                formik.setFieldValue("routeType", id);
+            }
         }
     };
 
     return (
         <div className={getClassname()}>
-            <div className={getClassname("container")}>
-                <TabContext
-                    value={activeTab}
-                    className={getClassname("tab-context")}
+            <div className={getClassname("form-container")}>
+                <Text
+                    type="primaryLarge fW8"
+                    className={getClassname("form-header")}
                 >
-                    <TabList
-                        onChange={handleTabChange}
-                        className={getClassname("tab-list")}
-                    >
-                        {renderTabComp()}
-                    </TabList>
-                    <TabPanel value={activeTab}>
-                        {renderActiveTab(activeTab)}
-                    </TabPanel>
-                </TabContext>
+                    {FORM_HEADER}
+                </Text>
+                <RequestForm
+                    formik={formik}
+                    isLoading={isLoading}
+                    mainError={isError && MAIN_ERR}
+                    inputList={[...inputList, customCheckbox]}
+                />
             </div>
-
-            <LoadScript
-                googleMapsApiKey={process.env.REACT_APP_GOOGLE_API_KEY}
-                libraries={["places"]}
-            >
-                <StandaloneSearchBox
-                    onLoad={(ref) => (inputRef.current = ref)}
-                    onPlacesChanged={handlePlaceChanged}
-                >
-                    <TextField
-                        type="text"
-                        className="form-control"
-                        placeholder="Enter Location"
-                    />
-                </StandaloneSearchBox>
-            </LoadScript>
         </div>
     );
 };

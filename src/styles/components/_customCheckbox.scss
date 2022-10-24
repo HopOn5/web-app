@@ -1,0 +1,31 @@
+@import "../variables.scss";
+
+.custom-check-box {
+    &__container {
+        display: flex;
+        justify-content: center;
+        &.vertical {
+            flex-direction: column;
+        }
+    }
+    &__list-item {
+        cursor: pointer;
+        background-color: $checkboxColor;
+        padding: 10px 20px;
+        margin: 0 1px;
+        min-width: 80px;
+        text-align: center;
+        &.selected {
+            box-shadow: 2px 4px 5px rgba(61, 45, 32, 0.13);
+        }
+        .icon {
+            width: 60px;
+        }
+        .walk-icon {
+            width: 55px;
+        }
+        .cycle-icon {
+            width: 80px;
+        }
+    }
+}
