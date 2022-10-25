@@ -1,12 +1,25 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import            "../../assets/css/bootstrap.min.css";
+import            "../../assets/css/animate.css";
+import            "../../assets/css/font-awesome.min.css";
+import            "../../assets/css/owl.carousel.css";
+import            "../../assets/css/owl.theme.css";
+import            "../../assets/css/style.css";
+import image1 from '../../assets/images/overview-img.jpg';
+import image2 from '../../assets/images/walk.jpg';
+import image3 from '../../assets/images/landing-cycle.jpg';
+import image4 from '../../assets/images/ride.jpg';
+import image5 from '../../assets/images/rent.jpg';
 
 class Landing extends React.Component {
     render() {
         return (
-            <div className data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
-                <div className="preloader">
+            <div data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
+                {/*<div className="preloader">
                     <div className="sk-spinner sk-spinner-pulse"></div>
-                </div>
+                </div>*/}
+
                 <div className="navbar navbar-default navbar-fixed-top sticky-navigation" role="navigation">
                     <div className="container">
                         <div className="navbar-header">
@@ -19,17 +32,17 @@ class Landing extends React.Component {
                         </div>
                         <div className="collapse navbar-collapse">
                             <ul className="nav navbar-nav navbar-right main-navigation">
-                                <li><a href="landing" className="smoothScroll">Home</a></li>
-                                <li><a href="overview" className="smoothScroll">About Us</a></li>
-                                <li><a href="services" className="smoothScroll">Services</a></li>
-                                <li><a href="process" className="smoothScroll">Process</a></li>
-                                <li><a href="#" className="smoothScroll">Login</a></li>
-                                <li><a href="#" className="smoothScroll">Register</a></li>
+                                <li><a href="#home" className="smoothScroll">Home</a></li>
+                                <li><a href="#overview" className="smoothScroll">About Us</a></li>
+                                <li><a href="#services" className="smoothScroll">Services</a></li>
+                                <li><a href="#process" className="smoothScroll">Process</a></li>
+                                <li><Link to={'/login'} className="smoothScroll">Login</Link></li>
+                                <li><Link to={'/registration'} className="smoothScroll">Register</Link></li>
                             </ul>
                         </div>
                     </div>
                 </div>
-            
+
                 <section id="home" className="parallax-section">
                     <div className="container">
                         <div className="row">
@@ -43,17 +56,16 @@ class Landing extends React.Component {
                         </div>
                     </div>
                 </section>
-            
+
                 <section id="overview" className="parallax-section">
                     <div className="container">
                         <div className="row">
                             <div className="col-md-6 col-sm-12">
-                                <img src="../assets/images/overview-img.jpg" className="img-responsive" alt="Overview" />
-                                <blockquote className="wow fadeInUp" data-wow-delay="1.9s">TAG ALONG</blockquote>
+                                <img src={image1} className="img-responsive" alt="Overview" />
                             </div>
-            
+
                             <div className="col-md-1"></div>
-            
+
                             <div className="wow fadeInUp col-md-4 col-sm-12" data-wow-delay="1s">
                                 <div className="overview-detail">
                                     <h2>About Us</h2>
@@ -63,50 +75,50 @@ class Landing extends React.Component {
                                     </p>
                                 </div>
                             </div>
-            
+
                             <div className="col-md-1"></div>
                         </div>
                     </div>
                 </section>
-            
-                <section id="trainer" className="parallax-section">
+
+                <section id="services" className="parallax-section">
                     <div className="container">
                         <div className="row">
                             <div className="wow fadeInUp col-md-12 col-sm-12" data-wow-delay="1.3s">
                                 <h2>Our Services</h2>
-                                <p>Lorem ipsum dolor sit amet, maecenas eget vestibulum justo.</p>
+                                
                             </div>
-            
-                            <div className="wow fadeInUp col-md-4 col-sm-6" data-wow-delay="1.9s">
+
+                            <div className="wow fadeInUp col-md-3 col-sm-6" data-wow-delay="1.9s">
                                 <div className="trainer-thumb">
-                                    <img src="../assets/images/walk.jpg" className="img-responsive" alt="Trainer" />
+                                    <img src={image2} className="img-responsive" alt="Trainer" />
                                 </div>
                                 <h4>WALK</h4>
                                 <p>Lorem ipsum dolor sit amet, maecenas eget vestibulum justo imperdiet, wisi risus purus augue vulputate.</p>
                                 <a href="#requestform" className="btn btn-default smoothScroll">Let us begin</a>
                             </div>
-            
-                            <div className="wow fadeInUp col-md-4 col-sm-6" data-wow-delay="2s">
+
+                            <div className="wow fadeInUp col-md-3 col-sm-6" data-wow-delay="2s">
                                 <div className="trainer-thumb">
-                                    <img src="../assets/images/cycle.jpg" className="img-responsive" alt="Trainer" />
+                                    <img src={image3} className="img-responsive" alt="Trainer" />
                                 </div>
                                 <h4>CYCLE</h4>
                                 <p>Lorem ipsum dolor sit amet, maecenas eget vestibulum justo imperdiet, wisi risus purus augue vulputate.</p>
                                 <a href="#requestform" className="btn btn-default smoothScroll">Let us begin</a>
                             </div>
-            
-                            <div className="wow fadeInUp col-md-4 col-sm-6" data-wow-delay="2.3s">
+
+                            <div className="wow fadeInUp col-md-3 col-sm-6" data-wow-delay="2.3s">
                                 <div className="trainer-thumb">
-                                    <img src="../assets/images/ride.jpg" className="img-responsive" alt="Trainer" />
+                                    <img src={image4} className="img-responsive" alt="Trainer" />
                                 </div>
                                 <h4>RIDE ON CARS</h4>
                                 <p>Lorem ipsum dolor sit amet, maecenas eget vestibulum justo imperdiet, wisi risus purus augue vulputate.</p>
                                 <a href="#requestform" className="btn btn-default smoothScroll">Let us begin</a>
                             </div>
-            
-                            <div className="wow fadeInUp col-md-4 col-sm-6" data-wow-delay="2.3s">
+
+                            <div className="wow fadeInUp col-md-3 col-sm-6" data-wow-delay="2.3s">
                                 <div className="trainer-thumb">
-                                    <img src="../assets/images/rent.jpg" className="img-responsive" alt="Trainer" />
+                                    <img src={image5} className="img-responsive" alt="Trainer" />
                                 </div>
                                 <h4>RENT A VEHICLE</h4>
                                 <p>Lorem ipsum dolor sit amet, maecenas eget vestibulum justo imperdiet, wisi risus purus augue vulputate.</p>
@@ -115,8 +127,8 @@ class Landing extends React.Component {
                         </div>
                     </div>
                 </section>
-            
-                <section id="blog" className="parallax-section">
+
+                <section id="process" className="parallax-section">
                     <div className="container">
                         <div className="row">
                             <div className="col-md-12 col-sm-12 text-center">
@@ -126,15 +138,17 @@ class Landing extends React.Component {
                         </div>
                     </div>
                 </section>
-            
+
                 <footer>
                     <div className="container">
                         <div className="row">
                             <div className="wow fadeInUp col-md-4 col-sm-4" data-wow-delay="0.6s">
                                 <h2>CONTACT US</h2>
-                                <p>Coventry University Priory St, Coventry CV1 5FB</p>
+                                <p>Coventry University<br/>
+                                   Priory St,<br/>
+                                   Coventry CV1 5FB</p>
                             </div>
-            
+
                             <div className="wow fadeInUp col-md-5 col-sm-4" data-wow-delay="0.9s">
                                 <h2>SERVICES</h2>
                                 <div>
@@ -144,7 +158,7 @@ class Landing extends React.Component {
                                     <h4>Rent a vehicle</h4>
                                 </div>
                             </div>
-            
+
                             <div className="wow fadeInUp col-md-3 col-sm-4" data-wow-delay="1s">
                                 <h2>Follow us</h2>
                                 <ul className="social-icon">
@@ -153,9 +167,9 @@ class Landing extends React.Component {
                                     <li><a href="#" className="fa fa-instagram wow fadeIn" data-wow-delay="1.6s"></a></li>
                                 </ul>
                             </div>
-            
+
                             <div className="clearfix"></div>
-            
+
                             <div className="col-md-12 col-sm-12">
                                 <p className="copyright-text">Copyright &copy; 2022 TagAlong</p>
                             </div>
@@ -168,4 +182,3 @@ class Landing extends React.Component {
 }
 
 export default Landing;
-    

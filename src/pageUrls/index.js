@@ -1,6 +1,6 @@
 export const URLData = {
-    onboarding: {
-        url: "/onboarding",
+    landing: {
+        url: "/",
         isLogo: true,
         layout: {
             isClose: true,
@@ -10,27 +10,31 @@ export const URLData = {
     registration: {
         url: "/registration",
         isLogo: true,
-        layout: { right: { type: "login" } }
-    },
-    landing: {
-        url: "/landing",
-        isLogo: true,
         layout: {
-            isClose: true,
-            title: ""
+            right: {
+                type: "login"
+            }
         }
+    },
+    login: {
+        url: "/login",
+        isLogo: true
     },
     home: {
         url: "/home",
         isLogo: true,
         layout: {
+            right: {
+                type: "user"
+            }
+        }
+    },
+    onboarding: {
+        url: "/onboarding",
+        isLogo: true,
+        layout: {
             isClose: true,
             title: ""
         }
-    },
-    home: { url: "/", isLogo: true, layout: { right: { type: "user" } } },
-    login: {
-        url: "/login",
-        isLogo: true
     }
 };

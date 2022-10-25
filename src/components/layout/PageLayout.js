@@ -37,13 +37,11 @@ const PageLayout = ({ isLogo, children, ...props }) => {
                             <Icon
                                 className={getClassname("right-icon")}
                                 icon={close}
-                                onClick={onClose}
-                            />
+                                onClick={onClose} />
                             {closeText && (
                                 <Text
                                     type={closeType}
-                                    className={getClassname("close-text")}
-                                >
+                                    className={getClassname("close-text")}>
                                     {closeText}
                                 </Text>
                             )}
