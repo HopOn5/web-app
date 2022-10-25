@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../styles/components/_pageLayout.scss";
 import Icon from "../Icon";
 import Text from "../Text";
 import close from "../../icons/close-white.svg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import logo from "../../icons/logo.jpg";
 import edit from "../../icons/pen-to-square-solid.svg";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Onboarding from "../../pages/onBoarding";
+import { setIsProfileEdit } from "../../pages/Profile/profileReducer";
 
 const PageLayout = ({ isLogo, children, ...props }) => {
     const location = useLocation();
@@ -15,13 +17,16 @@ const PageLayout = ({ isLogo, children, ...props }) => {
     const { leftComp, rightComp, onClose } = props;
     const layoutData = useSelector((states) => states?.app?.layout);
     const { isClose, title, closeText, closeType, left, right } = layoutData;
+    const [isEdit, setEdit] = useState(false);
 
     const getClassname = (classname) =>
         `page-layout${classname ? `__${classname}` : ""}`;
 
     const titleType = "primaryLarge white fW8";
+    const dispatch = useDispatch();
     const handleClick = () => {
-        navigate("/profile-edit");
+        //setEdit(true);
+        dispatch(setIsProfileEdit(true));
     };
 
     return (

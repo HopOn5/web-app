@@ -58,5 +58,12 @@ export const URLData = {
             isLogo: true,
             title: "Request List"
         }
+    },
+    emptyProfile: {
+        url: "/empty-profile",
+        layout: {
+            isLogo: true,
+            title: "Profile"
+        }
     }
 };
