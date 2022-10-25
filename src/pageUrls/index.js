@@ -11,7 +11,6 @@ export const URLData = {
         url: "/registration",
         layout: { isLogo: true, right: { type: "signin" }, title: "Register" }
     },
-    home: { url: "/", layout: { isLogo: true, right: { type: "user" } } },
     home: {
         url: "/",
         layout: { isLogo: true, right: { type: "all_feature" } }
