@@ -11,12 +11,25 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { LoadScript } from "@react-google-maps/api";
+import { onAuthStateChanged, updateCurrentUser } from "firebase/auth";
+import { auth } from "./firebase/config";
+import {
+    setCurrentUser,
+    updateUserData
+} from "./pages/registration/currentUserReducer";
+import { useGetUserDetailsQuery } from "./services/usersApi";
 
 const App = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const dispatch = useDispatch();
+    const [userId, setUserId] = useState("");
     const layoutData = useSelector((states) => states.app.layout);
+    const currentUser = useSelector((state) => state?.user?.currentUser);
+
+    const { data, isError, isSuccess, refetch } =
+        useGetUserDetailsQuery(userId);
+    console.log("current user", currentUser);
 
     const [layoutProps, setLayoutProps] = useState({});
 
@@ -40,6 +53,23 @@ const App = () => {
         dispatch(updateLayoutData(layout ?? {}));
         setLayoutProps(getLayoutProps(layout ?? {}));
     }, [location]);
+
+    useEffect(() => {
+        dispatch(updateUserData(data));
+    }, [data]);
+
+    useEffect(() => {
+        if (userId) {
+            refetch();
+        }
+    }, [userId]);
+    //To check if there is an authenticated user
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            setUserId(user?.uid);
+            dispatch(setCurrentUser(user));
+        });
+    }, []);
 
     const handleLayoutClose = () => {
         navigate(layoutData?.exitTo ?? location?.state?.from ?? "/");

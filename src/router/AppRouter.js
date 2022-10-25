@@ -8,6 +8,7 @@ import RouteRequests from "../pages/routeRequest";
 import ResetPassword from "../pages/resetpassword/ResetPassword";
 import Signin from "../pages/signin/Signin";
 import { URLData } from "../pageUrls";
+import { ChatSpace } from "../pages/chatSpace";
 
 const AppRouter = () => {
     return (
@@ -25,6 +26,7 @@ const AppRouter = () => {
                 path={URLData.routeRequest.url}
                 element={<RouteRequests />}
             />
+            <Route path={URLData.chatSpace.url} element={<ChatSpace />} />
         </Routes>
     );
 };

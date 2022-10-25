@@ -15,10 +15,10 @@ import {
     updateProfile
 } from "firebase/auth";
 import { setDoc, doc, serverTimestamp } from "firebase/firestore";
-import { db } from "../../firebase/config";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import TermsConditions from "./TermsConditions";
+import { auth, db } from "../../firebase/config";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 const style = {
@@ -39,11 +39,23 @@ const style = {
 
 const RegForm = () => {
     const [open, setOpen] = useState(false);
+    const navigate = useNavigate();
     const handleTAndC = (e) => {
         e.preventDefault();
         setOpen(true);
     };
     const handleClose = () => setOpen(false);
+
+    const [regEmail, setregEmail] = useState("");
+    const [regPassword, setregPassword] = useState("");
+    const [regcreatePassword, setregcreatePassword] = useState("");
+
+    const [user, setUser] = useState({});
+
+    onAuthStateChanged(auth, (currentUser) => {
+        //     console.log("on auth change", currentUser, auth);
+        //     setUser(currentUser);
+    });
 
     const [showPassword, setShowPassword] = useState(false);
 
@@ -54,8 +66,6 @@ const RegForm = () => {
     });
 
     const { email, createpassword, password } = formData;
-
-    const navigate = useNavigate();
 
     const onChange = (e) => {
         setFormData((prevState) => ({
@@ -84,6 +94,26 @@ const RegForm = () => {
             formDataCopy.timestamp = serverTimestamp();
             await setDoc(doc(db, "users", user.uid), formDataCopy);
             navigate("/");
+
+            const res = await createUserWithEmailAndPassword(
+                auth,
+                regEmail,
+                regPassword,
+                regcreatePassword
+            );
+
+            //create user on firestore
+            await setDoc(doc(db, "users", res.user.uid), {
+                uid: res.user.uid,
+                displayName,
+                email
+            });
+
+            //create empty user chats on firestore
+            await setDoc(doc(db, "userChats", res.user.uid), {});
+
+            //after successfull authentical navigate to home page
+            //navigate("/");
         } catch (error) {
             toast.error("something went wrong with registration");
         }

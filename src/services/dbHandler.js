@@ -11,28 +11,28 @@ import { db } from "../firebase/config";
 
 const dbHandler = async (data, collectionType = "", type = "GET") => {
     try {
-        console.log("collectionType", !collectionType);
         if (!collectionType) throw Error("Collection name is not provided");
         let collectionRef = collection(db, collectionType);
-        let docRef = data?.id ? doc(db, collectionType, data?.id) : null;
+        let docRef = data?.singleDoc ? doc(db, collectionType, data?.id) : null;
         switch (type) {
             case "GET": {
                 let resData;
-                let data = await getDoc(
+                let res = await getDoc(
                     data?.singleDoc ? docRef : collectionRef
                 );
-                if (Array.isArray(data))
-                    data.forEach((doc) => {
+                if (Array.isArray(res))
+                    res.forEach((doc) => {
                         resData.push({ id: doc?.id, ...doc.data() });
                     });
                 else {
-                    resData = data.data();
+                    resData = res.data();
                 }
                 return resData;
             }
             case "POST": {
+                let payload = { ...data };
                 await addDoc(collectionRef, {
-                    ...data,
+                    ...payload,
                     timestamp: serverTimestamp()
                 });
                 return { data: "Success" };
@@ -46,7 +46,7 @@ const dbHandler = async (data, collectionType = "", type = "GET") => {
                 delete uploadData?.singleDoc;
                 delete uploadData?.id;
                 await updateDoc(docRef, {
-                    ...data,
+                    ...uploadData,
                     timestamp: serverTimestamp()
                 });
                 return { data: "Success" };
