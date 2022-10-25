@@ -1,33 +1,26 @@
-export const inputList = {
-    1: [
-        {
-            label: "Start location",
-            key: "start_loc",
-            placeholder: "Start location",
-            type: "input"
-        },
-        {
-            label: "End location",
-            key: "end_loc",
-            placeholder: "End location",
-            type: "input"
-        }
-    ],
-    2: [
-        {
-            label: "Start time",
-            key: "start_time",
-            placeholder: "Start time",
-            type: "date"
-        },
-        {
-            label: "Nearby search",
-            key: "start_mile_radius",
-            placeholder: "Nearby search",
-            type: "drop"
-        }
-    ]
-};
+export const inputList = [
+    {
+        label: "Start location",
+        key: "start_loc.streetAddress",
+        valueKey: "start_loc",
+        placeholder: "Start location",
+        type: "autocomplete"
+    },
+    {
+        label: "End location",
+        key: "end_loc.streetAddress",
+        valueKey: "end_loc",
+        placeholder: "End location",
+        type: "autocomplete"
+    },
+
+    {
+        label: "Start time",
+        key: "start_time",
+        placeholder: "Start time",
+        type: "date"
+    }
+];
 
 export const dropData = {
     start_mile_radius: [

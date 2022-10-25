@@ -9,7 +9,8 @@ import getLayoutData from "./helpers/getLayoutData";
 import LayoutHeaderComponent from "./components/layout/LayoutHeaderComponent";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
+import { LoadScript } from "@react-google-maps/api";
 
 const App = () => {
     const navigate = useNavigate();
@@ -57,14 +58,19 @@ const App = () => {
     });
 
     return (
-        <ThemeProvider theme={theme}>
-            <div className="root-container">
-                <PageLayout onClose={handleLayoutClose} {...layoutProps}>
-                    <AppRouter />
-                    <ToastContainer/>
-                </PageLayout>
-            </div>
-        </ThemeProvider>
+        <LoadScript
+            libraries={["places", "geometry"]}
+            googleMapsApiKey={process.env.REACT_APP_GOOGLE_API_KEY}
+        >
+            <ThemeProvider theme={theme}>
+                <div className="root-container">
+                    <PageLayout onClose={handleLayoutClose} {...layoutProps}>
+                        <AppRouter />
+                        <ToastContainer />
+                    </PageLayout>
+                </div>
+            </ThemeProvider>
+        </LoadScript>
     );
 };
 

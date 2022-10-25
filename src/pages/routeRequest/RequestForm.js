@@ -1,34 +1,75 @@
-import React from "react";
+import React, { useRef } from "react";
 import TextField from "@mui/material/TextField";
 import { SelectField } from "../../components/SelectField";
 import Button from "../../components/Button";
-import { initialValues, basicSchema } from "./formHelper";
-import { useFormik } from "formik";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import GooglePlacesAutocomplete from "react-google-places-autocomplete";
+import { StandaloneSearchBox } from "@react-google-maps/api";
+import CustomCheckBox from "../../components/CustomCheckbox";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 
-const RequestForm = () => {
+const RequestForm = ({ inputList, formik, isLoading }) => {
     const getClassname = (subclass) =>
         `request-form${subclass ? `__${subclass}` : ""}`;
 
-    const handleSubmit = () => {};
-
-    const formik = useFormik({
-        initialValues,
-        onSubmit: handleSubmit,
-        validationSchema: basicSchema
-    });
-
     const { errors } = formik;
+    const inputRef = useRef();
+    const startRef = useRef();
+    const endRef = useRef();
 
-    const renderAutocompleteInput = inputList[1].map((inputData, key) => (
-        <GooglePlacesAutocomplete />
-    ));
+    const refs = { start_loc: startRef, end_loc: endRef };
+
+    const handlePlaceChanged = (e, info) => {
+        const [place] = inputRef.current.getPlaces();
+        if (place) {
+            console.log(e, info);
+            formik.setFieldValue(info?.key, {
+                streetAddress: "",
+                pincode: "",
+                city: "",
+                lat: "",
+                lng: ""
+            });
+            // console.log(place.formatted_address);
+            // console.log(place.geometry.location.lat());
+            // console.log(place.geometry.location.lng());
+        }
+    };
 
     const getComponent = (inputData, key) => {
         switch (inputData?.type) {
+            case "autocomplete":
+                return (
+                    <StandaloneSearchBox
+                        handleChange={(e) => handlePlaceChanged(e, inputData)}
+                    >
+                        <TextField
+                            key={`${key}-request-form`}
+                            placeholder={inputData?.placeholder}
+                            label={inputData?.label}
+                            name={inputData?.key}
+                            value={
+                                formik.values[inputData?.valueKey]
+                                    ?.streetAddress ?? ""
+                            }
+                            onChange={formik.handleChange}
+                            className={getClassname("input-field")}
+                            sx={styles.inputfield}
+                            error={
+                                errors[inputData?.key] &&
+                                formik?.touched?.[inputData?.key]
+                                    ? true
+                                    : false
+                            }
+                            helperText={
+                                formik?.touched?.[inputData?.key] &&
+                                errors[inputData?.key]
+                            }
+                            fullWidth
+                            ref={refs[inputData?.valueKey]}
+                        />
+                    </StandaloneSearchBox>
+                );
             case "input":
                 return (
                     <TextField
@@ -46,13 +87,18 @@ const RequestForm = () => {
                                 ? true
                                 : false
                         }
-                        helperText={errors[inputData?.key]}
+                        fullWidth
+                        helperText={
+                            formik?.touched?.[inputData?.key] &&
+                            errors[inputData?.key]
+                        }
                     />
                 );
             case "date":
                 return (
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DatePicker
+                        <DateTimePicker
+                            className={getClassname("datepicker")}
                             key={`${key}-date`}
                             onChange={(value) =>
                                 formik?.setFieldValue(
@@ -74,6 +120,7 @@ const RequestForm = () => {
                                         formik?.touched?.[inputData?.key] &&
                                         formik?.errors?.[inputData?.key]
                                     }
+                                    placeholder={inputData?.placeholder}
                                     label={inputData?.label}
                                     name={inputData?.key}
                                     fullWidth
@@ -110,26 +157,24 @@ const RequestForm = () => {
                         }
                     />
                 );
+            case "custom_check":
+                return <CustomCheckBox {...inputData?.props} />;
             default:
-                return null;
+                return "";
         }
     };
 
-    const renderInput = (inputKey) =>
-        inputList[inputKey].map((inputData, key) =>
-            getComponent(inputData, key)
-        );
+    const renderInput = () =>
+        inputList.map((inputData, key) => getComponent(inputData, key));
 
     return (
         <div className={getClassname()}>
-            <div className={getClassname("form")}>
-                <div className={getClassname("form-one")}>{renderInput(1)}</div>
-                <div className={getClassname("form-two")}>{renderInput(2)}</div>
-            </div>
+            <div className={getClassname("form")}>{renderInput()}</div>
+
             <Button
                 type="primary"
                 onClick={formik.handleSubmit}
-                isLoading={false}
+                isLoading={isLoading}
                 className={getClassname("form-submit")}
             >
                 Request

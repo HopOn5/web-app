@@ -1,7 +1,7 @@
 import { createApi, fakeBaseQuery } from "@reduxjs/toolkit/query/react";
 import dbHandler from "./dbHandler";
 
-const collectionType = "requests";
+const collectionType = "route_requests";
 export const requestsApi = createApi({
     reducerPath: "requestsApi",
     baseQuery: fakeBaseQuery(),
@@ -19,13 +19,19 @@ export const requestsApi = createApi({
         }),
         deleteRequests: builder.mutation({
             async queryFn(id) {
-                let res = await dbHandler({ id }, collectionType, "DELETE");
-                return { data: res };
+                try {
+                    let res = await dbHandler({ id }, collectionType, "DELETE");
+                    return { data: res };
+                } catch (error) {
+                    console.log(err);
+                    return { error: err };
+                }
             }
         }),
         createRequests: builder.mutation({
-            async queryFn(data) {
-                let res = await dbHandler({ data }, collectionType, "POST");
+            async queryFn(payloadData) {
+                console.log(payloadData, "DATA");
+                let res = await dbHandler(payloadData, collectionType, "POST");
                 return { data: res };
             }
         })

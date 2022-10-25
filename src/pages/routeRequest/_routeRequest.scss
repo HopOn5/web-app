@@ -1,11 +1,5 @@
 .request-form {
     &__form {
-        &-one,
-        &-two {
-            display: flex;
-            justify-content: space-between;
-            padding: 5px 0;
-        }
         &-submit {
             max-width: 200px;
             margin: 20px auto 0;
@@ -17,5 +11,27 @@
         input {
             background-color: white !important;
         }
+    }
+    &__datepicker {
+        background-color: white;
+    }
+}
+
+.route-request {
+    max-width: 600px;
+    margin: 50px auto 0;
+    .custom-check-box {
+        margin-top: 30px;
+    }
+    &__form-header {
+        display: flex;
+        justify-content: center;
+    }
+    &__form-container {
+        padding: 30px;
+        background-color: #fcdfc4;
+    }
+    .request-form {
+        margin-top: 20px;
     }
 }

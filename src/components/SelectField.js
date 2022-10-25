@@ -1,4 +1,3 @@
-import { LensBlurRounded } from "@mui/icons-material";
 import {
     FormControl,
     FormHelperText,
@@ -10,7 +9,6 @@ import React from "react";
 
 export const SelectField = (props) => {
     const { label, name, value, onChange, options, error, helperText } = props;
-    console.log("helper", helperText);
     return (
         <FormControl
             key={props?.keyValue ?? "select-key"}
@@ -25,6 +23,7 @@ export const SelectField = (props) => {
                 value={value}
                 onChange={onChange}
                 fullWidth
+                defaultValue={props?.defaultValue}
             >
                 {options.map((menuItem) => (
                     <MenuItem value={menuItem.value}>{menuItem.label}</MenuItem>

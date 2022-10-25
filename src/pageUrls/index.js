@@ -11,7 +11,6 @@ export const URLData = {
         url: "/registration",
         layout: { isLogo: true, right: { type: "signin" }, title: "Register" }
     },
-    home: { url: "/", layout: { isLogo: true, right: { type: "user" } } },
     home: {
         url: "/",
         layout: { isLogo: true, right: { type: "all_feature" } }
@@ -51,6 +50,13 @@ export const URLData = {
         layout: {
             isLogo: true,
             title: "Route requests"
+        }
+    },
+    routeRequestList: {
+        url: "/route-request/list",
+        layout: {
+            isLogo: true,
+            title: "Request List"
         }
     }
 };
