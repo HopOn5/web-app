@@ -16,7 +16,6 @@ import { setDoc, doc, serverTimestamp } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-// import { ErrorMessage, Formik } from "formik";
 import { useFormik } from "formik";
 import { schema, initialValues } from "./registervalidation";
 import TAndCContent from "./TAndCContent";
@@ -36,7 +35,6 @@ const RegForm = () => {
     const navigate = useNavigate();
 
     const register = async (data1) => {
-        // console.log(e, "E");
         try {
             const auth = getAuth();
             const userCredential = await createUserWithEmailAndPassword(
@@ -48,7 +46,7 @@ const RegForm = () => {
             toast.success("Register successfully");
             const user = userCredential.user;
             updateProfile(auth.currentUser, {
-                displayName: data1.email
+                displayName: data1.email           
             });
             const formDataCopy = { ...data1 };
             delete formDataCopy.password;
@@ -73,6 +71,36 @@ const RegForm = () => {
         <div>
             <h2 className="reg-form__heading">Let's get started...</h2>
             <div className="reg-form__textfield">
+                <TextField
+                    type={formik.values.firstName}
+                    value={formik.values.firstName}
+                    id="firstName"
+                    label="First Name"
+                    variant="outlined"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={errors.firstName && touched.firstName}
+                    helperText={
+                        errors.firstName && touched.firstName ? (
+                            <span className="error">{errors.firstName}</span>
+                        ) : null
+                    }
+                />
+                <TextField
+                    type={formik.values.lastName}
+                    value={formik.values.lastName}
+                    id="lastName"
+                    label="Last Name"
+                    variant="outlined"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={errors.lastName && touched.lastName}
+                    helperText={
+                        errors.lastName && touched.lastName ? (
+                            <span className="error">{errors.lastName}</span>
+                        ) : null
+                    }
+                />
                 <TextField
                     type={formik.values.email}
                     value={formik.values.email}

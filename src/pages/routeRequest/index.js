@@ -1,18 +1,16 @@
-import React, { useState, useEffect } from "react";
-import "./_home.scss";
+import React, { useState, useEffect, useRef } from "react";
+import "./_routeRequest.scss";
 import Tab from "@mui/material/Tab";
 import Icon from "../../components/Icon";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
-import walkIcon from "../../icons/walk-tab.svg";
-import cycleIcon from "../../icons/cycle-tab.svg";
-import cabIcon from "../../icons/car-tab.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { updateCustomLayout } from "../../appReducer";
-import RequestForm from "../routeRequest/RouteRequest";
+import TextField from "@mui/material/TextField";
 
-const Home = () => {
+import { StandaloneSearchBox, LoadScript } from "@react-google-maps/api";
+
+const RouteRequests = () => {
     const getClassname = (subclass) =>
         `home-page${subclass ? `__${subclass}` : ""}`;
     const dispatch = useDispatch();
@@ -21,34 +19,26 @@ const Home = () => {
 
     const requestList = [];
 
-    useEffect(() => {
-        dispatch(updateCustomLayout({ title: `Welcome ${userInfo?.name}` }));
-    }, [userInfo]);
-
     const tabs = [
-        {
-            label: "Walk",
-            value: "walk",
-            icon: walkIcon,
-            content: <RequestForm type="walk" />
-        },
-        {
-            label: "Cycle",
-            value: "cycle",
-            icon: cycleIcon,
-            content: <RequestForm type="cycle" />
-        },
-        {
-            label: "Cab share",
-            value: "cab",
-            icon: cabIcon,
-            content: <RequestForm type="cab" />
-        }
+        // {
+        //     label: "Walk",
+        //     value: "walk",
+        //     icon: walkIcon,
+        //     content: <RequestForm type="walk" />
+        // },
+        // {
+        //     label: "Cycle",
+        //     value: "cycle",
+        //     icon: cycleIcon,
+        //     content: <RequestForm type="cycle" />
+        // },
+        // {
+        //     label: "Cab share",
+        //     value: "cab",
+        //     icon: cabIcon,
+        //     content: <RequestForm type="cab" />
+        // }
     ];
-
-    const renderCards = () => {
-        return <></>;
-    };
 
     const renderTabComp = () =>
         tabs.map((item, index) => (
@@ -70,6 +60,17 @@ const Home = () => {
 
     const handleTabChange = (e, value) => setActiveTab(value);
 
+    const inputRef = useRef();
+
+    const handlePlaceChanged = () => {
+        const [place] = inputRef.current.getPlaces();
+        if (place) {
+            // console.log(place.formatted_address);
+            // console.log(place.geometry.location.lat());
+            // console.log(place.geometry.location.lng());
+        }
+    };
+
     return (
         <div className={getClassname()}>
             <div className={getClassname("container")}>
@@ -88,13 +89,24 @@ const Home = () => {
                     </TabPanel>
                 </TabContext>
             </div>
-            {requestList?.length > 0 && (
-                <div className={getClassname("card-container")}>
-                    {renderCards()}
-                </div>
-            )}
+
+            <LoadScript
+                googleMapsApiKey={process.env.REACT_APP_GOOGLE_API_KEY}
+                libraries={["places"]}
+            >
+                <StandaloneSearchBox
+                    onLoad={(ref) => (inputRef.current = ref)}
+                    onPlacesChanged={handlePlaceChanged}
+                >
+                    <TextField
+                        type="text"
+                        className="form-control"
+                        placeholder="Enter Location"
+                    />
+                </StandaloneSearchBox>
+            </LoadScript>
         </div>
     );
 };
 
-export default Home;
+export default RouteRequests;
