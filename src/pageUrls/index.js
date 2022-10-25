@@ -12,6 +12,22 @@ export const URLData = {
         isLogo: true,
         layout: { right: { type: "login" } }
     },
+    landing: {
+        url: "/landing",
+        isLogo: true,
+        layout: {
+            isClose: true,
+            title: ""
+        }
+    },
+    home: {
+        url: "/home",
+        isLogo: true,
+        layout: {
+            isClose: true,
+            title: ""
+        }
+    },
     home: { url: "/", isLogo: true, layout: { right: { type: "user" } } },
     login: {
         url: "/login",
