@@ -11,6 +11,7 @@ import image2 from '../../assets/images/walk.jpg';
 import image3 from '../../assets/images/landing-cycle.jpg';
 import image4 from '../../assets/images/ride.jpg';
 import image5 from '../../assets/images/rent.jpg';
+import image6 from '../../assets/images/chart.jpg';
 
 class Landing extends React.Component {
     render() {
@@ -68,7 +69,7 @@ class Landing extends React.Component {
 
                             <div className="wow fadeInUp col-md-4 col-sm-12" data-wow-delay="1s">
                                 <div className="overview-detail">
-                                    <h2>About Us</h2>
+                                    <h1>About Us</h1>
                                     <p>
                                         This community stand up with the students in our university. We mainly focus on the safety and welfare of our students at Coventry. This world is full of gadgets. With this app, we can travel without any afflict
                                         in a new place and will come to know new people and it will be a great experience for all students at Coventry.
@@ -84,16 +85,15 @@ class Landing extends React.Component {
                 <section id="services" className="parallax-section">
                     <div className="container">
                         <div className="row">
-                            <div className="wow fadeInUp col-md-12 col-sm-12" data-wow-delay="1.3s">
+                        <div className="col-md-12 col-sm-12 text-center">
                                 <h2>Our Services</h2>
-                                
                             </div>
 
                             <div className="wow fadeInUp col-md-3 col-sm-6" data-wow-delay="1.9s">
                                 <div className="trainer-thumb">
                                     <img src={image2} className="img-responsive" alt="Trainer" />
                                 </div>
-                                <h4>WALK</h4>
+                                <h3>WALK</h3>
                                 <p>Lorem ipsum dolor sit amet, maecenas eget vestibulum justo imperdiet, wisi risus purus augue vulputate.</p>
                                 <a href="#requestform" className="btn btn-default smoothScroll">Let us begin</a>
                             </div>
@@ -102,7 +102,7 @@ class Landing extends React.Component {
                                 <div className="trainer-thumb">
                                     <img src={image3} className="img-responsive" alt="Trainer" />
                                 </div>
-                                <h4>CYCLE</h4>
+                                <h3>CYCLE</h3>
                                 <p>Lorem ipsum dolor sit amet, maecenas eget vestibulum justo imperdiet, wisi risus purus augue vulputate.</p>
                                 <a href="#requestform" className="btn btn-default smoothScroll">Let us begin</a>
                             </div>
@@ -111,7 +111,7 @@ class Landing extends React.Component {
                                 <div className="trainer-thumb">
                                     <img src={image4} className="img-responsive" alt="Trainer" />
                                 </div>
-                                <h4>RIDE ON CARS</h4>
+                                <h3>RIDE ON CARS</h3>
                                 <p>Lorem ipsum dolor sit amet, maecenas eget vestibulum justo imperdiet, wisi risus purus augue vulputate.</p>
                                 <a href="#requestform" className="btn btn-default smoothScroll">Let us begin</a>
                             </div>
@@ -120,7 +120,7 @@ class Landing extends React.Component {
                                 <div className="trainer-thumb">
                                     <img src={image5} className="img-responsive" alt="Trainer" />
                                 </div>
-                                <h4>RENT A VEHICLE</h4>
+                                <h3>RENT A VEHICLE</h3>
                                 <p>Lorem ipsum dolor sit amet, maecenas eget vestibulum justo imperdiet, wisi risus purus augue vulputate.</p>
                                 <a href="#requestform" className="btn btn-default smoothScroll">Let us begin</a>
                             </div>
@@ -134,6 +134,7 @@ class Landing extends React.Component {
                             <div className="col-md-12 col-sm-12 text-center">
                                 <h2>HOW WE WORK</h2>
                                 <p>Lorem ipsum dolor sit amet, maecenas eget vestibulum justo.</p>
+                                <img src={image6} className="img-responsive" />
                             </div>
                         </div>
                     </div>
@@ -144,9 +145,9 @@ class Landing extends React.Component {
                         <div className="row">
                             <div className="wow fadeInUp col-md-4 col-sm-4" data-wow-delay="0.6s">
                                 <h2>CONTACT US</h2>
-                                <p>Coventry University<br/>
-                                   Priory St,<br/>
-                                   Coventry CV1 5FB</p>
+                                <h4>Coventry University</h4>
+                                <h4>Priory St,</h4>
+                                <h4>Coventry CV1 5FB</h4>
                             </div>
 
                             <div className="wow fadeInUp col-md-5 col-sm-4" data-wow-delay="0.9s">

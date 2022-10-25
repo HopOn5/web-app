@@ -26,6 +26,7 @@ h1 {
     letter-spacing: 10px;
     text-transform: uppercase;
     padding-top: 12px;
+    text-align: center;
 }
 
 h2 {
@@ -33,6 +34,7 @@ h2 {
   letter-spacing: 6px;
   padding-bottom: 18px;
   text-transform: uppercase;
+  
 }
 
 #trainer h2,
@@ -49,19 +51,22 @@ blockquote, h3 {
 
 h3 {
   line-height: 36px;
+  text-align: center;
+
 }
 
 h4 {
-    color: #999;
+    color: #f9f9f9;
     letter-spacing: 2px;
     margin-top: 22px;
 }
 
 p {
-    color: #707070;
+    color: #165954;    ;
     font-size: 20px;
     line-height: 25px;
     letter-spacing: 0.4px;
+    text-align: center;
 }
 
 a {
@@ -92,6 +97,7 @@ a {
 .parallax-section {
   background-attachment: fixed !important;
   background-size: cover !important;
+  padding-bottom: 8rem;
 }
 
 
@@ -146,14 +152,14 @@ a {
     Navigation section              
 -----------------------------------------*/
 .navbar-default {
-    background: #ffffff;
-    border-bottom: 2px solid #f9f9f9;
+    background: #ED6B5B;
+    border-bottom: 2px solid #ED6B5B;
     box-shadow: none;
     margin: 0 !important;
 }
 
 .navbar-default .navbar-brand {
-  color: #505050;
+  color: #f9f9f9;
   font-size: 36px;
   font-weight: bold;
   line-height: 50px;
@@ -161,7 +167,7 @@ a {
 }
 
 .navbar-default .navbar-nav li a {
-    color: #999;
+    color: #f9f9f9;
     font-size: 24px;
     font-weight: 300;
     line-height: 60px;
@@ -173,19 +179,19 @@ a {
 }
 
 .navbar-default .navbar-nav li a:hover {
-  color: #000;
+  color: #165954;
 }
 
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
-  color: #000;
+  color: #165954;
   background-color: transparent;
 }
 
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
-  color: #000;
+  color: #165954;
   background-color: transparent;
 }
 
@@ -195,13 +201,13 @@ a {
   }
 
 .navbar-default .navbar-toggle .icon-bar {
-    color: #000;
+    color: #165954;
     border-color: transparent;
   }
 
 .navbar-default .navbar-toggle:hover,
 .navbar-default .navbar-toggle:focus { 
-  color: #000;
+  color: #165954;
   background-color: transparent;
 }
 
@@ -256,7 +262,7 @@ a {
 -----------------------------------------*/
 #overview {
   padding-top: 14rem;
-  padding-bottom: 20rem;
+  padding-bottom: 8rem;
   position: relative;
 }
 
@@ -794,7 +800,7 @@ a {
    Footer section              
 -----------------------------------------*/
 footer {
-  background: #26253a;
+  background: #ED6B5B;
   color: #ffffff;
   padding-top: 8rem;
   padding-bottom: 8rem;
@@ -819,7 +825,7 @@ footer .copyright-text {
 }
 
 .copyright-text a {
-	color: #707070;
+	color: #ffffff;
 	transition: all 0.4s ease-in-out;
 }
 
@@ -843,7 +849,7 @@ footer .copyright-text {
 }
 
 .social-icon li a {
-    color: #999;
+    color: #f9f9f9;
     border-radius: 100px;
     font-size: 16px;
     text-decoration: none;
@@ -856,7 +862,7 @@ footer .copyright-text {
 }
 
 .social-icon li a:hover {
-    background: #ffffff;
+    background: #165954;
 }
 
 
