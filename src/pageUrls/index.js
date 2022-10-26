@@ -20,6 +20,10 @@ export const URLData = {
         url: "/signin",
         layout: { isLogo: true, right: {}, title: "Sign in" }
     },
+    googlemap: {
+        url: "/googlemap",
+        layout: { isLogo: true, right: {}, title: "google map" }
+    },
     resetpassword: {
         url: "/resetpassword",
         layout: { isLogo: true, right: {}, title: "reset password" }

@@ -8,6 +8,7 @@ import RouteRequests from "../pages/routeRequest";
 import ResetPassword from "../pages/resetpassword/ResetPassword";
 import Signin from "../pages/signin/Signin";
 import { URLData } from "../pageUrls";
+import Googlemap from "../pages/Googlemap/googlemap";
 
 // import PrivateRoute from "./PrivateRoute";
 
@@ -33,6 +34,8 @@ const AppRouter = () => {
             <Route path={URLData.registration.url} element={<Registration />} />
             <Route path={URLData.signin.url} element={<Signin />} />
             <Route path={URLData.profile.url} element={<Profile />} />
+            <Route path={URLData.googlemap.url} element={<Googlemap />} />
+
             <Route
                 path={URLData.routeRequest.url}
                 element={<RouteRequests />}
