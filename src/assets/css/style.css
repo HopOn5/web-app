@@ -66,7 +66,7 @@ p {
     font-size: 20px;
     line-height: 25px;
     letter-spacing: 0.4px;
-    text-align: center;
+    text-align: justify;
 }
 
 a {
@@ -217,11 +217,11 @@ a {
     Home section              
 -----------------------------------------*/
 #home {
-    background: 50% 0 repeat-y fixed;
+    background: 100% 0 repeat-y fixed;
     -webkit-background-size: cover;
     background-size: cover;
     background-position: center center;
-    color: #ffffff;
+    background-image: url('../images/home-bg-slider-img1.jpg');
     display: -webkit-box;
     display: -webkit-flex;
      display: -ms-flexbox;

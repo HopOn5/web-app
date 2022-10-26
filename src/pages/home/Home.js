@@ -6,7 +6,7 @@ import            "../../assets/css/font-awesome.min.css";
 import            "../../assets/css/owl.carousel.css";
 import            "../../assets/css/owl.theme.css";
 import            "../../assets/css/style.css";
-import image1 from '../../assets/images/overview-img.jpg';
+
 import image2 from '../../assets/images/walk.jpg';
 import image3 from '../../assets/images/landing-cycle.jpg';
 import image4 from '../../assets/images/ride.jpg';
@@ -50,7 +50,8 @@ class Landing extends React.Component {
                             <div className="col-md-offset-1 col-md-10 col-sm-12">
                                 <h3 className="wow bounceIn" data-wow-delay="0.9s">Hello! Welcome </h3>
                                 <h1 className="wow fadeInUp" data-wow-delay="1.6s">
-                                    Choose Your Journey<br />
+                                    Choose Your Journey <br />
+                                    Go Down<br />
                                    
                                 </h1>
                             </div>
@@ -61,9 +62,8 @@ class Landing extends React.Component {
                 <section id="services" className="parallax-section">
                     <div className="container">
                         <div className="row">
-
-                            <div className="col-md-12 col-sm-12 text-center">
-                                <h2>Our Services</h2>
+                        <div className="col-md-12 col-sm-12 text-center">
+                                <h2>Our Services</h2><br/>
                             </div>
 
                             <div className="wow fadeInUp col-md-3 col-sm-6" data-wow-delay="1.9s">
@@ -71,7 +71,9 @@ class Landing extends React.Component {
                                     <img src={image2} className="img-responsive" alt="Trainer" />
                                 </div>
                                 <h3>WALK</h3>
-                                <p>Lorem ipsum dolor sit amet, maecenas eget vestibulum justo imperdiet, wisi risus purus augue vulputate.</p>
+                                <p> We can walk with a person who is going to the same destination.
+                                    So they can accompany us throughout the journey. And you can make a new friend and stay motivated.
+                                </p>
                                 <a href="#requestform" className="btn btn-default smoothScroll">Let us begin</a>
                             </div>
 
@@ -80,7 +82,10 @@ class Landing extends React.Component {
                                     <img src={image3} className="img-responsive" alt="Trainer" />
                                 </div>
                                 <h3>CYCLE</h3>
-                                <p>Lorem ipsum dolor sit amet, maecenas eget vestibulum justo imperdiet, wisi risus purus augue vulputate.</p>
+                                <p> We can cycle with a person who is going to the same destination.
+                                    So that they can accompany us throughout the journey. 
+                                    And you can make a new friend and stay motivated.
+                                </p>
                                 <a href="#requestform" className="btn btn-default smoothScroll">Let us begin</a>
                             </div>
 
@@ -89,7 +94,9 @@ class Landing extends React.Component {
                                     <img src={image4} className="img-responsive" alt="Trainer" />
                                 </div>
                                 <h3>RIDE ON CARS</h3>
-                                <p>Lorem ipsum dolor sit amet, maecenas eget vestibulum justo imperdiet, wisi risus purus augue vulputate.</p>
+                                <p>Ride share programs help connect people to travel together to the same destination.
+                                
+                                </p>
                                 <a href="#requestform" className="btn btn-default smoothScroll">Let us begin</a>
                             </div>
 
@@ -98,7 +105,9 @@ class Landing extends React.Component {
                                     <img src={image5} className="img-responsive" alt="Trainer" />
                                 </div>
                                 <h3>RENT A VEHICLE</h3>
-                                <p>Lorem ipsum dolor sit amet, maecenas eget vestibulum justo imperdiet, wisi risus purus augue vulputate.</p>
+                                <p>In this service renting a vehicle, we can get a vehicle from a person and also if we have a vehicle we can rent
+                                    that to another person who requires it. It can be a bicycle or a car.
+                                </p>
                                 <a href="#requestform" className="btn btn-default smoothScroll">Let us begin</a>
                             </div>
                         </div>

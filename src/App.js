@@ -9,6 +9,7 @@ import getLayoutData from "./helpers/getLayoutData";
 import LayoutHeaderComponent from "./components/layout/LayoutHeaderComponent";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
+
 const App = () => {
     const navigate = useNavigate();
     const location = useLocation();
@@ -52,6 +53,7 @@ const App = () => {
             }
         }
     });
+    
 
     return (
         <ThemeProvider theme={theme}>
