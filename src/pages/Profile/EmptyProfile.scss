@@ -1,0 +1,19 @@
+.emptyProfile {
+    margin: auto;
+    width: fit-content;
+    &__details {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        &_child {
+            display: flex;
+            align-items: center;
+            &_none {
+                padding: 0 40px;
+            }
+        }
+    }
+    &__redirect {
+        margin-top: 100px;
+    }
+}

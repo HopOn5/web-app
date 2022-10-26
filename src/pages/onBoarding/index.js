@@ -11,146 +11,154 @@ import "./_onboarding.scss";
 import UploadAddress from "./uploadAddress/UploadAddress";
 import { useFormik } from "formik";
 import {
-  initialValues,
-  validateSchema,
+    initialValues,
+    validateSchema
 } from "./personalDetails/formValidation";
 import uploadToStorage from "../../services/uploadToStorage";
+import { addProfileDetails, setIsProfileEdit } from "../Profile/profileReducer";
 
 const Onboarding = ({}) => {
-  //formik initialisation for personal Details component
-  const formik = useFormik({
-    initialValues,
-    validationSchema: validateSchema,
-    onSubmit: (values) => {
-      console.log("values from onboarding", values);
-      handleNext();
-    },
-  });
+    //formik initialisation for personal Details component
+    const dispatch = useDispatch();
 
-  const dispatch = useDispatch();
-  const [layout, verificationFile] = useSelector((states) => [
-    states.app.layout,
-    states?.onboarding?.verificationData ?? null,
-  ]);
+    const formik = useFormik({
+        initialValues,
+        validationSchema: validateSchema,
+        onSubmit: (values) => {
+            console.log("values from onboarding", values);
+            dispatch(addProfileDetails({ ...values }));
+            handleNext();
+        }
+    });
 
-  const [activeStep, setActiveStep] = useState(0);
+    const [layout, verificationFile] = useSelector((states) => [
+        states.app.layout,
+        states?.onboarding?.verificationData ?? null
+    ]);
 
-  useEffect(() => {
-    if (!layout?.title)
-      dispatch(
-        updateCustomLayout({ title: stepData[activeStep]?.title ?? "" })
-      );
-  }, [activeStep, layout]);
+    const [activeStep, setActiveStep] = useState(0);
 
-  const handleSubmitForm = async ({ values, handleCallback }) => {
-    let downloadURL = await uploadToStorage(verificationFile, "verification");
-  };
+    useEffect(() => {
+        if (!layout?.title)
+            dispatch(
+                updateCustomLayout({ title: stepData[activeStep]?.title ?? "" })
+            );
+    }, [activeStep, layout]);
 
-  const stepData = {
-    0: {
-      body: <PersonalDetails formik={formik} />,
-      title: "Personal Details",
-    },
-    1: { body: <UploadVerification />, title: "Upload Verification" },
-    2: {
-      body: <UploadAddress handleSubmit={handleSubmitForm} />,
-      title: "Address Details",
-    },
-  };
+    const handleSubmitForm = async ({ values, handleCallback }) => {
+        let downloadURL = await uploadToStorage(
+            verificationFile,
+            "verification"
+        );
+        dispatch(addProfileDetails({ ...values }));
+        dispatch(setIsProfileEdit(false));
+    };
 
-  const getStepData = (step) => stepData[step].body;
+    const stepData = {
+        0: {
+            body: <PersonalDetails formik={formik} />,
+            title: "Personal Details"
+        },
+        1: { body: <UploadVerification />, title: "Upload Verification" },
+        2: {
+            body: <UploadAddress handleSubmit={handleSubmitForm} />,
+            title: "Address Details"
+        }
+    };
 
-  //mui stepper function implementation
+    const getStepData = (step) => stepData[step].body;
 
-  const totalSteps = () => {
-    return steps.length;
-  };
+    //mui stepper function implementation
 
-  const isLastStep = () => {
-    return activeStep === totalSteps() - 1;
-  };
+    const totalSteps = () => {
+        return steps.length;
+    };
 
-  const handleNext = () => {
-    if (!isLastStep()) {
-      setActiveStep((prevState) => prevState + 1);
-    }
-  };
+    const isLastStep = () => {
+        return activeStep === totalSteps() - 1;
+    };
 
-  const handleSubmitClick = () => {
-    if (activeStep === 0) {
-      formik?.handleSubmit && formik?.handleSubmit();
-    } else handleNext();
-  };
+    const handleNext = () => {
+        if (!isLastStep()) {
+            setActiveStep((prevState) => prevState + 1);
+        }
+    };
 
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
+    const handleSubmitClick = () => {
+        if (activeStep === 0) {
+            formik?.handleSubmit && formik?.handleSubmit();
+        } else handleNext();
+    };
 
-  const getSteps = () => {
-    return ["Personal Details", "Document Upload", "Address Details"];
-  };
+    const handleBack = () => {
+        setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    };
 
-  const steps = getSteps();
+    const getSteps = () => {
+        return ["Personal Details", "Document Upload", "Address Details"];
+    };
 
-  return (
-    <Box sx={styles.stepperStyle}>
-      <Stepper nonLinear activeStep={activeStep}>
-        {steps.map((label, index) => (
-          <Step key={label} sx={styles.stepNumberStyle}>
-            <StepLabel color="#457a76">{label}</StepLabel>
-          </Step>
-        ))}
-      </Stepper>
+    const steps = getSteps();
 
-      <Box sx={styles.alignItemCenter}>
-        {activeStep !== 0 ? (
-          <Box sx={styles.alignItemCenter}>
-            <Icon
-              icon={leftarr}
-              className="onBoarding__stepper-icon"
-              onClick={handleBack}
-            />
-          </Box>
-        ) : (
-          ""
-        )}
-        <Box> {getStepData(activeStep)}</Box>
-        {activeStep !== 2 ? (
-          <Box sx={styles.alignItemCenter}>
-            <Icon
-              icon={rightarr}
-              className="onBoarding__stepper-icon"
-              onClick={() => {
-                handleSubmitClick();
-              }}
-            />
-          </Box>
-        ) : (
-          ""
-        )}
-      </Box>
-    </Box>
-  );
+    return (
+        <Box sx={styles.stepperStyle}>
+            <Stepper nonLinear activeStep={activeStep}>
+                {steps.map((label, index) => (
+                    <Step key={label} sx={styles.stepNumberStyle}>
+                        <StepLabel color="#457a76">{label}</StepLabel>
+                    </Step>
+                ))}
+            </Stepper>
+
+            <Box sx={styles.alignItemCenter}>
+                {activeStep !== 0 ? (
+                    <Box sx={styles.alignItemCenter}>
+                        <Icon
+                            icon={leftarr}
+                            className="onBoarding__stepper-icon"
+                            onClick={handleBack}
+                        />
+                    </Box>
+                ) : (
+                    ""
+                )}
+                <Box> {getStepData(activeStep)}</Box>
+                {activeStep !== 2 ? (
+                    <Box sx={styles.alignItemCenter}>
+                        <Icon
+                            icon={rightarr}
+                            className="onBoarding__stepper-icon"
+                            onClick={() => {
+                                handleSubmitClick();
+                            }}
+                        />
+                    </Box>
+                ) : (
+                    ""
+                )}
+            </Box>
+        </Box>
+    );
 };
 
 export default Onboarding;
 
 const styles = {
-  stepperStyle: { width: "80%", margin: "auto", my: 5 },
-  stepNumberStyle: {
-    "& .MuiStepLabel-root .Mui-active": {
-      color: "#457a76", // circle color (ACTIVE)
+    stepperStyle: { width: "80%", margin: "auto", my: 5 },
+    stepNumberStyle: {
+        "& .MuiStepLabel-root .Mui-active": {
+            color: "#457a76" // circle color (ACTIVE)
+        },
+        "& .MuiStepLabel-label.Mui-active.MuiStepLabel-alternativeLabel": {
+            color: "common.white" // Just text label (ACTIVE)
+        },
+        "& .MuiStepLabel-root .Mui-active .MuiStepIcon-text": {
+            fill: "white" // circle's number (ACTIVE)
+        }
     },
-    "& .MuiStepLabel-label.Mui-active.MuiStepLabel-alternativeLabel": {
-      color: "common.white", // Just text label (ACTIVE)
-    },
-    "& .MuiStepLabel-root .Mui-active .MuiStepIcon-text": {
-      fill: "white", // circle's number (ACTIVE)
-    },
-  },
-  alignItemCenter: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
+    alignItemCenter: {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
+    }
 };

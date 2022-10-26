@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "../pages/home/Home.js";
 import Onboarding from "../pages/onBoarding";
+import EmptyProfile from "../pages/Profile/EmptyProfile";
 import Profile from "../pages/Profile/Profile";
 import Registration from "../pages/registration/Registration";
 import RouteRequests from "../pages/routeRequest";
@@ -15,7 +16,7 @@ const AppRouter = () => {
     return (
         <Routes>
             <Route path={URLData.onboarding.url} element={<Onboarding />} />
-            <Route path={URLData.landing.url} element={<Landing />} />
+            <Route path={URLData.profileEdit.url} element={<Onboarding />} />
             <Route path={URLData.registration.url} element={<Registration />} />
             <Route path={URLData.signin.url} element={<Signin />} />
             <Route
@@ -30,6 +31,8 @@ const AppRouter = () => {
                 path={URLData.routeRequest.url}
                 element={<RouteRequests />}
             />
+            <Route path={URLData.emptyProfile.url} element={<EmptyProfile />} />
+            <Route path={URLData.landing.url} element={<Landing />} />
         </Routes>
     );
 };
