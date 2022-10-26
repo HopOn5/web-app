@@ -8,6 +8,7 @@ import RouteRequests from "../pages/routeRequest";
 import ResetPassword from "../pages/resetpassword/ResetPassword";
 import Signin from "../pages/signin/Signin";
 import { URLData } from "../pageUrls";
+import Googlemap from "../pages/Googlemap/googlemap";
 
 const AppRouter = () => {
     return (
@@ -21,6 +22,8 @@ const AppRouter = () => {
             />
             <Route path={URLData.home.url} element={<Home />} />
             <Route path={URLData.profile.url} element={<Profile />} />
+            <Route path={URLData.googlemap.url} element={<Googlemap />} />
+
             <Route
                 path={URLData.routeRequest.url}
                 element={<RouteRequests />}
