@@ -9,6 +9,7 @@ import RouteRequests from "../pages/routeRequest";
 import ResetPassword from "../pages/resetpassword/ResetPassword";
 import Signin from "../pages/signin/Signin";
 import { URLData } from "../pageUrls";
+import { ChatSpace } from "../pages/chatSpace";
 import Googlemap from "../pages/Googlemap/googlemap";
 
 const AppRouter = () => {
@@ -30,6 +31,7 @@ const AppRouter = () => {
                 path={URLData.routeRequest.url}
                 element={<RouteRequests />}
             />
+            <Route path={URLData.chatSpace.url} element={<ChatSpace />} />
             <Route path={URLData.emptyProfile.url} element={<EmptyProfile />} />
         </Routes>
     );

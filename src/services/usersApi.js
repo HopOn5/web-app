@@ -8,7 +8,7 @@ export const usersApi = createApi({
     baseQuery: fakeBaseQuery(),
     tagTypes: ["User"],
     endpoints: (builder) => ({
-        getUserDetails: builder.query({
+        getUserDetails: builder.mutation({
             async queryFn(id) {
                 try {
                     let data = await dbHandler(
@@ -17,17 +17,16 @@ export const usersApi = createApi({
                     );
                     return { data };
                 } catch (error) {}
-            },
-            invalidatesTags: ["User"]
+            }
         }),
         updateUserDetails: builder.query({
             queryFn(id, data) {
                 let res = updateDB({}, collectionType, "PUT");
                 return { data: res };
-            },
-            invalidatesTags: ["User"]
+            }
         })
     })
 });
 
-export const { useGetUserDetailsQuery, useUpdateUserDetailsQuery } = usersApi;
+export const { useGetUserDetailsMutation, useUpdateUserDetailsQuery } =
+    usersApi;
