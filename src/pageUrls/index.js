@@ -11,7 +11,6 @@ export const URLData = {
         url: "/registration",
         layout: { isLogo: true, right: { type: "signin" }, title: "Register" }
     },
-    home: { url: "/", layout: { isLogo: true, right: { type: "user" } } },
     home: {
         url: "/",
         layout: { isLogo: true, right: { type: "all_feature" } }
@@ -19,6 +18,10 @@ export const URLData = {
     signin: {
         url: "/signin",
         layout: { isLogo: true, right: {}, title: "Sign in" }
+    },
+    googlemap: {
+        url: "/googlemap",
+        layout: { isLogo: true, right: {}, title: "google map" }
     },
     resetpassword: {
         url: "/resetpassword",
@@ -35,6 +38,7 @@ export const URLData = {
     profile: {
         url: "/profile",
         layout: {
+            left: { type: "profile_edit" },
             isLogo: true,
             title: "Profile"
         }
@@ -51,6 +55,20 @@ export const URLData = {
         layout: {
             isLogo: true,
             title: "Route requests"
+        }
+    },
+    routeRequestList: {
+        url: "/route-request/list",
+        layout: {
+            isLogo: true,
+            title: "Request List"
+        }
+    },
+    emptyProfile: {
+        url: "/empty-profile",
+        layout: {
+            isLogo: true,
+            title: "Profile"
         }
     }
 };
