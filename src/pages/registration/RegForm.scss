@@ -2,14 +2,14 @@
     text-align: center;
     color: #165954;
     font-size: 3vw;
-    padding-top: 40px;
+    padding-top: 5px;
 }
 
 .reg-form__textfield {
     display: flex;
     flex-direction: column;
     max-width: 400px;
-    margin: 40px auto 50px;
+    margin: 10px auto 50px;
     > div {
         margin: 20px;
     }
@@ -22,7 +22,7 @@
 }
 
 .reg-form__registerbutton {
-    margin-top: 30px;
+    margin-top: 20px;
     width: 100px;
 }
 .error {
