@@ -19,9 +19,29 @@ export const URLData = {
         url: "/signin",
         layout: { isLogo: true, right: {}, title: "Sign in" }
     },
+    googlemap: {
+        url: "/googlemap",
+        layout: { isLogo: true, right: {}, title: "google map" }
+    },
+    resetpassword: {
+        url: "/resetpassword",
+        layout: { isLogo: true, right: {}, title: "reset password" }
+    },
+    messages: {
+        url: "/messages",
+        layout: { isLogo: true, title: "Messages" }
+    },
     notifications: {
         url: "/notifications",
         layout: { isLogo: true, title: "Notifications" }
+    },
+    profile: {
+        url: "/profile",
+        layout: {
+            left: { type: "profile_edit" },
+            isLogo: true,
+            title: "Profile"
+        }
     },
     profileEdit: {
         url: "/profile-edit",
@@ -60,6 +80,13 @@ export const URLData = {
         layout: {
             isLogo: true,
             title: "Request List"
+        }
+    },
+    emptyProfile: {
+        url: "/empty-profile",
+        layout: {
+            isLogo: true,
+            title: "Profile"
         }
     }
 };
