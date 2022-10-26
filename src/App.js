@@ -10,17 +10,13 @@ import LayoutHeaderComponent from "./components/layout/LayoutHeaderComponent";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import useScript from "react-script-hook";
+import { LoadScript } from "@react-google-maps/api";
 
 const App = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const dispatch = useDispatch();
     const layoutData = useSelector((states) => states.app.layout);
-    useScript({
-        src: `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_API_KEY}`,
-        onload: () => console.log("loaded")
-    });
 
     const [layoutProps, setLayoutProps] = useState({});
 
@@ -62,14 +58,19 @@ const App = () => {
     });
 
     return (
-        <ThemeProvider theme={theme}>
-            <div className="root-container">
-                <PageLayout onClose={handleLayoutClose} {...layoutProps}>
-                    <AppRouter />
-                    <ToastContainer />
-                </PageLayout>
-            </div>
-        </ThemeProvider>
+        <LoadScript
+            libraries={["places", "geometry"]}
+            googleMapsApiKey={process.env.REACT_APP_GOOGLE_API_KEY}
+        >
+            <ThemeProvider theme={theme}>
+                <div className="root-container">
+                    <PageLayout onClose={handleLayoutClose} {...layoutProps}>
+                        <AppRouter />
+                        <ToastContainer />
+                    </PageLayout>
+                </div>
+            </ThemeProvider>
+        </LoadScript>
     );
 };
 

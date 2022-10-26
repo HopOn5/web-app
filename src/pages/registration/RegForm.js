@@ -71,8 +71,7 @@ const RegForm = () => {
             const userCredential = await createUserWithEmailAndPassword(
                 auth,
                 email,
-                createpassword,
-                password
+                createpassword
             );
             toast.success("Register successfully");
             const user = userCredential.user;
@@ -94,6 +93,22 @@ const RegForm = () => {
         <div>
             <h2 className="reg-form__heading">Let's get started...</h2>
             <div className="reg-form__textfield">
+                <TextField
+                    type={firstname}
+                    value={firstname}
+                    id="firstname"
+                    label="First Name"
+                    variant="outlined"
+                    onChange={onChange}
+                />
+                <TextField
+                    type={lastname}
+                    value={lastname}
+                    id="lastname"
+                    label="Last Name"
+                    variant="outlined"
+                    onChange={onChange}
+                />
                 <TextField
                     type={email}
                     value={email}

@@ -4,10 +4,9 @@ import { SelectField } from "../../components/SelectField";
 import Button from "../../components/Button";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-// import { StandaloneSearchBox } from "@react-google-maps/api";
+import { StandaloneSearchBox } from "@react-google-maps/api";
 import CustomCheckBox from "../../components/CustomCheckbox";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
-import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 
 const RequestForm = ({ inputList, formik, isLoading }) => {
     const getClassname = (subclass) =>
@@ -15,6 +14,10 @@ const RequestForm = ({ inputList, formik, isLoading }) => {
 
     const { errors } = formik;
     const inputRef = useRef();
+    const startRef = useRef();
+    const endRef = useRef();
+
+    const refs = { start_loc: startRef, end_loc: endRef };
 
     const handlePlaceChanged = (e, info) => {
         const [place] = inputRef.current.getPlaces();
@@ -37,47 +40,35 @@ const RequestForm = ({ inputList, formik, isLoading }) => {
         switch (inputData?.type) {
             case "autocomplete":
                 return (
-                    <>
-                        <GooglePlacesAutocomplete
-                            selectProps={{
-                                value: formik?.values[inputData?.valueKey]
-                                    ?.streetAddress,
-                                onChange: handlePlaceChanged
-                            }}
+                    <StandaloneSearchBox
+                        handleChange={(e) => handlePlaceChanged(e, inputData)}
+                    >
+                        <TextField
+                            key={`${key}-request-form`}
+                            placeholder={inputData?.placeholder}
+                            label={inputData?.label}
+                            name={inputData?.key}
+                            value={
+                                formik.values[inputData?.valueKey]
+                                    ?.streetAddress ?? ""
+                            }
+                            onChange={formik.handleChange}
+                            className={getClassname("input-field")}
+                            sx={styles.inputfield}
+                            error={
+                                errors[inputData?.key] &&
+                                formik?.touched?.[inputData?.key]
+                                    ? true
+                                    : false
+                            }
+                            helperText={
+                                formik?.touched?.[inputData?.key] &&
+                                errors[inputData?.key]
+                            }
+                            fullWidth
+                            ref={refs[inputData?.valueKey]}
                         />
-                    </>
-                    // <StandaloneSearchBox
-                    //     key={`${key}-request-item`}
-                    //     onLoad={(ref) => (inputRef.current = ref)}
-                    //     onPlacesChanged={(e) =>
-                    //         handlePlaceChanged(e, inputData)
-                    //     }
-                    // >
-                    //     <TextField
-                    //         key={`${key}-request-form`}
-                    //         placeholder={inputData?.placeholder}
-                    //         label={inputData?.label}
-                    //         name={inputData?.key}
-                    //         value={
-                    //             formik.values[inputData?.valueKey]
-                    //                 ?.streetAddress ?? ""
-                    //         }
-                    //         onChange={formik.handleChange}
-                    //         className={getClassname("input-field")}
-                    //         sx={styles.inputfield}
-                    //         error={
-                    //             errors[inputData?.key] &&
-                    //             formik?.touched?.[inputData?.key]
-                    //                 ? true
-                    //                 : false
-                    //         }
-                    //         helperText={
-                    //             formik?.touched?.[inputData?.key] &&
-                    //             errors[inputData?.key]
-                    //         }
-                    //         fullWidth
-                    //     />
-                    // </StandaloneSearchBox>
+                    </StandaloneSearchBox>
                 );
             case "input":
                 return (
