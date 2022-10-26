@@ -34,6 +34,7 @@ export const URLData = {
     profile: {
         url: "/profile",
         layout: {
+            left: { type: "profile_edit" },
             isLogo: true,
             title: "Profile"
         }

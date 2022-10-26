@@ -16,7 +16,6 @@ const Profile = () => {
     const navigate = useNavigate();
 
     const isEdit = useSelector((state) => state?.profile?.isEdit);
-    console.log("Editing mode is ", isEdit);
 
     const personalDetailsData = useSelector(
         (state) => state?.profile?.personalDetails

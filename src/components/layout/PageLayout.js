@@ -1,33 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "../../styles/components/_pageLayout.scss";
 import Icon from "../Icon";
 import Text from "../Text";
 import close from "../../icons/close-white.svg";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import logo from "../../icons/logo.jpg";
-import edit from "../../icons/pen-to-square-solid.svg";
-import { useLocation } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import Onboarding from "../../pages/onBoarding";
-import { setIsProfileEdit } from "../../pages/Profile/profileReducer";
 
 const PageLayout = ({ isLogo, children, ...props }) => {
-    const location = useLocation();
-    const navigate = useNavigate();
     const { leftComp, rightComp, onClose } = props;
     const layoutData = useSelector((states) => states?.app?.layout);
     const { isClose, title, closeText, closeType, left, right } = layoutData;
-    const [isEdit, setEdit] = useState(false);
 
     const getClassname = (classname) =>
         `page-layout${classname ? `__${classname}` : ""}`;
 
     const titleType = "primaryLarge white fW8";
-    const dispatch = useDispatch();
-    const handleClick = () => {
-        //setEdit(true);
-        dispatch(setIsProfileEdit(true));
-    };
 
     return (
         <div className={getClassname()}>
@@ -43,20 +30,11 @@ const PageLayout = ({ isLogo, children, ...props }) => {
                             />
                         </div>
                     )}
+                    {title && <Text type={titleType}>{title}</Text>}{" "}
                     {leftComp && (
                         <div className={getClassname("left-comp")}>
                             {leftComp}
                         </div>
-                    )}
-                    {title && <Text type={titleType}>{title}</Text>}
-                    {location?.pathname === "/profile" && (
-                        <Icon
-                            type=""
-                            className={getClassname("edit")}
-                            icon={edit}
-                            styles={styles.edit}
-                            onClick={handleClick}
-                        />
                     )}
                 </div>
                 <div className={getClassname("header-right")}>
