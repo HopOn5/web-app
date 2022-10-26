@@ -4,10 +4,16 @@ import {
     deleteDoc,
     doc,
     getDoc,
+    getDocs,
     serverTimestamp,
+    setDoc,
     updateDoc
 } from "firebase/firestore";
 import { db } from "../firebase/config";
+
+export const dbHelper = (id, collectionType) => ({
+    docRef: doc(db, collectionType, id)
+});
 
 const dbHandler = async (data, collectionType = "", type = "GET") => {
     try {
@@ -17,29 +23,34 @@ const dbHandler = async (data, collectionType = "", type = "GET") => {
         switch (type) {
             case "GET": {
                 let resData;
-                let res = await getDoc(
-                    data?.singleDoc ? docRef : collectionRef
-                );
-                if (Array.isArray(res))
+                let res = data?.singleDoc
+                    ? await getDoc(docRef)
+                    : await getDocs(collectionRef);
+
+                if (res?.docs) {
+                    resData = res.docs;
+                } else if (Array.isArray(res))
                     res.forEach((doc) => {
                         resData.push({ id: doc?.id, ...doc.data() });
                     });
-                else {
+                else if (res?.data) {
                     resData = res.data();
-                }
+                } else resData = [];
                 return resData;
             }
             case "POST": {
                 let payload = { ...data };
-                await addDoc(collectionRef, {
-                    ...payload,
-                    timestamp: serverTimestamp()
-                });
-                return { data: "Success" };
+                delete payload?.id;
+                delete payload?.singleDoc;
+                payload.timestamp = serverTimestamp();
+                if (data?.id) await setDoc(docRef, payload);
+                else await addDoc(collectionRef, payload);
+
+                return { status: "Success" };
             }
             case "DELETE": {
                 await deleteDoc(docRef);
-                return { data: "Success" };
+                return { status: "Success" };
             }
             case "PUT": {
                 let uploadData = { ...data };
@@ -49,13 +60,13 @@ const dbHandler = async (data, collectionType = "", type = "GET") => {
                     ...uploadData,
                     timestamp: serverTimestamp()
                 });
-                return { data: "Success" };
+                return { status: "Success" };
             }
             default:
                 return { data: null };
         }
     } catch (error) {
-        console.log("Update error! ", error);
+        console.log("Update error! ", error, data, collectionType);
         return { error };
     }
 };

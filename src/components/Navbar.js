@@ -4,22 +4,21 @@ import carrot from "../icons/carrot.svg";
 import { personalDetails as currentUser } from "../mocks/personalDetails";
 
 export const Navbar = () => {
-  // const personalDetails = useSelector(
-  //   (state) => state?.profile?.personalDetails
-  // );
+    // const personalDetails = useSelector(
+    //   (state) => state?.profile?.personalDetails
+    // );
 
-  console.log("personalDetails", currentUser?.firstName);
-  return (
-    <div className="navbar">
-      <span className="logo">All Messages</span>
-      <div className="user">
-        {/* <img src={currentUser?.photoURL} alt="phofile data" />
+    return (
+        <div className="navbar">
+            <span className="logo">All Messages</span>
+            <div className="user">
+                {/* <img src={currentUser?.photoURL} alt="phofile data" />
         <span>{currentUser?.firstName}</span> */}
-        {/* <button onClick={() => signOut(auth)}>logout</button>
+                {/* <button onClick={() => signOut(auth)}>logout</button>
         <img src={carrot} alt="" />
         <span>{"John"}</span> */}
-        {/* <button>Tage mate</button> */}
-      </div>
-    </div>
-  );
+                {/* <button>Tage mate</button> */}
+            </div>
+        </div>
+    );
 };

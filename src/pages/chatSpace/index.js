@@ -1,15 +1,15 @@
 import React from "react";
-import { Sidebar } from "../../components/Sidebar";
-import { Chat } from "../../components/Chat";
+import ChatList from "./ChatList";
+import Chatbox from "./Chatbox";
 import "./_chatSpace.scss";
 
 export const ChatSpace = () => {
-  return (
-    <div className="chatspace">
-      <div className="container">
-        <Sidebar />
-        <Chat />
-      </div>
-    </div>
-  );
+    return (
+        <div className="chatspace">
+            <div className="container">
+                <ChatList />
+                <Chatbox />
+            </div>
+        </div>
+    );
 };

@@ -19,20 +19,9 @@ export const URLData = {
         url: "/signin",
         layout: { isLogo: true, right: {}, title: "Sign in" }
     },
-    messages: {
-        url: "/messages",
-        layout: { isLogo: true, title: "Messages" }
-    },
     notifications: {
         url: "/notifications",
         layout: { isLogo: true, title: "Notifications" }
-    },
-    profile: {
-        url: "/profile",
-        layout: {
-            isLogo: true,
-            title: "Profile"
-        }
     },
     profileEdit: {
         url: "/profile-edit",
@@ -52,26 +41,11 @@ export const URLData = {
         url: "/resetpassword",
         layout: { isLogo: true, right: {}, title: "reset password" }
     },
-    messages: {
-        url: "/messages",
-        layout: { isLogo: true, title: "Messages" }
-    },
-    notifications: {
-        url: "/notifications",
-        layout: { isLogo: true, title: "Notifications" }
-    },
     profile: {
         url: "/profile",
         layout: {
             isLogo: true,
             title: "Profile"
-        }
-    },
-    profileEdit: {
-        url: "/profile-edit",
-        layout: {
-            isLogo: true,
-            title: "Profile-edit"
         }
     },
     routeRequest: {

@@ -12,6 +12,7 @@ import Modal from "@mui/material/Modal";
 import {
     createUserWithEmailAndPassword,
     getAuth,
+    onAuthStateChanged,
     updateProfile
 } from "firebase/auth";
 import { setDoc, doc, serverTimestamp } from "firebase/firestore";
@@ -62,10 +63,12 @@ const RegForm = () => {
     const [formData, setFormData] = useState({
         email: "",
         createpassword: "",
-        password: ""
+        password: "",
+        firstname: "",
+        lastname: ""
     });
 
-    const { email, createpassword, password } = formData;
+    const { email, createpassword, password, firstname, lastname } = formData;
 
     const onChange = (e) => {
         setFormData((prevState) => ({
