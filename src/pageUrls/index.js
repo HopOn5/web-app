@@ -50,6 +50,24 @@ export const URLData = {
             title: "Profile-edit"
         }
     },
+    chatSpace: {
+        url: "/messages",
+        layout: {
+            isLogo: true,
+            title: "Messages"
+        }
+    },
+    resetpassword: {
+        url: "/resetpassword",
+        layout: { isLogo: true, right: {}, title: "reset password" }
+    },
+    profile: {
+        url: "/profile",
+        layout: {
+            isLogo: true,
+            title: "Profile"
+        }
+    },
     routeRequest: {
         url: "/route-request",
         layout: {
