@@ -38,6 +38,7 @@ export const URLData = {
     profile: {
         url: "/profile",
         layout: {
+            left: { type: "profile_edit" },
             isLogo: true,
             title: "Profile"
         }
@@ -61,6 +62,13 @@ export const URLData = {
         layout: {
             isLogo: true,
             title: "Request List"
+        }
+    },
+    emptyProfile: {
+        url: "/empty-profile",
+        layout: {
+            isLogo: true,
+            title: "Profile"
         }
     }
 };

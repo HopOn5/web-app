@@ -10,6 +10,9 @@ import msgIcon from "../../icons/chat-icon.svg";
 import userIcon from "../../icons/user.svg";
 import { FormControl, Menu, MenuItem } from "@mui/material";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
+import edit from "../../icons/pen-to-square-solid.svg";
+import { useDispatch } from "react-redux";
+import { setIsProfileEdit } from "../../pages/Profile/profileReducer";
 
 const LoginButton = () => {
     const navigate = useNavigate();
@@ -144,4 +147,22 @@ const UserDrop = ({ handleSelect, className }) => {
     );
 };
 
-export { LoginButton, AllFeatures };
+const ProfileEdit = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const handleClick = () => {
+        dispatch(setIsProfileEdit(true));
+        navigate();
+    };
+    return (
+        <Icon
+            type=""
+            className="profile-edit"
+            icon={edit}
+            // styles={styles.edit}
+            onClick={handleClick}
+        />
+    );
+};
+
+export { LoginButton, AllFeatures, ProfileEdit };

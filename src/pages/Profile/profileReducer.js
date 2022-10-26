@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
-    personalDetails: {}
+    personalDetails: {},
+    isEdit: false
 };
 const profileSlice = createSlice({
     name: "profile",
@@ -8,9 +9,12 @@ const profileSlice = createSlice({
     reducers: {
         addProfileDetails(state, action) {
             state.personalDetails = { ...action?.payload };
+        },
+        setIsProfileEdit(state, action) {
+            state.isEdit = action?.payload;
         }
     }
 });
 
-export const { addProfileDetails } = profileSlice.actions;
+export const { addProfileDetails, setIsProfileEdit } = profileSlice.actions;
 export default profileSlice.reducer;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import { useFormik } from "formik";
 import { basicSchema, initialValues } from "./formValidation";
@@ -6,12 +6,18 @@ import Card from "../../../components/Card";
 import Text from "../../../components/Text";
 import Button from "../../../components/Button";
 import "./_uploadAddress.scss";
+import { useSelector } from "react-redux";
+import { URLData } from "../../../pageUrls";
 
 const UploadAddress = (props) => {
     const getClassname = (classname) =>
         `upload-address${classname ? `__${classname}` : ""}`;
 
     const [isLoading, setLoading] = useState(false);
+
+    const personalDetails = useSelector(
+        (state) => state?.profile?.personalDetails
+    );
 
     const handleSubmit = (values) => {
         setLoading(true);
@@ -56,6 +62,11 @@ const UploadAddress = (props) => {
             key: "postalCode"
         }
     ];
+    useEffect(() => {
+        if (location?.pathname === URLData.profileEdit.url) {
+            formik?.setValues(personalDetails);
+        }
+    }, [personalDetails]);
 
     const renderInput = () => {
         return inputList.map((inputData, key) => (
