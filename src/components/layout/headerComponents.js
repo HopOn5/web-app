@@ -15,7 +15,6 @@ import { useDispatch } from "react-redux";
 import { setIsProfileEdit } from "../../pages/Profile/profileReducer";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase/config";
-import { useDispatch } from "react-redux";
 import { resetReducer } from "../../redux/rootReducer";
 
 const LoginButton = () => {

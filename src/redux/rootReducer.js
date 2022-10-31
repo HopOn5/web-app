@@ -9,7 +9,7 @@ import currentUserReducer from "../pages/registration/currentUserReducer";
 import { chatsApi } from "../services/chatsApi";
 import { userChatsApi } from "../services/userChatsApi";
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   onboarding: onBoardingReducer,
   app: appReducer,
   home: homeReducer,
