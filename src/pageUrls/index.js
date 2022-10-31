@@ -19,6 +19,10 @@ export const URLData = {
         url: "/signin",
         layout: { isLogo: true, right: {}, title: "Sign in" }
     },
+    googlemap: {
+        url: "/googlemap",
+        layout: { isLogo: true, right: {}, title: "google map" }
+    },
     resetpassword: {
         url: "/resetpassword",
         layout: { isLogo: true, right: {}, title: "reset password" }
@@ -34,6 +38,7 @@ export const URLData = {
     profile: {
         url: "/profile",
         layout: {
+            left: { type: "profile_edit" },
             isLogo: true,
             title: "Profile"
         }
@@ -43,6 +48,24 @@ export const URLData = {
         layout: {
             isLogo: true,
             title: "Profile-edit"
+        }
+    },
+    chatSpace: {
+        url: "/messages",
+        layout: {
+            isLogo: true,
+            title: "Messages"
+        }
+    },
+    resetpassword: {
+        url: "/resetpassword",
+        layout: { isLogo: true, right: {}, title: "reset password" }
+    },
+    profile: {
+        url: "/profile",
+        layout: {
+            isLogo: true,
+            title: "Profile"
         }
     },
     routeRequest: {
@@ -57,6 +80,13 @@ export const URLData = {
         layout: {
             isLogo: true,
             title: "Request List"
+        }
+    },
+    emptyProfile: {
+        url: "/empty-profile",
+        layout: {
+            isLogo: true,
+            title: "Profile"
         }
     }
 };

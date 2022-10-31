@@ -5,45 +5,58 @@ import Button from "../../components/Button";
 import "./ResetPassword.scss";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import { toast } from "react-toastify";
+import { useFormik } from "formik";
+import { schema, initialValues } from "./resetvalidation";
 
 const ResetPassword = () => {
 
-    const [email, setEmail] = useState("");
-
-    const onChange = (e) => setEmail(e.target.value);
-
-    const reset = async (e) => {
-        e.preventDefault();
+    const handleSubmit = async (data1) => {
         try {
             const auth = getAuth();
-            await sendPasswordResetEmail(auth, email);
+            await sendPasswordResetEmail(auth, data1.email);
             toast.success("Email was sent");
         } catch (error) {
             toast.error("Could not send reset email");
         }
     };
 
+    const formik = useFormik({
+        initialValues,
+        onSubmit: handleSubmit,
+        validationSchema: schema
+    });
+
+    const { errors, touched } = formik;
+
     return (
-        <Card style={styles.card}>
+        <div style={styles.card}>
             <h5 className="resettitle">Reset Password</h5>
             <div className="textinput">
                 <TextField
-                    type="email"
+                    type={formik.values.email}
                     id="email"
-                    value={email}
+                    value={formik.values.email}
                     label="Email"
                     variant="outlined"
-                    onChange={onChange}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={errors.email && touched.email}
+                    helperText={
+                        errors.email && touched.email ? (
+                            <span className="error">{errors.email}</span>
+                        ) : null
+                    }
                 />
             </div>
             <div className="resetalignitems">
                 <div className="resetbutton">
-                    <Button type="primary" onClick={reset}>
+                    <Button type="primary" onClick={formik.handleSubmit}>
                         Reset
                     </Button>
                 </div>
             </div>
-        </Card>
+        </div>
+
     );
 };
 

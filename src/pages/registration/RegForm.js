@@ -1,137 +1,184 @@
 import React, { useState } from "react";
 import "./RegForm.scss";
-import { TextField } from "@mui/material";
+import TextField from "@mui/material/TextField";
 import Checkbox from "@mui/material/Checkbox";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Button from "../../components/Button";
 import Text from "../../components/Text";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import {
     createUserWithEmailAndPassword,
     getAuth,
+    onAuthStateChanged,
     updateProfile
 } from "firebase/auth";
 import { setDoc, doc, serverTimestamp } from "firebase/firestore";
-import { db } from "../../firebase/config";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import TermsConditions from "./TermsConditions";
+import { useFormik } from "formik";
+import { schema, initialValues } from "./registervalidation";
+import TAndCContent from "./TAndCContent";
+import { auth, db } from "../../firebase/config";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
-const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    overflow: "scroll",
-    height: "100%",
-    display: "block",
-    transform: "translate(-50%, -50%)",
-    width: "fit-content",
-    bgcolor: "background.paper",
-    border: "2px solid #000",
-    boxShadow: 24,
-    p: 4,
-    mt: 5
-};
 
 const RegForm = () => {
     const [open, setOpen] = useState(false);
+    const navigate = useNavigate();
     const handleTAndC = (e) => {
         e.preventDefault();
         setOpen(true);
     };
     const handleClose = () => setOpen(false);
 
-    const [showPassword, setShowPassword] = useState(false);
+    const [regEmail, setregEmail] = useState("");
+    const [regPassword, setregPassword] = useState("");
+    const [regcreatePassword, setregcreatePassword] = useState("");
 
-    const [formData, setFormData] = useState({
-        email: "",
-        createpassword: "",
-        password: ""
+    const [user, setUser] = useState({});
+
+    onAuthStateChanged(auth, (currentUser) => {
+        //     console.log("on auth change", currentUser, auth);
+        //     setUser(currentUser);
     });
 
-    const { email, createpassword, password } = formData;
+    const [showPassword, setShowPassword] = useState(false);
 
-    const navigate = useNavigate();
-
-    const onChange = (e) => {
-        setFormData((prevState) => ({
-            ...prevState,
-            [e.target.id]: e.target.value
-        }));
-    };
-
-    const register = async (e) => {
-        e.preventDefault();
+    
+    const register = async (data1) => {
         try {
             const auth = getAuth();
             const userCredential = await createUserWithEmailAndPassword(
                 auth,
-                email,
-                createpassword
+                data1.email,
+                data1.createpassword,
+                data1.password
             );
             toast.success("Register successfully");
             const user = userCredential.user;
             updateProfile(auth.currentUser, {
-                displayName: email
+                displayName: data1.email           
             });
-            const formDataCopy = { ...formData };
+            const formDataCopy = { ...data1 };
             delete formDataCopy.password;
             delete formDataCopy.createpassword;
             formDataCopy.timestamp = serverTimestamp();
             await setDoc(doc(db, "users", user.uid), formDataCopy);
             navigate("/");
+
+            const res = await createUserWithEmailAndPassword(
+                auth,
+                regEmail,
+                regPassword,
+                regcreatePassword
+            );
+
+            //create user on firestore
+            await setDoc(doc(db, "users", res.user.uid), {
+                uid: res.user.uid,
+                displayName,
+                email
+            });
+
+            //create empty user chats on firestore
+            await setDoc(doc(db, "userChats", res.user.uid), {});
+
+            //after successfull authentical navigate to home page
+            //navigate("/");
         } catch (error) {
-            toast.error("something went wrong with registration");
+            toast.error("Credential not valid");
         }
     };
+
+    const formik = useFormik({
+        initialValues,
+        onSubmit: register,
+        validationSchema: schema
+    });
+
+    const { errors, touched } = formik;
 
     return (
         <div>
             <h2 className="reg-form__heading">Let's get started...</h2>
             <div className="reg-form__textfield">
                 <TextField
-                    type={firstname}
-                    value={firstname}
-                    id="firstname"
+                    type={formik.values.firstName}
+                    value={formik.values.firstName}
+                    id="firstName"
                     label="First Name"
                     variant="outlined"
-                    onChange={onChange}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={errors.firstName && touched.firstName}
+                    helperText={
+                        errors.firstName && touched.firstName ? (
+                            <span className="error">{errors.firstName}</span>
+                        ) : null
+                    }
                 />
                 <TextField
-                    type={lastname}
-                    value={lastname}
-                    id="lastname"
+                    type={formik.values.lastName}
+                    value={formik.values.lastName}
+                    id="lastName"
                     label="Last Name"
                     variant="outlined"
-                    onChange={onChange}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={errors.lastName && touched.lastName}
+                    helperText={
+                        errors.lastName && touched.lastName ? (
+                            <span className="error">{errors.lastName}</span>
+                        ) : null
+                    }
                 />
                 <TextField
-                    type={email}
-                    value={email}
+                    type={formik.values.email}
+                    value={formik.values.email}
                     id="email"
                     label="Email"
                     variant="outlined"
-                    onChange={onChange}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={errors.email && touched.email}
+                    helperText={
+                        errors.email && touched.email ? (
+                            <span className="error">{errors.email}</span>
+                        ) : null
+                    }
                 />
                 <TextField
                     type={showPassword ? "text" : "password"}
-                    value={createpassword}
+                    value={formik.values.createpassword}
                     id="createpassword"
                     label="Create password"
                     variant="outlined"
-                    onChange={onChange}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={errors.createpassword && touched.createpassword}
+                    helperText={
+                        errors.createpassword && touched.createpassword ? (
+                            <span className="error">
+                                {errors.createpassword}
+                            </span>
+                        ) : null
+                    }
                 />
                 <TextField
                     type={showPassword ? "text" : "password"}
-                    value={password}
+                    value={formik.values.password}
                     id="password"
                     label="Confirm password"
                     variant="outlined"
-                    onChange={onChange}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={errors.password && touched.password}
+                    helperText={
+                        errors.password && touched.password ? (
+                            <span className="error">{errors.password}</span>
+                        ) : null
+                    }
                 />
                 <div className="alignthings">
                     <FormGroup>
@@ -163,250 +210,14 @@ const RegForm = () => {
                                         aria-labelledby="modal-modal-title"
                                         aria-describedby="modal-modal-description"
                                     >
-                                        <Box sx={style}>
-                                            <Typography
-                                                id="modal-modal-title"
-                                                variant="h6"
-                                                component="h2"
-                                            >
-                                                {TermsConditions.heading}
-                                            </Typography>
-                                            <Typography
-                                                id="modal-modal-title"
-                                                variant="h6"
-                                                component="h2"
-                                                sx={{ fontSize: 18, mt: 2 }}
-                                            >
-                                                {TermsConditions.subHeading1}
-                                            </Typography>
-                                            <Typography
-                                                id="modal-modal-description"
-                                                sx={{ mt: 2, fontSize: 15 }}
-                                            >
-                                                {TermsConditions.para11}
-                                            </Typography>
-                                            <Typography
-                                                id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
-                                            >
-                                                {TermsConditions.para12}
-                                            </Typography>
-                                            <Typography
-                                                id="modal-modal-title"
-                                                variant="h6"
-                                                component="h2"
-                                                sx={{ fontSize: 18, mt: 2 }}
-                                            >
-                                                {TermsConditions.subHeading2}
-                                            </Typography>
-                                            <Typography
-                                                id="modal-modal-description"
-                                                sx={{ mt: 2, fontSize: 15 }}
-                                            >
-                                                {TermsConditions.para21}
-                                            </Typography>
-                                            <Typography
-                                                id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
-                                            >
-                                                {TermsConditions.para22}
-                                            </Typography>
-                                            <Typography
-                                                id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
-                                            >
-                                                {TermsConditions.filler1}
-                                            </Typography>
-                                            <Typography
-                                                id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
-                                            >
-                                                • {TermsConditions.point1}
-                                            </Typography>
-                                            <Typography
-                                                id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
-                                            >
-                                                • {TermsConditions.point2}
-                                            </Typography>
-                                            <Typography
-                                                id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
-                                            >
-                                                • {TermsConditions.point3}
-                                            </Typography>
-                                            <Typography
-                                                id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
-                                            >
-                                                • {TermsConditions.point4}
-                                            </Typography>
-                                            <Typography
-                                                id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
-                                            >
-                                                • {TermsConditions.point5}
-                                            </Typography>
-                                            <Typography
-                                                id="modal-modal-title"
-                                                variant="h6"
-                                                component="h2"
-                                                sx={{ fontSize: 18, mt: 2 }}
-                                            >
-                                                {TermsConditions.subHeading3}
-                                            </Typography>
-                                            <Typography
-                                                id="modal-modal-description"
-                                                sx={{ mt: 2, fontSize: 15 }}
-                                            >
-                                                {TermsConditions.para31}
-                                            </Typography>
-                                            <Typography
-                                                id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
-                                            >
-                                                {TermsConditions.para32}
-                                            </Typography>
-                                            <Typography
-                                                id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
-                                            >
-                                                {TermsConditions.para33}
-                                            </Typography>
-                                            <Typography
-                                                id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
-                                            >
-                                                {TermsConditions.para34}
-                                            </Typography>
-                                            <Typography
-                                                id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
-                                            >
-                                                {TermsConditions.para35}
-                                            </Typography>
-                                            <Typography
-                                                id="modal-modal-title"
-                                                variant="h6"
-                                                component="h2"
-                                                sx={{ fontSize: 18, mt: 2 }}
-                                            >
-                                                {TermsConditions.subHeading4}
-                                            </Typography>
-                                            <Typography
-                                                id="modal-modal-description"
-                                                sx={{ mt: 2, fontSize: 15 }}
-                                            >
-                                                {TermsConditions.para41}
-                                            </Typography>
-                                            <Typography
-                                                id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
-                                            >
-                                                {TermsConditions.para42}
-                                            </Typography>
-                                            <Typography
-                                                id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
-                                            >
-                                                {TermsConditions.para43}
-                                            </Typography>
-                                            <Typography
-                                                id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
-                                            >
-                                                {TermsConditions.para44}
-                                            </Typography>
-                                            <Typography
-                                                id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
-                                            >
-                                                {TermsConditions.para45}
-                                            </Typography>
-                                            <Typography
-                                                id="modal-modal-title"
-                                                variant="h6"
-                                                component="h2"
-                                                sx={{ fontSize: 18, mt: 2 }}
-                                            >
-                                                {TermsConditions.subHeading5}
-                                            </Typography>
-                                            <Typography
-                                                id="modal-modal-description"
-                                                sx={{ mt: 2, fontSize: 15 }}
-                                            >
-                                                {TermsConditions.para51}
-                                            </Typography>
-                                            <Typography
-                                                id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
-                                            >
-                                                {TermsConditions.para52}
-                                            </Typography>
-                                            <Typography
-                                                id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
-                                            >
-                                                {TermsConditions.para53}
-                                            </Typography>
-                                            <Typography
-                                                id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
-                                            >
-                                                {TermsConditions.para54}
-                                            </Typography>
-                                            <Typography
-                                                id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
-                                            >
-                                                {TermsConditions.para55}
-                                            </Typography>
-                                            <Typography
-                                                id="modal-modal-title"
-                                                variant="h6"
-                                                component="h2"
-                                                sx={{ fontSize: 18, mt: 2 }}
-                                            >
-                                                {TermsConditions.subHeading6}
-                                            </Typography>
-                                            <Typography
-                                                id="modal-modal-description"
-                                                sx={{ mt: 2, fontSize: 15 }}
-                                            >
-                                                {TermsConditions.para61}
-                                            </Typography>
-                                            <Typography
-                                                id="modal-modal-description"
-                                                sx={{ mt: 1, fontSize: 15 }}
-                                            >
-                                                {TermsConditions.para62}
-                                            </Typography>
-                                            <Typography
-                                                id="modal-modal-title"
-                                                variant="h6"
-                                                component="h2"
-                                                sx={{ fontSize: 18, mt: 2 }}
-                                            >
-                                                Our details
-                                            </Typography>
-                                            <Typography
-                                                id="modal-modal-description"
-                                                sx={{
-                                                    mt: 2,
-                                                    mb: 5,
-                                                    fontSize: 15
-                                                }}
-                                            >
-                                                {TermsConditions.para63}
-                                            </Typography>
-                                        </Box>
+                                        <TAndCContent />
                                     </Modal>
                                 </>
                             }
                         />
                     </FormGroup>
                     <div className="reg-form__registerbutton">
-                        <Button type="primary" onClick={register}>
+                        <Button type="primary" onClick={formik.handleSubmit}>
                             Register
                         </Button>
                     </div>
