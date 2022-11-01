@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { TextField } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Alert, TextField } from "@mui/material";
 import Button from "../../components/Button";
 import Text from "../../components/Text";
 import "./SigninSection.scss";
 import { toast, Toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { useFormik } from "formik";
 import { schema, initialValues } from "./signinvalidation";
 
@@ -39,12 +39,13 @@ const SigninSection = () => {
             );
             if (userCredential.user) {
                 toast.success("Signin successfully");
-                navigate("/");
+                navigate("/Home");
             }
         } catch (error) {
             toast.error("Wrong user credentials");
         }
     };
+
 
     const formik = useFormik({
         initialValues,
