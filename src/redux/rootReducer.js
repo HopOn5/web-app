@@ -9,16 +9,24 @@ import currentUserReducer from "../pages/registration/currentUserReducer";
 import { chatsApi } from "../services/chatsApi";
 import { userChatsApi } from "../services/userChatsApi";
 
-const rootReducer = combineReducers({
-    onboarding: onBoardingReducer,
-    app: appReducer,
-    home: homeReducer,
-    [usersApi.reducerPath]: usersApi.reducer,
-    [requestsApi.reducerPath]: requestsApi.reducer,
-    [userChatsApi.reducerPath]: userChatsApi.reducer,
-    [chatsApi.reducerPath]: chatsApi.reducer,
-    profile: profileReducer,
-    user: currentUserReducer
+export const rootReducer = combineReducers({
+  onboarding: onBoardingReducer,
+  app: appReducer,
+  home: homeReducer,
+  [usersApi.reducerPath]: usersApi.reducer,
+  [requestsApi.reducerPath]: requestsApi.reducer,
+  [userChatsApi.reducerPath]: userChatsApi.reducer,
+  [chatsApi.reducerPath]: chatsApi.reducer,
+  profile: profileReducer,
+  user: currentUserReducer,
 });
 
-export default rootReducer;
+export const resetReducer = (state, action) => {
+  if (action.type === "USER_LOGOUT") {
+    return rootReducer(undefined, action);
+  }
+
+  return rootReducer(state, action);
+};
+
+//export default rootReducer;

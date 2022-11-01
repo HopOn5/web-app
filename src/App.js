@@ -10,7 +10,6 @@ import LayoutHeaderComponent from "./components/layout/LayoutHeaderComponent";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { LoadScript } from "@react-google-maps/api";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase/config";
 import {
@@ -86,19 +85,14 @@ const App = () => {
     });
 
     return (
-        <LoadScript
-            libraries={["places", "geometry"]}
-            googleMapsApiKey={process.env.REACT_APP_GOOGLE_API_KEY}
-        >
-            <ThemeProvider theme={theme}>
-                <div className="root-container">
-                    <PageLayout onClose={handleLayoutClose} {...layoutProps}>
-                        <AppRouter />
-                        <ToastContainer />
-                    </PageLayout>
-                </div>
-            </ThemeProvider>
-        </LoadScript>
+        <ThemeProvider theme={theme}>
+            <div className="root-container">
+                <PageLayout onClose={handleLayoutClose} {...layoutProps}>
+                    <AppRouter />
+                    <ToastContainer />
+                </PageLayout>
+            </div>
+        </ThemeProvider>
     );
 };
 

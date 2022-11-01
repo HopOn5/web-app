@@ -28,7 +28,6 @@ const AppRouter = () => {
             <Route path={URLData.home.url} element={<Home />} />
             </Route>
             <Route path={URLData.profile.url} element={<Profile />} />
-            <Route path={URLData.googlemap.url} element={<Googlemap />} />
 
             <Route
                 path={URLData.routeRequest.url}
