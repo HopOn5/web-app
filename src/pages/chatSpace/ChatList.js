@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { UserChatList } from "../../components/UserChatList";
 import SearchUser from "./SearchUser";
 
-const ChatList = ({}) => {
+const ChatList = ({ handleSelect }) => {
     const [userList, setUserList] = useState([]);
 
     return (
@@ -10,6 +10,7 @@ const ChatList = ({}) => {
             {/* <Navbar /> */}
             <SearchUser setUserList={setUserList} />
             <UserChatList
+                handleSelect={handleSelect}
                 isListEmpty={userList?.length <= 0}
                 userList={userList}
             />

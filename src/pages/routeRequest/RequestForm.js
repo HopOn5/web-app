@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import TextField from "@mui/material/TextField";
 import { SelectField } from "../../components/SelectField";
 import Button from "../../components/Button";
@@ -14,12 +14,16 @@ const RequestForm = ({ inputList, formik, isLoading }) => {
 
     const { errors } = formik;
 
-    const formatAddress = (addr) => {
+    const formatAddress = (addr, street) => {
         let addrObj = {};
         const requiredFields = ["place", "postcode"];
         addr.forEach((item) => {
             requiredFields.forEach((field) =>
-                item?.id?.includes(field) ? (addrObj[field] = item?.text) : null
+                item?.id?.includes(field)
+                    ? field === "place"
+                        ? (addrObj[field] = `${street} ${item?.text}`)
+                        : (addrObj[field] = item?.text)
+                    : null
             );
         });
         return addrObj;

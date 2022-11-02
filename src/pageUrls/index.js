@@ -19,17 +19,17 @@ export const URLData = {
         url: "/signin",
         layout: { isLogo: true, right: {}, title: "Sign in" }
     },
-    googlemap: {
-        url: "/googlemap",
-        layout: { isLogo: true, right: {}, title: "google map" }
-    },
     resetpassword: {
         url: "/resetpassword",
-        layout: { isLogo: true, right: {}, title: "reset password" }
+        layout: { isLogo: true, right: {}, title: "Reset password" }
     },
     messages: {
         url: "/messages",
-        layout: { isLogo: true, title: "Messages" }
+        layout: {
+            isLogo: true,
+            title: "Messages",
+            right: { type: "all_feature" }
+        }
     },
     notifications: {
         url: "/notifications",
@@ -40,21 +40,24 @@ export const URLData = {
         layout: {
             left: { type: "profile_edit" },
             isLogo: true,
-            title: "Profile"
+            title: "Profile",
+            right: { type: "all_feature" }
         }
     },
     profileEdit: {
         url: "/profile-edit",
         layout: {
             isLogo: true,
-            title: "Profile-edit"
+            title: "Profile-edit",
+            right: { type: "all_feature" }
         }
     },
     chatSpace: {
         url: "/messages",
         layout: {
             isLogo: true,
-            title: "Messages"
+            title: "Messages",
+            right: { type: "all_feature" }
         }
     },
     resetpassword: {
@@ -65,21 +68,24 @@ export const URLData = {
         url: "/profile",
         layout: {
             isLogo: true,
-            title: "Profile"
+            title: "Profile",
+            right: { type: "all_feature" }
         }
     },
     routeRequest: {
         url: "/route-request",
         layout: {
             isLogo: true,
-            title: "Route requests"
+            title: "Route requests",
+            right: { type: "all_feature" }
         }
     },
     routeRequestList: {
-        url: "/route-request/list",
+        url: "/requests",
         layout: {
             isLogo: true,
-            title: "Request List"
+            title: "Request List",
+            right: { type: "all_feature" }
         }
     },
     emptyProfile: {

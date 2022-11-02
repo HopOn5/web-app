@@ -12,15 +12,27 @@ import Text from "../../components/Text";
 import { useCreateRequestsMutation } from "../../services/requestsApi";
 import { URLData } from "../../pageUrls";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { updateRouteRequest } from "../requestList/redux/reducer";
 
 const RouteRequests = () => {
     const getClassname = (subclass) =>
         `route-request${subclass ? `__${subclass}` : ""}`;
 
+    const user = useSelector((states) => states.user.currentUser);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [createRequest, { isError, isLoading, isSuccess }] =
         useCreateRequestsMutation();
     const handleSubmit = async (e) => {
+        e = {
+            ...e,
+            user: {
+                firstName: user?.firstName,
+                photoURL: user?.photoURL,
+                id: user?.uid
+            }
+        };
         await createRequest(e);
     };
 
@@ -35,7 +47,13 @@ const RouteRequests = () => {
 
     useEffect(() => {
         if (isSuccess) {
-            navigate(URLData.routeRequestList.url);
+            let requestInfo = {
+                end_loc: formik?.values?.end_loc,
+                start_loc: formik?.values?.start_loc,
+                routeType: formik?.values?.routeType
+            };
+            dispatch(updateRouteRequest(requestInfo));
+            navigate(URLData.routeRequestList.url, { state: { requestInfo } });
         }
     }, [isSuccess]);
 

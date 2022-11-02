@@ -6,7 +6,7 @@ const Icon = ({ icon, onClick, className, styles, type = "" }) => {
         return (
             <Avatar
                 src={icon}
-                className={className}
+                className={`${className} ${onClick ? "pointer" : ""}`}
                 sx={styles}
                 onClick={onClick}
             />
