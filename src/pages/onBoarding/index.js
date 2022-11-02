@@ -53,7 +53,6 @@ const Onboarding = ({}) => {
   }, [activeStep, layout]);
 
   const handleSubmitForm = async ({ values, handleCallback }) => {
-    console.log("values", values);
     let downloadURL = await uploadToStorage(verificationFile, "verification");
     dispatch(addProfileDetails({ ...values }));
     dispatch(setIsProfileEdit(false));
@@ -62,6 +61,7 @@ const Onboarding = ({}) => {
       ...personalDetails,
       id: currentUser?.uid,
       downloadURL,
+      preferences: { isOnboardingView: true },
     };
     updateUser(userData);
   };

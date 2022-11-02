@@ -23,7 +23,6 @@ export const ChatSpace = () => {
     const [postChat] = usePostChatMutation();
 
     const handleSelect = async (user) => {
-        console.log("user handle select", user);
         const combinedId = getChatId(currentUser, user);
         try {
             const res1 = await getChat({
@@ -32,13 +31,7 @@ export const ChatSpace = () => {
             });
 
             // check if a chat exists
-            console.log(
-                res1?.data,
-                "res data",
-                !res1?.data?.messages,
-                "combined",
-                combinedId
-            );
+
             if (!res1?.data?.messages) {
                 //create a chat in chats collection
                 await postChat({

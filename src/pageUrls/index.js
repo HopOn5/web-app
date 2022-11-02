@@ -94,5 +94,12 @@ export const URLData = {
             isLogo: true,
             title: "Profile"
         }
+    },
+    landing: {
+        url: "/landing",
+        layout: {
+            isLogo: true,
+            title: "TagAlong"
+        }
     }
 };
