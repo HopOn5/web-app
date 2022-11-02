@@ -17,10 +17,13 @@ import {
 import uploadToStorage from "../../services/uploadToStorage";
 import { addProfileDetails, setIsProfileEdit } from "../Profile/profileReducer";
 import moment from "moment";
+import dbHandler from "../../services/dbHandler";
 
 const Onboarding = ({}) => {
   //formik initialisation for personal Details component
   const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state?.user?.currentUser);
+  console.log("user id", currentUser);
 
   const formik = useFormik({
     initialValues,
@@ -28,6 +31,7 @@ const Onboarding = ({}) => {
     onSubmit: (values) => {
       const formatedDob = moment(values?.dob).format("MM/DD/YYYY");
       dispatch(addProfileDetails({ ...values, dob: formatedDob }));
+      dbHandler({ ...values, dob: formatedDob }, "users", "PUT");
       handleNext();
     },
   });
