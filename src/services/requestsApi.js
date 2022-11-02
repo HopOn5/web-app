@@ -37,7 +37,7 @@ export const requestsApi = createApi({
                 return { data: res };
             }
         }),
-        filterRequests: builder.mutation({
+        filterSearchRequests: builder.mutation({
             async queryFn(queries) {
                 let query = where("user.id", "!=", queries?.userId);
                 try {
@@ -62,5 +62,5 @@ export const {
     useCreateRequestsMutation,
     useDeleteRequestsMutation,
     useUpdateRequestsMutation,
-    useFilterRequestsMutation
+    useFilterSearchRequestsMutation
 } = requestsApi;

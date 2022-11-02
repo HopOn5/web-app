@@ -4,11 +4,13 @@ import { Message } from "../../components/Message";
 const Messages = ({ chatMessages }) => {
     return (
         <div className="messages">
-            {chatMessages.map((msg, key) => (
-                <div key={`${key}-chat-mesg`}>
-                    <Message message={msg} />
-                </div>
-            ))}
+            {chatMessages.map((msg, key) => {
+                return (
+                    <div key={`${key}-chat-mesg`}>
+                        <Message message={msg} />
+                    </div>
+                );
+            })}
         </div>
     );
 };
