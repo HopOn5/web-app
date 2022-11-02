@@ -11,9 +11,11 @@ export const usersApi = createApi({
     getUserDetails: builder.mutation({
       async queryFn(id) {
         try {
-          let data = await dbHandler({ singleDoc: true, id }, collectionType);
-          return { data };
-        } catch (error) {}
+          let res = await dbHandler({ singleDoc: true, id }, collectionType);
+          return { data: res ?? {} };
+        } catch (error) {
+          return { error };
+        }
       },
     }),
 

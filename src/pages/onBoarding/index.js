@@ -17,14 +17,12 @@ import {
 import uploadToStorage from "../../services/uploadToStorage";
 import { addProfileDetails, setIsProfileEdit } from "../Profile/profileReducer";
 import moment from "moment";
-import dbHandler from "../../services/dbHandler";
 import { useUpdateUserDetailsMutation } from "../../services/usersApi";
 
 const Onboarding = ({}) => {
   //formik initialisation for personal Details component
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state?.user?.currentUser);
-  console.log("user id", currentUser);
   const personalDetails = useSelector(
     (state) => state?.profile?.personalDetails
   );
@@ -34,13 +32,11 @@ const Onboarding = ({}) => {
     onSubmit: (values) => {
       const formatedDob = moment(values?.dob).format("MM/DD/YYYY");
       dispatch(addProfileDetails({ ...values, dob: formatedDob }));
-      // useUpdateUserDetailsMutation(currentUser?.uid, {
-      //   ...values,
-      //   dob: formatedDob,
-      // });
       handleNext();
     },
   });
+
+  console.log("current user from onboarding", currentUser);
 
   const [layout, verificationFile] = useSelector((states) => [
     states.app.layout,
@@ -67,7 +63,6 @@ const Onboarding = ({}) => {
       id: currentUser?.uid,
       downloadURL,
     };
-    console.log("details---------------------------", userData);
     updateUser(userData);
   };
 

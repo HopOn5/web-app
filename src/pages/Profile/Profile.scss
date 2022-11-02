@@ -5,6 +5,7 @@
 .profile {
     display: flex;
     align-items: center;
+    min-width:500px;
     &__child:first-child {
         display: flex;
         justify-content: flex-start;
