@@ -60,11 +60,13 @@ module.exports = () => {
                 }
             ]
         },
+       
         plugins: [
             htmlPlugin,
             new webpack.DefinePlugin({
                 process: { env: envKeys }
-            })
+            }),
+          
         ]
     };
 };

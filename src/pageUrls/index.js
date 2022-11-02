@@ -11,9 +11,13 @@ export const URLData = {
         url: "/registration",
         layout: { isLogo: true, right: { type: "signin" }, title: "Register" }
     },
-    home: {
+    landing: {
         url: "/",
-        layout: { isLogo: true, right: { type: "all_feature" } }
+        isLogo: true,
+        layout: {
+            isClose: true,
+            title: ""
+        }
     },
     signin: {
         url: "/signin",
@@ -22,6 +26,15 @@ export const URLData = {
     resetpassword: {
         url: "/resetpassword",
         layout: { isLogo: true, right: {}, title: "Reset password" }
+    },
+    home: {
+        url: "/home",
+        isLogo: true,
+        layout: {
+            right: {
+                type: "user"
+            }
+        }
     },
     messages: {
         url: "/messages",
