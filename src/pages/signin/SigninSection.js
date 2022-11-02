@@ -5,13 +5,17 @@ import Text from "../../components/Text";
 import "./SigninSection.scss";
 import { toast, Toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import {
+    getAuth,
+    onAuthStateChanged,
+    signInWithEmailAndPassword
+} from "firebase/auth";
 import { useFormik } from "formik";
 import { schema, initialValues } from "./signinvalidation";
+import { URLData } from "../../pageUrls";
 
 const SigninSection = () => {
     const [showPassword, setShowPassword] = useState(false);
-    
 
     const [formData, setFormData] = useState({
         email: "",
@@ -39,13 +43,12 @@ const SigninSection = () => {
             );
             if (userCredential.user) {
                 toast.success("Signin successfully");
-                navigate("/Home");
+                navigate(URLData.home.url);
             }
         } catch (error) {
             toast.error("Wrong user credentials");
         }
     };
-
 
     const formik = useFormik({
         initialValues,

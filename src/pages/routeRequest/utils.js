@@ -22,11 +22,9 @@ export const inputList = [
     }
 ];
 
-export const dropData = {
-    start_mile_radius: [
-        { label: "1 mile radius", value: 1 },
-        { label: "2 mile radius", value: 2 },
-        { label: "3 mile radius", value: 3 },
-        { label: "4 mile radius", value: 4 }
-    ]
-};
+export const mileRadius = [
+    { label: "1 mile radius", value: 1 },
+    { label: "2 mile radius", value: 2 },
+    { label: "3 mile radius", value: 3 },
+    { label: "4 mile radius", value: 4 }
+];

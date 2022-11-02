@@ -20,6 +20,8 @@ import { useFormik } from "formik";
 import { schema, initialValues } from "./registervalidation";
 import TAndCContent from "./TAndCContent";
 import { auth, db } from "../../firebase/config";
+import { URLData } from "../../pageUrls";
+import { useCreateUserChatMutation } from "../../services/userChatsApi";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
@@ -38,6 +40,8 @@ const RegForm = () => {
 
     const [user, setUser] = useState({});
 
+    const [createUserChat] = useCreateUserChatMutation();
+
     onAuthStateChanged(auth, (currentUser) => {
         //     console.log("on auth change", currentUser, auth);
         //     setUser(currentUser);
@@ -45,7 +49,6 @@ const RegForm = () => {
 
     const [showPassword, setShowPassword] = useState(false);
 
-    
     const register = async (data1) => {
         try {
             const auth = getAuth();
@@ -58,34 +61,24 @@ const RegForm = () => {
             toast.success("Register successfully");
             const user = userCredential.user;
             updateProfile(auth.currentUser, {
-                displayName: data1.email           
+                displayName: data1.email
             });
-            const formDataCopy = { ...data1 };
+            const formDataCopy = {
+                ...data1,
+                preferences: { isOnboardingView: false }
+            };
             delete formDataCopy.password;
             delete formDataCopy.createpassword;
             formDataCopy.timestamp = serverTimestamp();
             await setDoc(doc(db, "users", user.uid), formDataCopy);
-            navigate("/");
-
-            const res = await createUserWithEmailAndPassword(
-                auth,
-                regEmail,
-                regPassword,
-                regcreatePassword
-            );
-
-            //create user on firestore
-            await setDoc(doc(db, "users", res.user.uid), {
-                uid: res.user.uid,
-                displayName,
-                email
-            });
 
             //create empty user chats on firestore
-            await setDoc(doc(db, "userChats", res.user.uid), {});
 
-            //after successfull authentical navigate to home page
-            //navigate("/");
+            let createUserRes = await createUserChat({ id: res.user.uid });
+
+            console.log(createUserRes, "create user res");
+
+            navigate(URLData.home.url);
         } catch (error) {
             toast.error("Credential not valid");
         }
@@ -201,7 +194,6 @@ const RegForm = () => {
                                         type="primaryMed blue"
                                         onClick={handleTAndC}
                                     >
-                                        {" "}
                                         Terms and Conditions
                                     </Text>
                                     <Modal
@@ -224,8 +216,8 @@ const RegForm = () => {
                     <div className="text">
                         <Text>Already have an account? ?</Text>
                         {/* <Text type="primaryMed blue">Register </Text> */}
-                        <Link to="/signin" type="primarymed blue">
-                            signin →
+                        <Link to={URLData?.signin.url} type="primarymed blue">
+                            Signin
                         </Link>
                     </div>
                 </div>

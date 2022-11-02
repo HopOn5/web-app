@@ -9,9 +9,6 @@ const Signin = () => {
             <div className="child">
                 <img src={banner} className="image" />
             </div>
-            <div className="textonimage">
-                <p>Signin →</p>
-            </div>
             <div className="child">
                 <SigninSection />
             </div>

@@ -4,15 +4,20 @@ import Icon from "../Icon";
 import Text from "../Text";
 import close from "../../icons/close-white.svg";
 import { useSelector } from "react-redux";
-import logo from "../../icons/logo.jpg";
+import logo from "../../icons/logo.png";
+import { URLData } from "../../pageUrls";
+import { useNavigate } from "react-router-dom";
 
 const PageLayout = ({ isLogo, children, ...props }) => {
     const { leftComp, rightComp, onClose } = props;
     const layoutData = useSelector((states) => states?.app?.layout);
     const { isClose, title, closeText, closeType, left, right } = layoutData;
+    const navigate = useNavigate();
 
     const getClassname = (classname) =>
         `page-layout${classname ? `__${classname}` : ""}`;
+
+    const handleLogoClick = () => navigate(URLData.home.url);
 
     const titleType = "primaryLarge white fW8";
 
@@ -27,6 +32,7 @@ const PageLayout = ({ isLogo, children, ...props }) => {
                                 className={getClassname("logo")}
                                 icon={logo}
                                 styles={styles.logo}
+                                onClick={handleLogoClick}
                             />
                         </div>
                     )}

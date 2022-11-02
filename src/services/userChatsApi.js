@@ -6,6 +6,20 @@ export const userChatsApi = createApi({
     reducerPath: "userChatsApi",
     baseQuery: fakeBaseQuery(),
     endpoints: (builder) => ({
+        createUserChat: builder.mutation({
+            async queryFn(data) {
+                try {
+                    let res = await dbHandler(
+                        { ...data, singleDoc: true },
+                        collectionType,
+                        "POST"
+                    );
+                    return { data: res };
+                } catch (error) {
+                    return { error };
+                }
+            }
+        }),
         updateUserChats: builder.mutation({
             async queryFn(data) {
                 try {
@@ -46,5 +60,8 @@ export const userChatsApi = createApi({
     })
 });
 
-export const { useUpdateUserChatsMutation, useGetUserChatsMutation } =
-    userChatsApi;
+export const {
+    useCreateUserChatMutation,
+    useUpdateUserChatsMutation,
+    useGetUserChatsMutation
+} = userChatsApi;

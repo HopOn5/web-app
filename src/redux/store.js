@@ -9,11 +9,11 @@ middlewares.push(createLogger());
 middlewares.push(...apiMiddlewares);
 
 export const store = configureStore({
-  reducer: rootReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: false,
-    }).concat(middlewares),
+    reducer: rootReducer,
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: false
+        }).concat(middlewares)
 });
 
 setupListeners(store.dispatch);
