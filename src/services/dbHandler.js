@@ -5,6 +5,7 @@ import {
     doc,
     getDoc,
     getDocs,
+    query,
     serverTimestamp,
     setDoc,
     updateDoc
@@ -20,20 +21,29 @@ const dbHandler = async (data, collectionType = "", type = "GET") => {
         if (!collectionType) throw Error("Collection name is not provided");
         let collectionRef = collection(db, collectionType);
         let docRef = data?.singleDoc ? doc(db, collectionType, data?.id) : null;
+        let queryRef = data?.isQuery ? query(collectionRef, data?.query) : null;
         switch (type) {
             case "GET": {
                 let resData;
                 let res = data?.singleDoc
                     ? await getDoc(docRef)
+                    : data?.isQuery
+                    ? await getDocs(queryRef)
                     : await getDocs(collectionRef);
-
-                if (res?.docs) {
-                    resData = res.docs;
-                } else if (Array.isArray(res))
-                    res.forEach((doc) => {
+                if (data?.isDocFormat && Array.isArray(res.docs)) {
+                    resData = [];
+                    res.docs.forEach((doc) => {
                         resData.push({ id: doc?.id, ...doc.data() });
                     });
-                else if (res?.data) {
+                } else if (res?.docs) {
+                    resData = res.docs;
+                } else if (Array.isArray(res)) {
+                    redData = [];
+                    res.forEach((doc) => {
+                        console.log("doc", doc);
+                        resData.push({ id: doc?.id, ...doc.data() });
+                    });
+                } else if (res?.data) {
                     resData = res.data();
                 } else resData = [];
                 return resData;

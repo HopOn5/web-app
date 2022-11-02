@@ -8,9 +8,19 @@ import {
 import React from "react";
 
 export const SelectField = (props) => {
-    const { label, name, value, onChange, options, error, helperText } = props;
+    const {
+        label,
+        name,
+        value,
+        onChange,
+        options,
+        error,
+        helperText,
+        className
+    } = props;
     return (
         <FormControl
+            className={className}
             key={props?.keyValue ?? "select-key"}
             fullWidth
             error={error ? true : false}
@@ -25,8 +35,10 @@ export const SelectField = (props) => {
                 fullWidth
                 defaultValue={props?.defaultValue}
             >
-                {options.map((menuItem) => (
-                    <MenuItem value={menuItem.value}>{menuItem.label}</MenuItem>
+                {options.map((menuItem, key) => (
+                    <MenuItem value={menuItem.value} key={`${key}-menu-item`}>
+                        {menuItem.label}
+                    </MenuItem>
                 ))}
             </Select>
             <FormHelperText>{helperText}</FormHelperText>
