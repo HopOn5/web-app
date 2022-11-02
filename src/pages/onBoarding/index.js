@@ -18,20 +18,26 @@ import uploadToStorage from "../../services/uploadToStorage";
 import { addProfileDetails, setIsProfileEdit } from "../Profile/profileReducer";
 import moment from "moment";
 import dbHandler from "../../services/dbHandler";
+import { useUpdateUserDetailsMutation } from "../../services/usersApi";
 
 const Onboarding = ({}) => {
   //formik initialisation for personal Details component
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state?.user?.currentUser);
   console.log("user id", currentUser);
-
+  const personalDetails = useSelector(
+    (state) => state?.profile?.personalDetails
+  );
   const formik = useFormik({
     initialValues,
     validationSchema: validateSchema,
     onSubmit: (values) => {
       const formatedDob = moment(values?.dob).format("MM/DD/YYYY");
       dispatch(addProfileDetails({ ...values, dob: formatedDob }));
-      dbHandler({ ...values, dob: formatedDob }, "users", "PUT");
+      // useUpdateUserDetailsMutation(currentUser?.uid, {
+      //   ...values,
+      //   dob: formatedDob,
+      // });
       handleNext();
     },
   });
@@ -42,7 +48,7 @@ const Onboarding = ({}) => {
   ]);
 
   const [activeStep, setActiveStep] = useState(0);
-
+  const [updateUser, { isLoading }] = useUpdateUserDetailsMutation();
   useEffect(() => {
     if (!layout?.title)
       dispatch(
@@ -55,6 +61,14 @@ const Onboarding = ({}) => {
     let downloadURL = await uploadToStorage(verificationFile, "verification");
     dispatch(addProfileDetails({ ...values }));
     dispatch(setIsProfileEdit(false));
+    let userData = {
+      ...values,
+      ...personalDetails,
+      id: currentUser?.uid,
+      downloadURL,
+    };
+    console.log("details---------------------------", userData);
+    updateUser(userData);
   };
 
   const stepData = {
@@ -64,7 +78,9 @@ const Onboarding = ({}) => {
     },
     1: { body: <UploadVerification />, title: "Upload Verification" },
     2: {
-      body: <UploadAddress handleSubmit={handleSubmitForm} />,
+      body: (
+        <UploadAddress handleSubmit={handleSubmitForm} isLoading={isLoading} />
+      ),
       title: "Address Details",
     },
   };
