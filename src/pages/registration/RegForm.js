@@ -74,7 +74,7 @@ const RegForm = () => {
 
             //create empty user chats on firestore
 
-            let createUserRes = await createUserChat({ id: res.user.uid });
+            let createUserRes = await createUserChat({ id: user.uid });
 
             console.log(createUserRes, "create user res");
 
