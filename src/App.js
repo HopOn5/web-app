@@ -57,8 +57,6 @@ const App = () => {
                 currentUser?.uid ?? currentUser?.id
             );
             if (userInfo) dispatch(updateUserData(userInfo?.data));
-            if (!userInfo?.preferences?.isOnboardingView)
-                navigate(URLData.onboarding.url);
         };
         if (currentUser?.uid || currentUser?.id) {
             initialCall();

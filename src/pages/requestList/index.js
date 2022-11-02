@@ -20,17 +20,17 @@ const RequestList = () => {
         states.routeRequest?.requestInfo
     ]);
     const location = useLocation();
+    const currentUserRequest = location?.state?.requestInfo ?? requestInfo;
 
     const [getRequests] = useFilterSearchRequestsMutation();
 
     const handleNearbySelect = (e) => setNearbyRadius(e?.target?.value);
 
     const getRequestList = async () => {
-        let queries = location?.state?.requestInfo ?? requestInfo;
         let res = await getRequests({
             userId: user?.uid,
             nearbyRadius,
-            ...queries
+            ...currentUserRequest
         });
         setRequestList(res?.data);
     };
@@ -65,7 +65,11 @@ const RequestList = () => {
                         />
                     ))
                 ) : (
-                    <EmptyRequest />
+                    <EmptyRequest
+                        isRequestAdded={
+                            Object.keys(currentUserRequest)?.length > 0
+                        }
+                    />
                 )}
             </div>
         </div>

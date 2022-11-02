@@ -1,10 +1,4 @@
 import React from "react";
-import "../../assets/css/bootstrap.min.css";
-import "../../assets/css/animate.css";
-import "../../assets/css/font-awesome.min.css";
-import "../../assets/css/owl.carousel.css";
-import "../../assets/css/owl.theme.css";
-import "../../assets/css/style.css";
 
 import image2 from "../../assets/images/walk.jpg";
 import image3 from "../../assets/images/landing-cycle.jpg";

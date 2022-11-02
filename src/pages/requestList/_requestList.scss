@@ -60,4 +60,8 @@
         margin: 20px auto;
         padding: 10px 17px;
     }
+    &__text {
+        display: flex;
+        flex-direction: column;
+    }
 }
