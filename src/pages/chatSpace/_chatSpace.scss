@@ -1,28 +1,4 @@
-//  .chatspace {
-//         background-color:rgba(237, 107, 91, 0.14);
-//         height: 100vh;
-//         display: flex;
-//         align-items: center;
-//         justify-content: center;
-
-//         .container {
-//           border: 1px solid white;
-//           border-radius: 10px;
-//           width: 65%;
-//           height: 80%;
-//           display: flex;
-//           overflow: hidden;
-//         //   @include tablet {
-//         //    width: 90%;
-//         //   }
-
-//           .sidebar {
-//             flex: 1;
-//             background-color:rgba(237, 107, 91, 0.14);
-//             position: relative;
-//         }
-//     }
-// }
+@import "../../styles/variables.scss";
 
 .chatspace {
     background-color: rgba(237, 107, 91, 0.14);
@@ -170,7 +146,6 @@
                 }
             }
 
-            
             .emptyIcon {
                 display: flex;
                 flex-direction: column;
@@ -227,15 +202,25 @@
                         }
                     }
 
-                    &.owner {
+                    &__owner {
                         flex-direction: row-reverse;
-
                         .messageContent {
                             align-items: flex-end;
                             p {
-                                background-color: #8da4f1;
+                                background-color: $receiverChat;
                                 color: white;
                                 border-radius: 10px 0px 10px 10px;
+                            }
+                        }
+                    }
+                    &__chatuser {
+                        // flex-direction: row-reverse;
+                        .messageContent {
+                            align-items: flex-end;
+                            p {
+                                background-color: $senderChat;
+                                color: white;
+                                border-radius: 0px 10px 10px 10px;
                             }
                         }
                     }

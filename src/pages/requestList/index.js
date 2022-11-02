@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useFilterRequestsMutation } from "../../services/requestsApi";
+import { useFilterSearchRequestsMutation } from "../../services/requestsApi";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import Button from "../../components/Button";
@@ -21,7 +21,7 @@ const RequestList = () => {
     ]);
     const location = useLocation();
 
-    const [getRequests] = useFilterRequestsMutation();
+    const [getRequests] = useFilterSearchRequestsMutation();
 
     const handleNearbySelect = (e) => setNearbyRadius(e?.target?.value);
 
@@ -32,7 +32,6 @@ const RequestList = () => {
             nearbyRadius,
             ...queries
         });
-        console.log(queries, "Queries", location);
         setRequestList(res?.data);
     };
 

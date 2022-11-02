@@ -17,6 +17,7 @@ import {
     updateUserData
 } from "./pages/registration/currentUserReducer";
 import { useGetUserDetailsMutation } from "./services/usersApi";
+import { URLData } from "./pageUrls";
 
 const App = () => {
     const navigate = useNavigate();
@@ -56,6 +57,8 @@ const App = () => {
                 currentUser?.uid ?? currentUser?.id
             );
             if (userInfo) dispatch(updateUserData(userInfo?.data));
+            if (!userInfo?.preferences?.isOnboardingView)
+                navigate(URLData.onboarding.url);
         };
         if (currentUser?.uid || currentUser?.id) {
             initialCall();
