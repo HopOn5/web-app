@@ -4,71 +4,62 @@ import { SelectField } from "../../components/SelectField";
 import Button from "../../components/Button";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { StandaloneSearchBox } from "@react-google-maps/api";
 import CustomCheckBox from "../../components/CustomCheckbox";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import AutocompleteAddress from "../../components/AutocompleteAddress";
 
 const RequestForm = ({ inputList, formik, isLoading }) => {
     const getClassname = (subclass) =>
         `request-form${subclass ? `__${subclass}` : ""}`;
 
     const { errors } = formik;
-    const inputRef = useRef();
-    const startRef = useRef();
-    const endRef = useRef();
 
-    const refs = { start_loc: startRef, end_loc: endRef };
+    const formatAddress = (addr) => {
+        let addrObj = {};
+        const requiredFields = ["place", "postcode"];
+        addr.forEach((item) => {
+            requiredFields.forEach((field) =>
+                item?.id?.includes(field) ? (addrObj[field] = item?.text) : null
+            );
+        });
+        return addrObj;
+    };
 
-    const handlePlaceChanged = (e, info) => {
-        const [place] = inputRef.current.getPlaces();
-        if (place) {
-            console.log(e, info);
-            formik.setFieldValue(info?.key, {
-                streetAddress: "",
-                pincode: "",
-                city: "",
-                lat: "",
-                lng: ""
-            });
-            // console.log(place.formatted_address);
-            // console.log(place.geometry.location.lat());
-            // console.log(place.geometry.location.lng());
-        }
+    const handleAutocomplete = (address, type) => {
+        formik.setFieldValue(type, {
+            streetAddress: address.text,
+            lat: address?.geometry?.coordinates?.[0],
+            lng: address?.geometry?.coordinates?.[1],
+            ...formatAddress(address?.context ?? [])
+        });
     };
 
     const getComponent = (inputData, key) => {
         switch (inputData?.type) {
             case "autocomplete":
                 return (
-                    <StandaloneSearchBox
-                        handleChange={(e) => handlePlaceChanged(e, inputData)}
-                    >
-                        <TextField
-                            key={`${key}-request-form`}
-                            placeholder={inputData?.placeholder}
-                            label={inputData?.label}
-                            name={inputData?.key}
-                            value={
-                                formik.values[inputData?.valueKey]
-                                    ?.streetAddress ?? ""
-                            }
-                            onChange={formik.handleChange}
-                            className={getClassname("input-field")}
-                            sx={styles.inputfield}
-                            error={
-                                errors[inputData?.key] &&
+                    <AutocompleteAddress
+                        handleSelection={(adr) =>
+                            handleAutocomplete(adr, inputData?.key)
+                        }
+                        inputProps={{
+                            className: getClassname("input-field"),
+                            key: `${key}-request-form`,
+                            placeholder: inputData?.placeholder,
+                            label: inputData?.label,
+                            name: inputData?.key,
+                            sx: styles.inputfield,
+                            error:
+                                errors[inputData?.key]?.lng &&
                                 formik?.touched?.[inputData?.key]
                                     ? true
-                                    : false
-                            }
-                            helperText={
+                                    : false,
+                            fullWidth: true,
+                            helperText:
                                 formik?.touched?.[inputData?.key] &&
-                                errors[inputData?.key]
-                            }
-                            fullWidth
-                            ref={refs[inputData?.valueKey]}
-                        />
-                    </StandaloneSearchBox>
+                                errors[inputData?.key]?.lng
+                        }}
+                    />
                 );
             case "input":
                 return (
@@ -101,9 +92,9 @@ const RequestForm = ({ inputList, formik, isLoading }) => {
                             className={getClassname("datepicker")}
                             key={`${key}-date`}
                             onChange={(value) =>
-                                formik?.setFieldValue(
+                                formik.setFieldValue(
                                     inputData?.key,
-                                    value,
+                                    value.$d,
                                     true
                                 )
                             }
@@ -126,6 +117,7 @@ const RequestForm = ({ inputList, formik, isLoading }) => {
                                     fullWidth
                                 />
                             )}
+                            sx={styles.inputfield}
                         />
                     </LocalizationProvider>
                 );
@@ -185,7 +177,8 @@ const RequestForm = ({ inputList, formik, isLoading }) => {
 
 const styles = {
     inputfield: {
-        marginBottom: "15px"
+        marginTop: "15px",
+        backgroundColor: "white"
     },
     card: { maxWidth: "500px", margin: "54px auto", padding: "35px" }
 };

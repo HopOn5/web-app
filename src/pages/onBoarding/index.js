@@ -15,7 +15,7 @@ import {
     validateSchema
 } from "./personalDetails/formValidation";
 import uploadToStorage from "../../services/uploadToStorage";
-import { addProfileDetails, setIsProfileEdit } from "../Profile/profileReducer";
+import { addProfileDetails, setIsProfileEdit } from "../profile/profileReducer";
 
 const Onboarding = ({}) => {
     //formik initialisation for personal Details component

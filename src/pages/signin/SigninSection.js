@@ -1,14 +1,17 @@
-import React, { useState } from "react";
-import { TextField } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Alert, TextField } from "@mui/material";
 import Button from "../../components/Button";
 import Text from "../../components/Text";
 import "./SigninSection.scss";
 import { toast, Toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import { useFormik } from "formik";
+import { schema, initialValues } from "./signinvalidation";
 
 const SigninSection = () => {
     const [showPassword, setShowPassword] = useState(false);
+    
 
     const [formData, setFormData] = useState({
         email: "",
@@ -26,50 +29,71 @@ const SigninSection = () => {
         }));
     };
 
-    const signin = async (e) => {
-        e.preventDefault();
-
+    const signin = async (data1) => {
         try {
             const auth = getAuth();
-
             const userCredential = await signInWithEmailAndPassword(
                 auth,
-                email,
-                password
+                data1.email,
+                data1.password
             );
             if (userCredential.user) {
-                navigate("/");
+                toast.success("Signin successfully");
+                navigate("/Home");
             }
         } catch (error) {
             toast.error("Wrong user credentials");
         }
     };
 
+
+    const formik = useFormik({
+        initialValues,
+        onSubmit: signin,
+        validationSchema: schema
+    });
+
+    const { errors, touched } = formik;
+
     return (
         <div>
             <h2 className="title">Welcome to Tag-Along</h2>
             <div className="textinput">
                 <TextField
-                    type="email"
+                    type={formik.values.email}
                     id="email"
                     label="Email"
                     variant="outlined"
-                    value={email}
-                    onChange={onChange}
-                    endAdor
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
+                    // endAdor
+                    onBlur={formik.handleBlur}
+                    error={errors.email && touched.email}
+                    helperText={
+                        errors.email && touched.email ? (
+                            <span className="error">{errors.email}</span>
+                        ) : null
+                    }
                 />
+
                 <TextField
                     type={showPassword ? "text" : "password"}
                     id="password"
-                    value={password}
+                    value={formik.values.password}
                     label="password"
                     variant="outlined"
-                    onChange={onChange}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={errors.password && touched.password}
+                    helperText={
+                        errors.password && touched.password ? (
+                            <span className="error">{errors.password}</span>
+                        ) : null
+                    }
                 />
-
                 <div className="alignitems">
                     <div className="loginbutton">
-                        <Button type="primary" onClick={signin}>
+                        <Button type="primary" onClick={formik.handleSubmit}>
                             Login
                         </Button>
                     </div>

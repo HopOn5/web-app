@@ -1,14 +1,14 @@
 export const inputList = [
     {
         label: "Start location",
-        key: "start_loc.streetAddress",
+        key: "start_loc",
         valueKey: "start_loc",
         placeholder: "Start location",
         type: "autocomplete"
     },
     {
         label: "End location",
-        key: "end_loc.streetAddress",
+        key: "end_loc",
         valueKey: "end_loc",
         placeholder: "End location",
         type: "autocomplete"

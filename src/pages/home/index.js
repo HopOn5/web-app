@@ -6,6 +6,9 @@ import Icon from "../../components/Icon";
 import DashboardTable from "./DashboardTable";
 import { formatRoutes } from "./utils";
 import rightArr from "../../icons/right-arrow.svg";
+import { personalDetails } from "../../mocks/personalDetails";
+import { addProfileDetails } from "../Profile/profileReducer";
+import EmptyScreen from "./Home";
 
 const Home = () => {
     const getClassname = (subclass) =>
@@ -23,6 +26,11 @@ const Home = () => {
             states?.home?.completedRoutes
         ]
     );
+
+    //mock data
+    useEffect(() => {
+        dispatch(addProfileDetails(personalDetails));
+    }, []);
 
     useEffect(() => {
         if (!layout?.title) {
@@ -53,28 +61,36 @@ const Home = () => {
 
     return (
         <div className={getClassname()}>
-            <div className={getClassname("upcoming-container")}>
-                <DashboardTable
-                    header="Upcoming requests"
-                    cols={dashboardCols}
-                    rows={upcomingRouteList}
-                    customCell={(rowData) => (
-                        <Icon
-                            icon={rightArr}
-                            onClick={() => handleRowSelect(rowData)}
-                            className={getClassname("custom-last-cell")}
+            {upcomingRouteList?.length > 0 || completedRouteList?.length > 0 ? (
+                <>
+                    <div className={getClassname("upcoming-container")}>
+                        <DashboardTable
+                            header="Upcoming requests"
+                            cols={dashboardCols}
+                            rows={upcomingRouteList}
+                            customCell={(rowData) => (
+                                <Icon
+                                    icon={rightArr}
+                                    onClick={() => handleRowSelect(rowData)}
+                                    className={getClassname("custom-last-cell")}
+                                />
+                            )}
                         />
-                    )}
-                />
-            </div>
-            <div className={getClassname("expired-container")}>
-                <DashboardTable
-                    header="Completed requests"
-                    cols={dashboardCols}
-                    rows={completedRouteList}
-                    customCell={() => {}}
-                />
-            </div>
+                    </div>
+                    <div className={getClassname("expired-container")}>
+                        <DashboardTable
+                            header="Completed requests"
+                            cols={dashboardCols}
+                            rows={completedRouteList}
+                            customCell={() => {}}
+                        />
+                    </div>
+                </>
+            ) : (
+                <>
+                    <EmptyScreen />
+                </>
+            )}
         </div>
     );
 };

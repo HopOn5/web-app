@@ -1,3 +1,5 @@
+@import "../../styles/variables.scss";
+
 .request-form {
     &__form {
         &-submit {
@@ -11,9 +13,20 @@
         input {
             background-color: white !important;
         }
+        .MuiFormHelperText-root.Mui-error {
+            background-color: $tableColor !important;
+            margin: 0;
+            padding: 3px 14px 0;
+        }
     }
     &__datepicker {
-        background-color: white;
+        background-color: white !important;
+        margin-top: 15px !important;
+        .MuiFormHelperText-root.Mui-error {
+            background-color: $tableColor !important;
+            margin: 0;
+            padding: 3px 14px 0;
+        }
     }
 }
 
