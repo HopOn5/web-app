@@ -66,11 +66,15 @@ const dbHandler = async (data, collectionType = "", type = "GET") => {
                 let uploadData = { ...data };
                 delete uploadData?.singleDoc;
                 delete uploadData?.id;
-                await updateDoc(docRef, {
-                    ...uploadData,
-                    timestamp: serverTimestamp()
-                });
-                return { status: "Success" };
+                try {
+                    await updateDoc(docRef, {
+                        ...uploadData,
+                        timestamp: serverTimestamp()
+                    });
+                    return { status: "Success" };
+                } catch (error) {
+                    return { error };
+                }
             }
             default:
                 return { data: null };

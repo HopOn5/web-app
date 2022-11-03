@@ -64,14 +64,6 @@ export const URLData = {
         url: "/resetpassword",
         layout: { isLogo: true, right: {}, title: "reset password" }
     },
-    profile: {
-        url: "/profile",
-        layout: {
-            isLogo: true,
-            title: "Profile",
-            right: { type: "all_feature" }
-        }
-    },
     routeRequest: {
         url: "/route-request",
         layout: {

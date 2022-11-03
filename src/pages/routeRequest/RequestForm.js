@@ -14,16 +14,12 @@ const RequestForm = ({ inputList, formik, isLoading }) => {
 
     const { errors } = formik;
 
-    const formatAddress = (addr, street) => {
+    const formatAddress = (addr) => {
         let addrObj = {};
         const requiredFields = ["place", "postcode"];
         addr.forEach((item) => {
             requiredFields.forEach((field) =>
-                item?.id?.includes(field)
-                    ? field === "place"
-                        ? (addrObj[field] = `${street} ${item?.text}`)
-                        : (addrObj[field] = item?.text)
-                    : null
+                item?.id?.includes(field) ? (addrObj[field] = item?.text) : null
             );
         });
         return addrObj;

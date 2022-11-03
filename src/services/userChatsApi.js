@@ -50,6 +50,22 @@ export const userChatsApi = createApi({
                 }
             }
         })
+        // updateUserRoutes: builder.mutation({
+        //     async queryFn(data) {
+        //         try {
+        //             let docId = data?.id,
+        //                 data = { routes: arrayUnion(data?.routeId) };
+        //             let res = await dbHandler(
+        //                 { id: docId, ...data },
+        //                 collectionType,
+        //                 "PUT"
+        //             );
+        //             return { data: res };
+        //         } catch (err) {
+        //             return { error };
+        //         }
+        //     }
+        // })
 
         // updateUserDetails: builder.query({
         //   queryFn(id, data) {

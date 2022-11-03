@@ -271,3 +271,33 @@
         }
     }
 }
+
+.add-companion {
+    &__footer {
+        margin-top: 40px;
+        display: flex;
+        justify-content: center;
+    }
+    &__btn {
+        margin: 0 15px;
+    }
+    &__text {
+        margin-bottom: 10px;
+    }
+    &__select {
+        .MuiSelect-select {
+            padding: 12px !important;
+            max-width: 305px !important;
+        }
+    }
+    &__box {
+        &:focus-visible {
+            border: none;
+            outline: none;
+        }
+    }
+    &__header {
+        text-align: center;
+        margin: 10px 0 30px;
+    }
+}

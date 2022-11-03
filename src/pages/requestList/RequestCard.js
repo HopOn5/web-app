@@ -13,10 +13,10 @@ const RequestCard = ({ key1, data }) => {
     const user = data?.user;
     const address = data?.end_loc;
 
-    console.log("USR CHAT", user, data);
-
-    const handleMessageClick = () => {
-        navigate(URLData.messages.url, { state: { chatUser: data?.user } });
+    const handleMessageClick = async () => {
+        navigate(URLData.messages.url, {
+            state: { chatUser: data?.user }
+        });
     };
 
     return (
