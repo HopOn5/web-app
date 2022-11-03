@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import carrot from "../../icons/carrot.svg";
 import { ChatInput } from "../../components/ChatInput";
 import Messages from "./Messages";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useSelector } from "react-redux";
 import useFetchSnapshot from "../../helpers/useFetchSnapshot";
 import { getChatId } from "./helper/getChatId";
@@ -12,17 +11,24 @@ import { arrayUnion, serverTimestamp, Timestamp } from "firebase/firestore";
 import { v4 as uuid } from "uuid";
 import chat from "../../icons/chat-svgrepo-com.svg";
 import { Typography } from "@mui/material";
+import addIcon from "../../icons/plus.svg";
+import Icon from "../../components/Icon";
+import AddCompanionModal from "./AddCompanionModal";
+import { useUpdateRequestsMutation } from "../../services/requestsApi";
 
-const Chatbox = ({}) => {
-    const [currentUser, chatUser] = useSelector((states) => [
+const Chatbox = ({ getRequests }) => {
+    const [currentUser, chatUser, routes] = useSelector((states) => [
         states?.user?.currentUser,
-        states?.user?.chatUser
+        states?.user?.chatUser,
+        states?.routeRequest?.ownerRoutes
     ]);
     const [message, setMessage] = useState("");
+    const [showAddModal, setShowAddModal] = useState(false);
 
     const { res } = useFetchSnapshot(getChatId(currentUser, chatUser), "chats");
     const [sendMessage] = useSendMessageMutation();
     const [updateUserChat] = useUpdateUserChatsMutation();
+    const [updateRequest, { isLoading }] = useUpdateRequestsMutation();
 
     const handleSend = async (message) => {
         let chatId = getChatId(currentUser, chatUser);
@@ -38,6 +44,7 @@ const Chatbox = ({}) => {
 
         await updateUserChat({
             id: currentUser.uid,
+            routes: [],
             [chatId + ".lastMessage"]: {
                 text: message
             },
@@ -46,6 +53,7 @@ const Chatbox = ({}) => {
 
         await updateUserChat({
             id: chatUser?.uid ?? chatUser?.id,
+            routes: [],
             [chatId + ".lastMessage"]: {
                 text: message
             },
@@ -54,19 +62,48 @@ const Chatbox = ({}) => {
         setMessage("");
     };
 
+    const handleShowAddModal = () => setShowAddModal(true);
+    const handleCloseModal = () => setShowAddModal(false);
+
+    const handleAddCompanion = async (routeId) => {
+        let routeCompanion = {
+            uid: chatUser?.uid ?? chatUser?.id,
+            firstName: chatUser?.firstName
+        };
+        let res = await updateRequest({
+            id: routeId,
+            routeCompanion
+        });
+        if (res?.data?.status === "Success") {
+            getRequests();
+            handleCloseModal();
+        }
+    };
+
     return (
         <div className="chat">
-            {Object.keys(chatUser)?.length <= 0 ? (
-                <div className="chat__empty-box"></div>
-            ) : (
+            <AddCompanionModal
+                showModal={showAddModal}
+                handleClose={handleCloseModal}
+                handleConfirm={handleAddCompanion}
+                isLoading={isLoading}
+                routes={routes}
+            />
+            {Object.keys(chatUser)?.length <= 0 ? null : (
                 <div className="chatInfo">
                     <div className="chatIcons">
                         <img src={chatUser?.photoURL ?? carrot} alt="" />
                         <span>{chatUser?.username ?? chatUser?.firstName}</span>
                     </div>
-                    <div className="chatIcons">
-                        <MoreVertIcon />
-                    </div>
+                    {routes?.length > 0 && (
+                        <div className="chatIcons">
+                            <Icon
+                                className="chat__add-companion"
+                                icon={addIcon}
+                                onClick={handleShowAddModal}
+                            />
+                        </div>
+                    )}
                 </div>
             )}
             {Object.keys(chatUser)?.length <= 0 ? (

@@ -2,6 +2,7 @@ import { createApi, fakeBaseQuery } from "@reduxjs/toolkit/query/react";
 import filterRouteRequest from "./helpers/filterRouteRequest";
 import dbHandler from "./dbHandler";
 import { where } from "firebase/firestore";
+import filterOwnerRoutes from "./helpers/filterOwnerRoutes";
 
 const collectionType = "route_requests";
 export const requestsApi = createApi({
@@ -14,9 +15,18 @@ export const requestsApi = createApi({
             }
         }),
         updateRequests: builder.mutation({
-            async queryFn(id, data) {
-                let res = await dbHandler({ data, id }, collectionType, "PUT");
-                return { data: res };
+            async queryFn(data) {
+                try {
+                    let res = await dbHandler(
+                        { ...data, singleDoc: true },
+                        collectionType,
+                        "PUT"
+                    );
+                    console.log(res);
+                    return { data: res };
+                } catch (error) {
+                    return { error };
+                }
             }
         }),
         deleteRequests: builder.mutation({
@@ -45,11 +55,26 @@ export const requestsApi = createApi({
                         { isDocFormat: true, isQuery: true, query },
                         collectionType
                     );
-                    console.log(res, "RES");
                     let filteredData = filterRouteRequest(res, queries);
                     return { data: filteredData };
                 } catch (error) {
-                    console.log(error, "ERR");
+                    return { error };
+                }
+            }
+        }),
+        filterUserRequests: builder.mutation({
+            async queryFn(queries) {
+                let query = where("user.id", "==", queries?.userId);
+                try {
+                    let res = await dbHandler(
+                        { isDocFormat: true, isQuery: true, query },
+                        collectionType
+                    );
+
+                    let filteredOwnerRoutes = filterOwnerRoutes(res, queries);
+                    console.log(res, filteredOwnerRoutes, "filtered");
+                    return { data: filteredOwnerRoutes };
+                } catch (error) {
                     return { error };
                 }
             }
@@ -62,5 +87,6 @@ export const {
     useCreateRequestsMutation,
     useDeleteRequestsMutation,
     useUpdateRequestsMutation,
-    useFilterSearchRequestsMutation
+    useFilterSearchRequestsMutation,
+    useFilterUserRequestsMutation
 } = requestsApi;

@@ -50,6 +50,19 @@
     align-items: center;
 }
 
+.btn-white {
+    background-color: none;
+    border: 1px solid;
+    border-radius: 5px;
+    color: black;
+    font-size: 16px;
+    font-weight: 800;
+    padding: 10px 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .btn-tWhite {
     background-color: none;
     color: white;

@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
-    requestInfo: {}
+    requestInfo: {},
+    ownerRoutes: []
 };
 const routeRequestsSlice = createSlice({
     name: "routeRequest",
@@ -8,9 +9,13 @@ const routeRequestsSlice = createSlice({
     reducers: {
         updateRouteRequest(state, action) {
             state.requestInfo = { ...action.payload };
+        },
+        updateOwnerRoutes(state, action) {
+            state.ownerRoutes = [...action.payload];
         }
     }
 });
 
-export const { updateRouteRequest } = routeRequestsSlice.actions;
+export const { updateRouteRequest, updateOwnerRoutes } =
+    routeRequestsSlice.actions;
 export default routeRequestsSlice.reducer;

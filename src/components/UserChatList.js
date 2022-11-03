@@ -17,20 +17,20 @@ export const UserChatList = ({ userList, isListEmpty, handleSelect }) => {
         }
     }, [res]);
 
-    const renderUser = (user, key) => (
+    const renderUser = (userInfo, key) => (
         <div
             className="userChat"
-            key={`${key}-${user?.id ?? user?.uid}`}
-            onClick={() => handleSelect(user)}
+            key={`${key}-${userInfo?.id ?? userInfo?.uid}`}
+            onClick={() => handleSelect(userInfo)}
         >
-            <img src={user?.photoURL} alt="" />
+            <img src={userInfo?.photoURL} alt="" />
             <div className="userChatInfo">
-                <span>{user?.firstName}</span>
+                <span>{userInfo?.firstName}</span>
             </div>
         </div>
     );
     return (
-        <div className="ch ats">
+        <div className="chats">
             {userList?.length > 0 && userList?.map((user) => renderUser(user))}
             {existingUser && existingUser?.length > 0 ? (
                 existingUser
