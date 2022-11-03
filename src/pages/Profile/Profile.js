@@ -8,42 +8,35 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
-    // const dispatch = useDispatch();
-    // useEffect(() => {
-    //     dispatch(addProfileDetails(profileDetails));
-    // }, []);
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
+  const isEdit = useSelector((state) => state?.profile?.isEdit);
+  const personalDetailsData = useSelector((state) => state?.user?.currentUser);
+  console.log("personaldetails", personalDetailsData);
 
-    const isEdit = useSelector((state) => state?.profile?.isEdit);
-
-    const personalDetailsData = useSelector(
-        (state) => state?.profile?.personalDetails
-    );
-
-    return isEdit ? (
-        navigate("/profile-edit")
-    ) : (
-        <div className="profile__card">
-            <TemplateCard>
-                <div className="profile">
-                    <div className="profile__child">
-                        <Avatar
-                            alt="Ente padam"
-                            src={personalDetailsData.picture}
-                            sx={{ width: 150, height: 150 }}
-                        />
-                    </div>
-                    <div className="profile__child">
-                        <AddressDetails data={personalDetailsData} />
-                    </div>
-                </div>
-            </TemplateCard>
-            <TemplateCard>
-                <BasicDetails data={personalDetailsData} />
-            </TemplateCard>
+  return isEdit ? (
+    navigate("/profile-edit")
+  ) : (
+    <div className="profile__card">
+      <TemplateCard>
+        <div className="profile">
+          <div className="profile__child">
+            <Avatar
+              alt="Ente padam"
+              src={personalDetailsData.picture}
+              sx={{ width: 150, height: 150 }}
+            />
+          </div>
+          <div className="profile__child">
+            <AddressDetails data={personalDetailsData} />
+          </div>
         </div>
-    );
+      </TemplateCard>
+      <TemplateCard>
+        <BasicDetails data={personalDetailsData} />
+      </TemplateCard>
+    </div>
+  );
 };
 
 export default Profile;
