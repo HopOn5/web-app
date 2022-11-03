@@ -69,7 +69,7 @@ class Landing extends React.Component {
                                 </li>
                                 <li>
                                     <Link
-                                        to={"/login"}
+                                        to={"/signin"}
                                         className="smoothScroll"
                                     >
                                         Login
