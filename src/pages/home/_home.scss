@@ -1,8 +1,14 @@
 @import "../../styles/variables.scss";
 
 .home-page {
-    max-width: 600px;
     margin: 40px auto 0;
+    &:not(.empty-screen){ 
+         max-width: 600px;
+   
+}
+&.empty-screen{
+    max-width:900px;
+}
     &__tab-icon {
         max-width: 66px;
     }
@@ -27,5 +33,31 @@
             margin-top: 25px;
             background-color: $tableColor;
         }
+    }
+}
+.empty-home{
+  
+    &__content-container{
+        display: flex;
+        justify-content: space-between;
+        margin-top:20px;
+    }
+    &__icon{
+        max-width: 300px;
+    }
+    &__item{
+        margin: 0 10px;
+        &:first-child{
+            margin-left:0
+        }
+        &:last-child{
+            margin-right:0
+        }
+    }
+    &__text{
+        text-align: justify;
+    }
+    &__heading{
+        text-align: center;
     }
 }
