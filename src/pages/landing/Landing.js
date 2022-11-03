@@ -1,5 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import            "../../assets/css/bootstrap.min.css";
+import            "../../assets/css/style.css";
+//import            "../../assets/css/animate.css";
+//import            "../../assets/css/font-awesome.min.css";
+//import            "../../assets/css/owl.carousel.css";
+// import            "../../assets/css/owl.theme.css";
 
 import image1 from "../../assets/images/overview-img.jpg";
 import image2 from "../../assets/images/walk.jpg";
@@ -7,6 +13,8 @@ import image3 from "../../assets/images/landing-cycle.jpg";
 import image4 from "../../assets/images/ride.jpg";
 import image5 from "../../assets/images/rent.jpg";
 import image6 from "../../assets/images/chart.jpg";
+
+
 
 class Landing extends React.Component {
     render() {
@@ -20,7 +28,7 @@ class Landing extends React.Component {
                 <div className="sk-spinner sk-spinner-pulse"></div>
                 </div>*/}
 
-                <div
+                {/* <div
                     className="navbar navbar-default navbar-fixed-top sticky-navigation"
                     role="navigation"
                 >
@@ -86,23 +94,16 @@ class Landing extends React.Component {
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
                 <section id="home" className="parallax-section">
-                    <div className="container">
+                    <div className="container banner-img"  >
                         <div className="row">
                             <div className=" col-md-12 col-sm-12">
-                                <h3
-                                    className="wow bounceIn"
-                                    data-wow-delay="0.9s"
-                                >
-                                    Hello! you are welcome to
+                                <h3 class="head-tag" >
+                                    Hello! Welcome to
                                 </h3>
-                                <h1
-                                    className="wow fadeInUp"
-                                    data-wow-delay="1.6s"
-                                >
-                                    TAG ALONG
+                                <h1>TAG ALONG
                                     <br />
                                     Community
                                 </h1>
@@ -111,7 +112,7 @@ class Landing extends React.Component {
                     </div>
                 </section>
 
-                <section id="overview" className="parallax-section">
+                {/* <section id="overview" className="parallax-section">
                     <div className="container">
                         <div className="row">
                             <div className="col-md-6 col-sm-12">
@@ -147,7 +148,7 @@ class Landing extends React.Component {
                             <div className="col-md-1"></div>
                         </div>
                     </div>
-                </section>
+                </section> */}
 
                 <section id="services" className="parallax-section">
                     <div className="container">
@@ -158,7 +159,7 @@ class Landing extends React.Component {
                             </div>
 
                             <div
-                                className="wow fadeInUp col-md-3 col-sm-6"
+                                className="wow fadeInUp col-md-4 col-sm-6"
                                 data-wow-delay="1.9s"
                             >
                                 <div className="trainer-thumb">
@@ -168,24 +169,21 @@ class Landing extends React.Component {
                                         alt="Trainer"
                                     />
                                 </div>
-                                <h3>WALK</h3>
+                                <h3>WALKING PAL</h3>
                                 <p>
                                     {" "}
-                                    We can walk with a person who is going to
-                                    the same destination. So they can accompany
-                                    us throughout the journey. And you can make
-                                    a new friend and stay motivated.
+                                    Find your walk buddy with the help of Tag-Along. Specify the start and destination, we will assist you in locating your companion. Don't worry! Your details are safe with us unless you choose to share it with your buddy.
                                 </p>
-                                <a
+                                {/* <a
                                     href="#requestform"
                                     className="btn btn-default smoothScroll"
                                 >
                                     Let us begin
-                                </a>
+                                </a> */}
                             </div>
 
                             <div
-                                className="wow fadeInUp col-md-3 col-sm-6"
+                                className="wow fadeInUp col-md-4 col-sm-6"
                                 data-wow-delay="2s"
                             >
                                 <div className="trainer-thumb">
@@ -195,24 +193,21 @@ class Landing extends React.Component {
                                         alt="Trainer"
                                     />
                                 </div>
-                                <h3>CYCLE</h3>
+                                <h3>CYCLYING MATE</h3>
                                 <p>
                                     {" "}
-                                    We can cycle with a person who is going to
-                                    the same destination. So that they can
-                                    accompany us throughout the journey. And you
-                                    can make a new friend and stay motivated.
+                                    Find a cycling companion to the university with the aid of Tag-Along community. Come explore more features with us. Get started to find your mate.
                                 </p>
-                                <a
+                                {/* <a
                                     href="#requestform"
                                     className="btn btn-default smoothScroll"
                                 >
                                     Let us begin
-                                </a>
+                                </a> */}
                             </div>
 
                             <div
-                                className="wow fadeInUp col-md-3 col-sm-6"
+                                className="wow fadeInUp col-md-4 col-sm-6"
                                 data-wow-delay="2.3s"
                             >
                                 <div className="trainer-thumb">
@@ -222,20 +217,19 @@ class Landing extends React.Component {
                                         alt="Trainer"
                                     />
                                 </div>
-                                <h3>RIDE ON CARS</h3>
+                                <h3>CAR POOL</h3>
                                 <p>
-                                    Ride share programs help connect people to
-                                    travel together to the same destination.
+                                Do you have trouble finding someone to split the cost of your cab ride? Find someone who is going to the same place as you and get in the cab together. Visit the discussion room on Tag-Along to get to know your travel buddy.
                                 </p>
-                                <a
+                                {/* <a
                                     href="#requestform"
                                     className="btn btn-default smoothScroll"
                                 >
                                     Let us begin
-                                </a>
+                                </a> */}
                             </div>
 
-                            <div
+                            {/* <div
                                 className="wow fadeInUp col-md-3 col-sm-6"
                                 data-wow-delay="2.3s"
                             >
@@ -260,7 +254,7 @@ class Landing extends React.Component {
                                 >
                                     Let us begin
                                 </a>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </section>
@@ -276,7 +270,7 @@ class Landing extends React.Component {
                     </div>
                 </section>
 
-                <footer>
+                {/* <footer>
                     <div className="container">
                         <div className="row">
                             <div
@@ -341,7 +335,7 @@ class Landing extends React.Component {
                             </div>
                         </div>
                     </div>
-                </footer>
+                </footer> */}
             </div>
         );
     }
