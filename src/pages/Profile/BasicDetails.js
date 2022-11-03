@@ -5,6 +5,7 @@ import "./BasicDetails.scss";
 
 const BasicDetails = (props) => {
   const { data } = props;
+  console.log(data, "DATA");
   return (
     <div className="basic-details__card">
       <h3 className="basic-details__heading">BASIC DETAILS</h3>

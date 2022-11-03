@@ -1,105 +1,97 @@
 export const URLData = {
-    onboarding: {
-        url: "/onboarding",
-        layout: {
-            isLogo: true,
-            isClose: true,
-            title: ""
-        }
+  onboarding: {
+    url: "/onboarding",
+    layout: {
+      isLogo: true,
+      isClose: true,
+      title: "",
     },
-    registration: {
-        url: "/registration",
-        layout: { isLogo: true, right: { type: "signin" }, title: "Register" }
+  },
+  registration: {
+    url: "/registration",
+    layout: { isLogo: true, right: { type: "signin" }, title: "Register" },
+  },
+  home: {
+    url: "/",
+    layout: { isLogo: true, right: { type: "all_feature" } },
+  },
+  signin: {
+    url: "/signin",
+    layout: { isLogo: true, right: {}, title: "Sign in" },
+  },
+  resetpassword: {
+    url: "/resetpassword",
+    layout: { isLogo: true, right: {}, title: "Reset password" },
+  },
+  messages: {
+    url: "/messages",
+    layout: {
+      isLogo: true,
+      title: "Messages",
+      right: { type: "all_feature" },
     },
-    home: {
-        url: "/",
-        layout: { isLogo: true, right: { type: "all_feature" } }
+  },
+  notifications: {
+    url: "/notifications",
+    layout: { isLogo: true, title: "Notifications" },
+  },
+  profile: {
+    url: "/profile",
+    layout: {
+      left: { type: "profile_edit" },
+      isLogo: true,
+      title: "Profile",
+      right: { type: "all_feature" },
     },
-    signin: {
-        url: "/signin",
-        layout: { isLogo: true, right: {}, title: "Sign in" }
+  },
+  profileEdit: {
+    url: "/profile-edit",
+    layout: {
+      isLogo: true,
+      title: "Profile-edit",
+      right: { type: "all_feature" },
     },
-    resetpassword: {
-        url: "/resetpassword",
-        layout: { isLogo: true, right: {}, title: "Reset password" }
+  },
+  chatSpace: {
+    url: "/messages",
+    layout: {
+      isLogo: true,
+      title: "Messages",
+      right: { type: "all_feature" },
     },
-    messages: {
-        url: "/messages",
-        layout: {
-            isLogo: true,
-            title: "Messages",
-            right: { type: "all_feature" }
-        }
+  },
+  resetpassword: {
+    url: "/resetpassword",
+    layout: { isLogo: true, right: {}, title: "reset password" },
+  },
+  routeRequest: {
+    url: "/route-request",
+    layout: {
+      isLogo: true,
+      title: "Route requests",
+      right: { type: "all_feature" },
     },
-    notifications: {
-        url: "/notifications",
-        layout: { isLogo: true, title: "Notifications" }
+  },
+  routeRequestList: {
+    url: "/requests",
+    layout: {
+      isLogo: true,
+      title: "Request List",
+      right: { type: "all_feature" },
     },
-    profile: {
-        url: "/profile",
-        layout: {
-            left: { type: "profile_edit" },
-            isLogo: true,
-            title: "Profile",
-            right: { type: "all_feature" }
-        }
+  },
+  emptyProfile: {
+    url: "/empty-profile",
+    layout: {
+      isLogo: true,
+      title: "Profile",
     },
-    profileEdit: {
-        url: "/profile-edit",
-        layout: {
-            isLogo: true,
-            title: "Profile-edit",
-            right: { type: "all_feature" }
-        }
+  },
+  landing: {
+    url: "/landing",
+    layout: {
+      isLogo: true,
+      title: "TagAlong",
     },
-    chatSpace: {
-        url: "/messages",
-        layout: {
-            isLogo: true,
-            title: "Messages",
-            right: { type: "all_feature" }
-        }
-    },
-    resetpassword: {
-        url: "/resetpassword",
-        layout: { isLogo: true, right: {}, title: "reset password" }
-    },
-    profile: {
-        url: "/profile",
-        layout: {
-            isLogo: true,
-            title: "Profile",
-            right: { type: "all_feature" }
-        }
-    },
-    routeRequest: {
-        url: "/route-request",
-        layout: {
-            isLogo: true,
-            title: "Route requests",
-            right: { type: "all_feature" }
-        }
-    },
-    routeRequestList: {
-        url: "/requests",
-        layout: {
-            isLogo: true,
-            title: "Request List",
-            right: { type: "all_feature" }
-        }
-    },
-    emptyProfile: {
-        url: "/empty-profile",
-        layout: {
-            isLogo: true,
-            title: "Profile"
-        }
-    },
-    landing: {
-        url: "/landing",
-        layout: {
-            isLogo: true,
-            title: "TagAlong"
-        }
-    }
+  },
 };

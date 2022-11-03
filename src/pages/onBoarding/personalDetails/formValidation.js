@@ -1,14 +1,14 @@
 import * as Yup from "yup";
 import differenceInYears from "date-fns/differenceInYears";
 
-export const initialValues = ({}) => ({
+export const initialValues = {
   firstName: "",
   lastName: "",
   phoneNumber: "",
   email: "",
   dob: "",
   gender: "",
-});
+};
 
 const emailRegEx = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
 const phoneNumberRegEx =
