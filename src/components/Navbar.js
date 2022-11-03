@@ -14,10 +14,10 @@ export const Navbar = () => {
             <div className="user">
                 {/* <img src={currentUser?.photoURL} alt="phofile data" />
         <span>{currentUser?.firstName}</span> */}
-                {/* <button onClick={() => signOut(auth)}>logout</button>
-        <img src={carrot} alt="" />
-        <span>{"John"}</span> */}
-                {/* <button>Tage mate</button> */}
+                {/* <button onClick={() => signOut(auth)}>logout</button> */}
+        {/* <img src={carrot} alt="" />
+        <span>{"John"}</span>
+                <button>Tage mate</button> */}
             </div>
         </div>
     );
