@@ -11,7 +11,11 @@ import { useNavigate } from "react-router-dom";
 const PageLayout = ({ isLogo, children, ...props }) => {
     const { leftComp, rightComp, onClose } = props;
     const layoutData = useSelector((states) => states?.app?.layout);
-    const { isClose, title, closeText, closeType, left, right } = layoutData;
+
+    const title = layoutData?.title;
+    const closeType = layoutData?.closeType;
+    const closeText = layoutData?.closeText;
+    const isClose = layoutData?.isClose;
     const navigate = useNavigate();
 
     const getClassname = (classname) =>
@@ -22,7 +26,7 @@ const PageLayout = ({ isLogo, children, ...props }) => {
     const titleType = "primaryLarge white fW8";
 
     return (
-        <div className={getClassname()}>
+        <div data-testid="" className={getClassname()}>
             <div className={getClassname("header")}>
                 <div className={getClassname("header-left")}>
                     {isLogo && (

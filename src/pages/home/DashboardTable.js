@@ -28,18 +28,21 @@ const DashboardTable = ({
     };
 
     const renderCells = (rowData) =>
-        cols.map((colKey, key) => (
-            <TableCell
-                className={getClassname("cell")}
-                scope="row"
-                align="left"
-                key={`${key}-cell`}
-            >
-                {colKey === "custom_cell"
-                    ? customCell(rowData)
-                    : rowData[colKey]}
-            </TableCell>
-        ));
+        cols.map((colKey, key) => {
+            console.log(rowData, colKey);
+            return (
+                <TableCell
+                    className={getClassname("cell")}
+                    scope="row"
+                    align="left"
+                    key={`${key}-cell`}
+                >
+                    {colKey === "custom_cell"
+                        ? customCell(rowData)
+                        : rowData[colKey]}
+                </TableCell>
+            );
+        });
 
     return (
         <div className={getClassname()}>

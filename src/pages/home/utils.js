@@ -7,19 +7,26 @@ const cellWrapper = (content1, content2) => (
     </div>
 );
 export const formatRoutes = (allRoutes, type) =>
-    allRoutes?.map((routeInfo) => ({
-        start_point: cellWrapper(
-            routeInfo?.start_point?.streetAddress,
-            routeInfo?.start_point?.pincode
-        ),
-        end_point: cellWrapper(
-            routeInfo?.end_point?.streetAddress,
-            routeInfo?.end_point?.pincode
-        ),
-        start_time: cellWrapper(routeInfo?.start_date, routeInfo?.start_time),
-        route_companion: cellWrapper(
-            routeInfo?.route_companion?.name ??
-                `No companion ${type === "upcoming" ? "yet" : "added"}`,
-            routeInfo?.route_companion?.start_point?.streetAddress
-        )
-    }));
+    allRoutes?.map((routeInfo) => {
+        console.log(routeInfo, "ROUTE");
+        return {
+            start_loc: cellWrapper(
+                routeInfo?.start_loc?.streetAddress,
+                routeInfo?.start_loc?.postcode
+            ),
+            end_loc: cellWrapper(
+                routeInfo?.end_loc?.streetAddress,
+                routeInfo?.end_loc?.postcode
+            ),
+            start_time: cellWrapper(
+                new Date(routeInfo?.start_time?.seconds * 1000).toLocaleString(
+                    "en-US"
+                )
+            ),
+            route_companion: cellWrapper(
+                routeInfo?.route_companion?.firstName ??
+                    `No companion ${type === "upcoming" ? "yet" : "added"}`
+                // routeInfo?.route_companion?.start_point?.streetAddress
+            )
+        };
+    });

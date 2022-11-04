@@ -91,6 +91,7 @@ const RequestForm = ({ inputList, formik, isLoading }) => {
                         <DateTimePicker
                             className={getClassname("datepicker")}
                             key={`${key}-date`}
+                            minDate={new Date()}
                             onChange={(value) =>
                                 formik.setFieldValue(
                                     inputData?.key,

@@ -25,7 +25,7 @@ const RequestList = () => {
     const [getRequests] = useFilterSearchRequestsMutation();
 
     const handleNearbySelect = (e) => setNearbyRadius(e?.target?.value);
-
+    console.log(currentUserRequest, "current user requesr", location?.state);
     const getRequestList = async () => {
         let res = await getRequests({
             userId: user?.uid,

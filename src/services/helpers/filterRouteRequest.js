@@ -11,8 +11,15 @@ const sortRouteDistance = (route1, route2, userRoute) => {
         { latitude: route2?.lat, longitude: route2?.lng },
         { latitude: userRoute?.lat, longitude: userRoute?.lng }
     );
-
     return Number(dist1) - Number(dist2);
+};
+
+const isTimeExpired = (date1) => (new Date() > new Date(date1) ? true : false);
+const isTimeInRange = (time, startTime) => {
+    let time1 = new Date(time);
+    let time2 = new Date(startTime);
+    if (time1 < time2) return false;
+    return true;
 };
 
 const convertMileToMetre = (mile) => Number(mile * 1610);
@@ -32,7 +39,14 @@ const filterRouteRequest = (allData, filterInfo) => {
             { latitude: lat, longitude: lng },
             convertMileToMetre(nearbyRadius)
         );
-        if (isInside && filterInfo?.routeType === item?.routeType) return item;
+
+        if (
+            isInside &&
+            filterInfo?.routeType === item?.routeType &&
+            !isTimeExpired(item?.start_time) &&
+            isTimeInRange(item?.start_time, filterInfo?.start_time)
+        )
+            return item;
     });
     let sortedRes = [
         ...resData.sort((a, b) =>
