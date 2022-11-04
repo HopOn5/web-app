@@ -19,7 +19,7 @@ const Profile = () => {
 
     return isEdit ? (
         navigate("/profile-edit")
-    ) : personalDetailsData.phoneNumber == "" ? (
+    ) : personalDetailsData.phoneNumber != "" ? (
         <div className="profile__card">
             <TemplateCard>
                 <div className="profile">
