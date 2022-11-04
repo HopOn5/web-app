@@ -5,6 +5,12 @@
     max-width: 500px;
     &__nearby-drop-container {
         display: flex;
+        align-items: center;
+        .btn-primary {
+            flex: 1;
+            max-width: 90px;
+            padding: 10px 8px;
+        }
     }
     &__nearby-drop {
         margin-right: 10px !important;

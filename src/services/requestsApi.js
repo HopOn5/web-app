@@ -22,7 +22,6 @@ export const requestsApi = createApi({
                         collectionType,
                         "PUT"
                     );
-                    console.log(res);
                     return { data: res };
                 } catch (error) {
                     return { error };
@@ -42,7 +41,6 @@ export const requestsApi = createApi({
         }),
         createRequests: builder.mutation({
             async queryFn(payloadData) {
-                console.log(payloadData, "DATA");
                 let res = await dbHandler(payloadData, collectionType, "POST");
                 return { data: res };
             }
@@ -70,10 +68,15 @@ export const requestsApi = createApi({
                         { isDocFormat: true, isQuery: true, query },
                         collectionType
                     );
+                    if (!queries?.filterOwner) {
+                        let filteredOwnerRoutes = filterOwnerRoutes(
+                            res,
+                            queries
+                        );
 
-                    let filteredOwnerRoutes = filterOwnerRoutes(res, queries);
-                    console.log(res, filteredOwnerRoutes, "filtered");
-                    return { data: filteredOwnerRoutes };
+                        return { data: filteredOwnerRoutes };
+                    }
+                    return { data: res };
                 } catch (error) {
                     return { error };
                 }
