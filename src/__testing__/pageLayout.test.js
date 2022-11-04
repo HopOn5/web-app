@@ -2,7 +2,7 @@ import React from "react";
 import { render } from "@testing-library/react";
 import renderer from "react-test-renderer";
 import PageLayout from "../components/layout/PageLayout";
-import testRenderer from "./testRenderer";
+import testRenderer from "./helper/testRenderer";
 import { teststore } from "./utils/teststore";
 import LayoutHeaderComponent from "../components/layout/LayoutHeaderComponent";
 import { URLData } from "../pageUrls/index";
